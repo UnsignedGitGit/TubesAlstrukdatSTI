@@ -1,4 +1,4 @@
-# Tubes Alstrukdat STI
+# Repository njus njus
 ---
 Pls jangan dicontek gua takut dipanggil rektor
 
