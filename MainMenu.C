@@ -1,27 +1,46 @@
 #include<stdio.h>
 
+void readmain();
+
 int main(){
 
-    int pil;
+    printf("##################################################################\n\n");
+    printf("       _________ __     __ ________  ________ ________    __      \n");
+    printf("      /   ______|  |   |  |  ______|/  ______/  ______|  |  |     \n");
+    printf("      |  |      |  |___|  |  |__   |  (_____ |  (_____   |  |     \n");
+    printf("      |  |      |   ___   |   __|   \\_____   \\______  \\  |__| \n");  
+    printf("      |  |______|  |   |  |  |_____  _____)  | _____)  |  __      \n");
+    printf("      \\_________|__|   |__|________|/________/________/  |__|   \n\n");
+    printf("##################################################################\n\n");
+    printf("               **WELCOME TO CHESS KACANG BUNCHESS**               \n");
+    printf("_________________________________________________________________\n");
+    printf("|                                                               |\n");
+    printf("|                          <(N)ew Game>                         |\n");
+    printf("|                         <(L)oad Game>                         |\n");
+    printf("|                        <Leader(B)oards>                       |\n");
+    printf("|                           <(E)xit>                            |\n");
+    printf("|_______________________________________________________________|  \n");
 
-    printf("####################################################################\n\n");
-    printf("              SELAMAT DATANG DI CHESS KACANG BUNCHESS\n");
-    printf("___________________________________________________________________\n\n");
-    printf("                          1. New Game\n");
-    printf("                         2. Load Game\n");
-    printf("                        3. Leaderboards\n");
-    printf("                           4. Exit\n");
-    printf("___________________________________________________________________\n");
-
-    scanf("Masukan nomor pilihan: %d", &pil);
-    if (pil==1){
-        printf ("Loading...");
-    }else if (pil==2){
-        printf("Input your file name: ");
-    }else if (pil==3){
-        printf("Papan SKOR KOSONG HEHE");
-    }
-
-    scanf("%d",&pil);
+    readmain();
+    
         return 0;
+}
+void readmain(){
+    char pil;
+    printf("Enter your command: ");
+    scanf("%c", &pil);
+    printf("%d", pil);
+    if (&pil=="N"){
+        printf ("Loading...");
+    }else if (&pil=="L"){
+        printf("Input your file name: ");
+    }else if (&pil=="B"){
+        printf("Leaderboards Empty");
+    }else if (&pil=="E"){
+        printf("Exiting...");
+    }
+    else{
+        printf("Please input the correct command.\n");
+        readmain();
+    }         
 }

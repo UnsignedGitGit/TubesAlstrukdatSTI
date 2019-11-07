@@ -1,0 +1,6 @@
+{
+    "files.associations": {
+        "MainMenu.C": "cpp",
+        "conio.h": "c"
+    }
+}
