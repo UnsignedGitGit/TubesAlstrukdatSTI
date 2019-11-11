@@ -31,7 +31,13 @@ void CellCreate(cell *C, piece *P);
 // F.S. Membuat cell C dengan Warna sesuai dengan posisi Piece P
 
 void CellCreateEmpty(cell *C, int X, int Y);
+// Membuat Cell yang bidaknya empty, X[0..8], Y[0..8]
+// I.S. Cell C Terdefinisi, Piece P Terdefinisi
+// F.S. Membuat cell C dengan Warna sesuai dengan posisi cell
 
 void CellCreateOffset(cell *C, int X, int Y);
+// Membuat Cell yang bidaknya empty, X[0..8], Y[0..8]
+// I.S. Cell C Terdefinisi, X[0..8], Y[0..8]
+// F.S. Membuat cell C diluar papan permainan
 
 #endif
