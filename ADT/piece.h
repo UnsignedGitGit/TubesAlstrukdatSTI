@@ -9,8 +9,8 @@
 typedef struct {
     char type; // P = pion, R = Rook, H = Horse/Knight, B = Bishop, Q = Queen, K = King 
     char team; // W = White, B = Black
-    int xpos; // Possible int: 'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h'. 
-    int ypos; // Possible int: '1', '2', '3', '4', '5', '6', '7', '8'.
+    int xpos; // Possible int: [0..8] 
+    int ypos; // Possible int: [0..8]
 } piece;
 
 #define PieceType(P) (P).type
