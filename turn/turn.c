@@ -3,11 +3,11 @@
 //bonus udh dimasukin. DELETE KLO GA KEKEJAR
 
 //ASUMSI: 
-// - ada stack "history" yg elemen2nya punya atribut "giliran" yg nilainya 'h' atau 'p' (ada pake S.TOP.giliran)
+// - ada stack "history" yg elemen2nya punya atribut "giliran" yg nilainya 'B' atau 'W' (nanti bisa diakses dengan S.TOP.giliran)
 // - ada fungsi IsStackEmpty dan CreateEmptyQ
 
 //FUNGSI:
-// - queue "giliran" bakal dipake buat masukin 'q' atau 'h' di stack "history"
+// - queue "giliran" bakal dipake buat masukin 'B' atau 'W' di stack "history"
 // - bakal dipake di movement (supaya command MOVE cuma perlu nampilin bidak tim 'h' atau 'p') 
 
 
@@ -15,13 +15,13 @@
 /*PROTOTIPE*/
 void init_giliran (Stack S, Queue* Q);
 /* I.S. S terdefinisi dan bisa kosong.
- * F.S. Queue yang berisi dua elemen ('h' dan 'p') terbentuk. Head queue
+ * F.S. Queue yang berisi dua elemen ('B' dan 'W') terbentuk. Head queue
 		menandakan giliran pemain sekarang (tim hitam atau putih) dan
 		tail menandakan giliran pemain selanjutnya. */
 
 void ganti_giliran (Queue* Q);
-/* Mengirimkan 'p' jika giliran sedang berada pada pemain tim putih.
-   Mengirimkan 'h' jika giliran sedang berada pada pemain tim hitam. */
+/* Mengirimkan 'W' jika giliran sedang berada pada pemain tim putih.
+   Mengirimkan 'B' jika giliran sedang berada pada pemain tim hitam. */
 
 
 #include "stack.h"
@@ -30,7 +30,7 @@ void ganti_giliran (Queue* Q);
 /*IMPLEMENTASI*/
 void init_giliran (Stack S, Queue* Q)
 /* I.S. S terdefinisi dan bisa kosong.
- * F.S. Queue yang berisi dua elemen ('h' dan 'p') terbentuk. Head queue
+ * F.S. Queue yang berisi dua elemen ('B' dan 'W') terbentuk. Head queue
 		menandakan giliran pemain sekarang (tim hitam atau putih) dan
 		tail menandakan giliran pemain selanjutnya. */
 {
@@ -39,22 +39,22 @@ void init_giliran (Stack S, Queue* Q)
 	CreateEmptyQ(Q,2);
 	
 	if (IsStackEmpty(S)) {	/*Jika new game*/
-		Add(Q,'p');
-		Add(Q,'h');
+		Add(Q,'W');
+		Add(Q,'B');
 	} else {	/*BONUS: Jika load game*/
-		if (S.TOP.giliran == 'p') {
-			Add(Q,'p');
-			Add(Q,'h');
+		if (S.TOP.giliran == 'W') {
+			Add(Q,'W');
+			Add(Q,'B');
 		} else {
-			Add(Q,'h');
-			Add(Q,'p');
+			Add(Q,'B');
+			Add(Q,'W');
 		}
 	}
 }
 
 char get_giliran (Queue* Q)
-/* Mengirimkan 'p' jika giliran sedang berada pada pemain tim putih.
-   Mengirimkan 'h' jika giliran sedang berada pada pemain tim hitam. */
+/* Mengirimkan 'W' jika giliran sedang berada pada pemain tim putih.
+   Mengirimkan 'B' jika giliran sedang berada pada pemain tim hitam. */
 {
 	/*KAMUS*/
 	char g;
