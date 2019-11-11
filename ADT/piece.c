@@ -132,9 +132,19 @@ boolean PieceIsTeamBlack(piece P)
 }
 // Mengembalikan true jika P adalah Hitam atau Putih tergantung dengan semantik fungsi
 
+
 // *** ============== *** //
 // *** Selektor Piece *** //
 // *** ============== *** //
+
+void PieceDelete(piece *P, piece *P1)
+// Menghapus piece P yang ada di board. menyimpan informasi piece P ke piece P1
+// I.S. Piece P, P1 Terdefinisi
+// F.S. Piece P menjadi empty, informasi P pindah ke P1 
+{
+    *P1 = *P;
+    PieceCreateEmpty(P, PiecePosX(*P), PiecePosY(*P));
+}
 
 void PieceMove(piece *P, int x, int y)
 // Mengubah Posisi Piece Secara General
@@ -162,5 +172,5 @@ void PiecePrintInfo(piece P)
     printf("YPos: %d\n", PiecePosY(P));
 }
 
-
-// Movement(*B)
+// Bikin Delete, sebagai komplemen dari piececreate dan mengganti algoritma move
+// move : delete -> create -> creatempty 

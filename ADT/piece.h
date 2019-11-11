@@ -18,6 +18,9 @@ typedef struct {
 #define PiecePosX(P) (P).xpos
 #define PiecePosY(P) (P).ypos
 
+// DEFINISI PIECE
+// Piece Empty adalah Piece yang memiliki Piece.type Charnil dan Piece.team Charnil 
+
 // *** ================= *** //
 // *** Konstruktor Piece *** //
 // *** ================= *** //
@@ -86,6 +89,10 @@ boolean PieceIsTeamBlack(piece P);
 // *** ============== *** //
 // *** Selektor Piece *** //
 // *** ============== *** //
+void PieceDelete(piece *P, piece *P1);
+// Menghapus piece P yang ada di board. menyimpan informasi piece P ke piece P1
+// I.S. Piece P, P1 Terdefinisi
+// F.S. Piece P menjadi empty, informasi P pindah ke P1 
 
 void PieceMove(piece *P, int x, int y);
 // Mengubah Posisi Piece Secara General

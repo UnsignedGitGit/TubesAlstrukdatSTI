@@ -4,7 +4,11 @@
 
 int main(){
     board B;
-    CreateBoard(&B);
+    cell C;
 
+    CreateBoard(&B);
+    BoardPrintInfo(B);
+
+    CellDelete(&(BoardCell(B)[2][1]), &C);
     BoardPrintInfo(B);
 }
