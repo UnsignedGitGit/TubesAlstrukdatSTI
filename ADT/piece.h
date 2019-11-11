@@ -13,10 +13,10 @@ typedef struct {
     int ypos; // Possible int: '1', '2', '3', '4', '5', '6', '7', '8'.
 } piece;
 
-#define ChessType(P) (P).type
-#define ChessTeam(P) (P).team
-#define ChessPosX(P) (P).xpos
-#define ChessPosY(P) (P).ypos
+#define PieceType(P) (P).type
+#define PieceTeam(P) (P).team
+#define PiecePosX(P) (P).xpos
+#define PiecePosY(P) (P).ypos
 
 // *** ================= *** //
 // *** Konstruktor Piece *** //
@@ -66,6 +66,31 @@ void PieceCreateKing(piece *P, char Team, int X, int Y);
 // *** ============== *** //
 boolean PieceIsEmpty(piece P);
 // Menghasilkan true jika piece kosong, yaitu tipe atau tim piece bernilai CharNil
+
+// Cek Type Piece
+boolean PieceIsPawn(piece P); // 'P'
+boolean PieceIsRook(piece P); // 'R'
+boolean PieceIsHorse(piece P); // 'H'
+boolean PieceIsBishop(piece P); // 'B'
+boolean PieceIsQueen(piece P); // 'Q'
+boolean PieceIsKing(piece P); // 'K'
+// Menghasilkan true jika sesuai dengan tipe piece
+
+boolean PieceIsValidMove(int x, int y);
+// Mengembalikan true jika x[1..8] dan y[1..8]
+
+boolean PieceIsTeamWhite(piece P);
+boolean PieceIsTeamBlack(piece P);
+// Mengembalikan true jika P adalah Hitam atau Putih tergantung dengan semantik fungsi
+
+// *** ============== *** //
+// *** Selektor Piece *** //
+// *** ============== *** //
+
+void PieceMove(piece *P, int x, int y);
+// Mengubah Posisi Piece Secara General
+// I.S. Piece P terdefinisi, x dan y berada pada [1..8]
+// F.S. Nilai xPos dan yPos pada Piece P diubah menyesuaikan inputan x dan y 
 
 
 // *** =================== *** //

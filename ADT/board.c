@@ -2,10 +2,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// *** =================== *** //
-// *** Input/Output Screen *** //
-// *** =================== *** //
-
 char TranslateX(int X)
 // Menerjemahkan axis pada sel board
 // x tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
@@ -92,6 +88,7 @@ char TranslateY(int Y)
     }
 }
 
+
 // *** ================= *** //
 // *** Konstruktor Board *** //
 // *** ================= *** //
@@ -123,24 +120,20 @@ void CreateBoard(board *B)
                     if ((x == 1) || (x == 8)){
                         // Create Black Rook
                         PieceCreateRook(&P, 'B', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if ((x == 2) || (x == 7)){
                         // Create Black Knight 
                         PieceCreateHorse(&P, 'B', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if ((x == 3) || (x == 6)){
                         // Create Black Bishop
                         PieceCreateBishop(&P, 'B', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if (x == 4){
                         // Create Black Queen
                         PieceCreateQueen(&P, 'B', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if (x == 5){
                         // Create Black King
                         PieceCreateKing(&P, 'B', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     }
+                    CellCreate(&(BoardCell(*B)[y][x]), &P);
                 } else if (y == 7){
                     // Create Black Pawn
                     PieceCreatePawn(&P, 'B', x, y);
@@ -153,29 +146,42 @@ void CreateBoard(board *B)
                     if ((x == 1) || (x == 8)){
                         // Create White Rook
                         PieceCreateRook(&P, 'W', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if ((x == 2) || (x == 7)){
                         // Create White Knight 
                         PieceCreateHorse(&P, 'W', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if ((x == 3) || (x == 6)){
                         // Create White Bishop
                         PieceCreateBishop(&P, 'W', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if (x == 4){
                         // Create White Queen
                         PieceCreateQueen(&P, 'W', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     } else if (x == 5){
                         // Create White King
                         PieceCreateKing(&P, 'W', x, y);
-                        CellCreate(&(BoardCell(*B)[y][x]), &P);
                     }
+                    CellCreate(&(BoardCell(*B)[y][x]), &P);
                 } else {
                     PieceCreateEmpty(&P, x, y);
                     CellCreateEmpty(&(BoardCell(*B)[y][x]), x, y);
                 }
             }
         }
+    }
+}
+
+// *** =================== *** //
+// *** Input/Output Screen *** //
+// *** =================== *** //
+
+void BoardPrintInfo(board B)
+// Menampilkan info dari Board secara lengkap
+// I.S. B Terdefinisi
+// F.S. Menampilkan Seluruh Info Board pada CLI
+{
+    for(int y = 8; y >= 0; y--){
+        for (int x = 0; x < 9; x++){
+            printf("%c", CellDisplay(BoardCell(B)[y][x]));
+        }
+        printf("\n");
     }
 }

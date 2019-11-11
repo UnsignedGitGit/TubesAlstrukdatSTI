@@ -10,10 +10,10 @@ void PieceCreate(piece *P, char Tipe, char Team, int X, int Y)
 // I.S. P Terdefinisi, X[0 .. 8], Y[0 .. 8]
 // F.S. Terbentuk P dengan tipe piece Type, tim piece Team, posisi piece X dan posisi piece Y. 
 {
-    ChessType(*P) = Tipe;
-    ChessTeam(*P) = Team;
-    ChessPosX(*P) = X;
-    ChessPosY(*P) = Y;
+    PieceType(*P) = Tipe;
+    PieceTeam(*P) = Team;
+    PiecePosX(*P) = X;
+    PiecePosY(*P) = Y;
 }
 
 void PieceCreateEmpty(piece *P, int X, int Y)
@@ -77,7 +77,74 @@ void PieceCreateKing(piece *P, char Team, int X, int Y)
 boolean PieceIsEmpty(piece P)
 // Menghasilkan true jika piece kosong, yaitu tipe atau tim piece bernilai CharNil
 {
-    return ((ChessTeam(P) == CharNil) || (ChessType(P) == CharNil));
+    return ((PieceTeam(P) == CharNil) || (PieceType(P) == CharNil));
+}
+
+// Cek Type Piece
+boolean PieceIsPawn(piece P)
+{
+    return (PieceType(P) == 'P');    
+}
+boolean PieceIsRook(piece P)
+{
+    return (PieceType(P) == 'R');    
+}
+boolean PieceIsHorse(piece P)
+{
+    return (PieceType(P) == 'H');    
+}
+boolean PieceIsBishop(piece P)
+{
+    return (PieceType(P) == 'B');    
+}
+boolean PieceIsQueen(piece P)
+{
+    return (PieceType(P) == 'Q');    
+}
+boolean PieceIsKing(piece P)
+{
+    return (PieceType(P) == 'K');    
+}
+// Menghasilkan true jika sesuai dengan tipe piece
+
+boolean PieceIsValidMove(int x, int y)
+// Mengembalikan true jika x[1..8] dan y[1..8]
+{
+    if (x >= 1 && x <= 8) {
+        if (y >= 1 && y <= 8){
+            return true;
+        } else {
+            return false;
+        }
+    } else {
+        return false;
+    }
+}
+
+boolean PieceIsTeamWhite(piece P)
+{
+    return (PieceTeam(P) == 'W');
+}
+
+boolean PieceIsTeamBlack(piece P)
+{
+    return (PieceTeam(P) == 'B');
+}
+// Mengembalikan true jika P adalah Hitam atau Putih tergantung dengan semantik fungsi
+
+// *** ============== *** //
+// *** Selektor Piece *** //
+// *** ============== *** //
+
+void PieceMove(piece *P, int x, int y)
+// Mengubah Posisi Piece Secara General
+// I.S. Piece P terdefinisi, x dan y berada pada [1..8]
+// F.S. Nilai xPos dan yPos pada Piece P diubah menyesuaikan inputan x dan y 
+{
+    if (PieceIsValidMove(x, y)){
+        PiecePosX(*P) = x;
+        PiecePosY(*P) = y;
+    }
 }
 
 // *** =================== *** //
@@ -89,19 +156,11 @@ void PiecePrintInfo(piece P)
 // F.S. Menampilkan Type, Team, X, dan Y Catur pada CLI
 {
     printf("Piece Info\n");
-    printf("Type: %c\n", ChessType(P));
-    printf("Team: %c\n", ChessTeam(P));
-    printf("XPos: %d\n", ChessPosX(P));
-    printf("YPos: %d\n", ChessPosY(P));
+    printf("Type: %c\n", PieceType(P));
+    printf("Team: %c\n", PieceTeam(P));
+    printf("XPos: %d\n", PiecePosX(P));
+    printf("YPos: %d\n", PiecePosY(P));
 }
 
 
 // Movement(*B)
-
-// void PrintPiece(piece B)
-// // Menuliskan status piece pada CLI
-// // I.S. Sembarang
-// // F.S. Output Type, Team, Posisi X, dan Posisi Y piece
-// {
-//     // printf("%c %c %d %d\n", ChessType(B), CheTeam(B), X(B), Y(B));
-// }

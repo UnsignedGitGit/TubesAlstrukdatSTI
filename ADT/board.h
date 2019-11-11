@@ -9,9 +9,6 @@ typedef struct {
 
 #define BoardCell(B) (B).boardCell // input B : board
 
-// *** =================== *** //
-// *** Input/Output Screen *** //
-// *** =================== *** //
 
 // **** Dictionary **** //
 /*   (y)
@@ -27,14 +24,6 @@ typedef struct {
       =================== (x)
              a x i s
 */
-
-char translatex(int x);
-// Menerjemahkan axis pada sel board
-// x tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
-
-char translatey(int y);
-// Menerjemahkan ordinat pada sel board
-// y tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
 
 
 // *** ================= *** //
@@ -52,5 +41,21 @@ void CreateEmptyBoard(board *B);
 // F.S. Board Kosong 9x9 dengan indikator
 
 
+// *** =================== *** //
+// *** Input/Output Screen *** //
+// *** =================== *** //
+
+char translatex(int x);
+// Menerjemahkan axis pada sel board
+// x tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
+
+char translatey(int y);
+// Menerjemahkan ordinat pada sel board
+// y tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
+
+void BoardPrintInfo(board B);
+// Menampilkan info dari Board secara lengkap
+// I.S. B Terdefinisi
+// F.S. Menampilkan Seluruh Info Board pada CLI
 
 #endif

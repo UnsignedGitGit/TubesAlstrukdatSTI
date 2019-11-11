@@ -12,14 +12,7 @@ typedef struct {
 #define CellColor(C) (C).cellColor // input C : char
 #define CellPiece(C) (C).cellPiece // input C : piece
 #define CellDisplay(C) (C).cellDisplay // input C : char
-// *** =================== *** //
-// *** Input/Output Screen *** //
-// *** =================== *** //
 
-void CellPrintInfo(cell C);
-// Menampilkan info dari Cell secara lengkap
-// I.S. P Terdefinisi
-// F.S. Menampilkan cellColor dan cellPiece pada CLI
 
 // *** ================= *** //
 // *** Konstruktor Cell  *** //
@@ -39,5 +32,15 @@ void CellCreateOffset(cell *C, int X, int Y);
 // Membuat Cell yang bidaknya empty, X[0..8], Y[0..8]
 // I.S. Cell C Terdefinisi, X[0..8], Y[0..8]
 // F.S. Membuat cell C diluar papan permainan
+
+
+// *** =================== *** //
+// *** Input/Output Screen *** //
+// *** =================== *** //
+
+void CellPrintInfo(cell C);
+// Menampilkan info dari Cell secara lengkap
+// I.S. C Terdefinisi
+// F.S. Menampilkan Seluruh Info Cell pada CLI
 
 #endif
