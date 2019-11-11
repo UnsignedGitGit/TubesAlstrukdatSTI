@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "piece.h": "c",
-        "boolean.h": "c"
+        "boolean.h": "c",
+        "MainMenu.C": "cpp"
     }
 }
