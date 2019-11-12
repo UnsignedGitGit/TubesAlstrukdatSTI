@@ -8,7 +8,4 @@ int main(){
 
     CreateBoard(&B);
     BoardPrintInfo(B);
-
-    CellDelete(&(BoardCell(B)[2][1]), &C);
-    BoardPrintInfo(B);
 }

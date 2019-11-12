@@ -11,12 +11,14 @@ typedef struct {
     char team; // W = White, B = Black
     int xpos; // Possible int: [0..8] 
     int ypos; // Possible int: [0..8]
+    boolean hasmoved;
 } piece;
 
 #define PieceType(P) (P).type
 #define PieceTeam(P) (P).team
 #define PiecePosX(P) (P).xpos
 #define PiecePosY(P) (P).ypos
+#define PieceHasMoved(P) (P).hasmoved
 
 // DEFINISI PIECE
 // Piece Empty adalah Piece yang memiliki Piece.type Charnil dan Piece.team Charnil 

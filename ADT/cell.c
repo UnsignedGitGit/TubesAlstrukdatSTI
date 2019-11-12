@@ -92,6 +92,9 @@ void CellMove(cell *C, cell *C1, cell *CTemp)
     CellDelete(C, C1);
     CellDisplay(*C1) = PieceType(CellPiece(*C1));
 }
+
+
+
 // *** =================== *** //
 // *** Input/Output Screen *** //
 // *** =================== *** //

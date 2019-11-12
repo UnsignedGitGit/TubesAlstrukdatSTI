@@ -14,6 +14,7 @@ void PieceCreate(piece *P, char Tipe, char Team, int X, int Y)
     PieceTeam(*P) = Team;
     PiecePosX(*P) = X;
     PiecePosY(*P) = Y;
+    PieceHasMoved(*P) = false;
 }
 
 void PieceCreateEmpty(piece *P, int X, int Y)
@@ -154,6 +155,7 @@ void PieceMove(piece *P, int x, int y)
     if (PieceIsValidMove(x, y)){
         PiecePosX(*P) = x;
         PiecePosY(*P) = y;
+        PieceHasMoved(*P) = true;
     }
 }
 
