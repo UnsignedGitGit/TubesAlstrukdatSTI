@@ -24,14 +24,23 @@ void PieceCreateEmpty(piece *P, int X, int Y)
     PieceCreate(P, CharNil, CharNil, X, Y);
 }
 
-void PieceCreatePawn(piece *P, char Team, int X, int Y)
+void PieceCreateWPawn(piece *P, char Team, int X, int Y) //White
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Pawn 'P', tim piece Team, posisi piece X dan Y.
 {
     PieceCreate(P, 'P', Team, X, Y);
 }
-void PieceCreateRook(piece *P, char Team, int X, int Y)
+
+void PieceCreateBPawn(piece *P, char Team, int X, int Y) //Black
+// Membuat piece bertipe pawn pada variabel P.
+// I.S. P Terdefinisi
+// F.S. Terbentuk P dengan tipe piece Pawn 'P', tim piece Team, posisi piece X dan Y.
+{
+    PieceCreate(P, 'p', Team, X, Y);
+}
+
+void PieceCreateWRook(piece *P, char Team, int X, int Y) //White
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Rook 'R', tim piece Team, posisi piece X dan Y.
@@ -39,15 +48,31 @@ void PieceCreateRook(piece *P, char Team, int X, int Y)
     PieceCreate(P, 'R', Team, X, Y);
 }
 
-void PieceCreateHorse(piece *P, char Team, int X, int Y)
+void PieceCreateBRook(piece *P, char Team, int X, int Y) //Black
+// Membuat piece bertipe pawn pada variabel P.
+// I.S. P Terdefinisi
+// F.S. Terbentuk P dengan tipe piece Rook 'R', tim piece Team, posisi piece X dan Y.
+{
+    PieceCreate(P, 'r', Team, X, Y);
+}
+
+void PieceCreateWKnight(piece *P, char Team, int X, int Y) //White
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Horse 'H', tim piece Team, posisi piece X dan Y.
 {
-    PieceCreate(P, 'H', Team, X, Y);
+    PieceCreate(P, 'N', Team, X, Y);
 }
 
-void PieceCreateBishop(piece *P, char Team, int X, int Y)
+void PieceCreateBKnight(piece *P, char Team, int X, int Y) //Black
+// Membuat piece bertipe pawn pada variabel P.
+// I.S. P Terdefinisi
+// F.S. Terbentuk P dengan tipe piece Horse 'H', tim piece Team, posisi piece X dan Y.
+{
+    PieceCreate(P, 'n', Team, X, Y);
+}
+
+void PieceCreateWBishop(piece *P, char Team, int X, int Y) //White
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Bishop 'B', tim piece Team, posisi piece X dan Y.
@@ -55,7 +80,15 @@ void PieceCreateBishop(piece *P, char Team, int X, int Y)
     PieceCreate(P, 'B', Team, X, Y);
 }
 
-void PieceCreateQueen(piece *P, char Team, int X, int Y)
+void PieceCreateBBishop(piece *P, char Team, int X, int Y) //Black
+// Membuat piece bertipe pawn pada variabel P.
+// I.S. P Terdefinisi
+// F.S. Terbentuk P dengan tipe piece Bishop 'B', tim piece Team, posisi piece X dan Y.
+{
+    PieceCreate(P, 'b', Team, X, Y);
+}
+
+void PieceCreateWQueen(piece *P, char Team, int X, int Y) //White
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Queen 'Q', tim piece Team, posisi piece X dan Y.
@@ -63,12 +96,28 @@ void PieceCreateQueen(piece *P, char Team, int X, int Y)
     PieceCreate(P, 'Q', Team, X, Y);
 }
 
-void PieceCreateKing(piece *P, char Team, int X, int Y)
+void PieceCreateBQueen(piece *P, char Team, int X, int Y) //Black
+// Membuat piece bertipe pawn pada variabel P.
+// I.S. P Terdefinisi
+// F.S. Terbentuk P dengan tipe piece Queen 'Q', tim piece Team, posisi piece X dan Y.
+{
+    PieceCreate(P, 'q', Team, X, Y);
+}
+
+void PieceCreateWKing(piece *P, char Team, int X, int Y) //White
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece King 'K', tim piece Team, posisi piece X dan Y.
 {
     PieceCreate(P, 'K', Team, X, Y);
+}
+
+void PieceCreateBKing(piece *P, char Team, int X, int Y) //Black
+// Membuat piece bertipe pawn pada variabel P.
+// I.S. P Terdefinisi
+// F.S. Terbentuk P dengan tipe piece King 'K', tim piece Team, posisi piece X dan Y.
+{
+    PieceCreate(P, 'k', Team, X, Y);
 }
 
 // *** ============== *** //
@@ -83,27 +132,27 @@ boolean PieceIsEmpty(piece P)
 // Cek Type Piece
 boolean PieceIsPawn(piece P)
 {
-    return (PieceType(P) == 'P');    
+    return (PieceType(P) == 'P' || PieceType(P) == 'p');    
 }
 boolean PieceIsRook(piece P)
 {
-    return (PieceType(P) == 'R');    
+    return (PieceType(P) == 'R' || PieceType(P) == 'r');    
 }
-boolean PieceIsHorse(piece P)
+boolean PieceIsKnight(piece P)
 {
-    return (PieceType(P) == 'H');    
+    return (PieceType(P) == 'N' || PieceType(P) == 'n');    
 }
 boolean PieceIsBishop(piece P)
 {
-    return (PieceType(P) == 'B');    
+    return (PieceType(P) == 'B' || PieceType(P) == 'b');    
 }
 boolean PieceIsQueen(piece P)
 {
-    return (PieceType(P) == 'Q');    
+    return (PieceType(P) == 'Q' || PieceType(P) == 'q');    
 }
 boolean PieceIsKing(piece P)
 {
-    return (PieceType(P) == 'K');    
+    return (PieceType(P) == 'K' || PieceType(P) == 'k');    
 }
 // Menghasilkan true jika sesuai dengan tipe piece
 

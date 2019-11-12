@@ -31,32 +31,38 @@ void PieceCreateEmpty(piece *P, int X, int Y);
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Charnil, tim piece Charnil, posisi piece X dan posisi piece Y. 
 
-void PieceCreatePawn(piece *P, char Team, int X, int Y);
+void PieceCreateWPawn(piece *P, char Team, int X, int Y); //White
+void PieceCreateBPawn(piece *P, char Team, int X, int Y); //Black
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Pawn 'P', tim piece Team, posisi piece X dan Y.
 
-void PieceCreateRook(piece *P, char Team, int X, int Y);
+void PieceCreateWRook(piece *P, char Team, int X, int Y); //White
+void PieceCreateBRook(piece *P, char Team, int X, int Y); //Black
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Rook 'R', tim piece Team, posisi piece X dan Y.
 
-void PieceCreateHorse(piece *P, char Team, int X, int Y);
+void PieceCreateWKnight(piece *P, char Team, int X, int Y); //White
+void PieceCreateBKnight(piece *P, char Team, int X, int Y); //Black
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Horse 'H', tim piece Team, posisi piece X dan Y.
 
-void PieceCreateBishop(piece *P, char Team, int X, int Y);
+void PieceCreateWBishop(piece *P, char Team, int X, int Y); //White
+void PieceCreateBBishop(piece *P, char Team, int X, int Y); //Black
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Bishop 'B', tim piece Team, posisi piece X dan Y.
 
-void PieceCreateQueen(piece *P, char Team, int X, int Y);
+void PieceCreateWQueen(piece *P, char Team, int X, int Y); //White
+void PieceCreateBQueen(piece *P, char Team, int X, int Y); //Black
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Queen 'Q', tim piece Team, posisi piece X dan Y.
 
-void PieceCreateKing(piece *P, char Team, int X, int Y);
+void PieceCreateWKing(piece *P, char Team, int X, int Y); //White
+void PieceCreateBKing(piece *P, char Team, int X, int Y); //Black
 // Membuat piece bertipe pawn pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece King 'K', tim piece Team, posisi piece X dan Y.
@@ -68,12 +74,12 @@ boolean PieceIsEmpty(piece P);
 // Menghasilkan true jika piece kosong, yaitu tipe atau tim piece bernilai CharNil
 
 // Cek Type Piece
-boolean PieceIsPawn(piece P); // 'P'
-boolean PieceIsRook(piece P); // 'R'
-boolean PieceIsHorse(piece P); // 'H'
-boolean PieceIsBishop(piece P); // 'B'
-boolean PieceIsQueen(piece P); // 'Q'
-boolean PieceIsKing(piece P); // 'K'
+boolean PieceIsPawn(piece P); // 'P' || 'p'
+boolean PieceIsRook(piece P); // 'R' || 'r'
+boolean PieceIsKnight(piece P); // 'N' || 'n'
+boolean PieceIsBishop(piece P); // 'B' || 'b'
+boolean PieceIsQueen(piece P); // 'Q' || 'q'
+boolean PieceIsKing(piece P); // 'K' || 'k'
 // Menghasilkan true jika sesuai dengan tipe piece
 
 boolean PieceIsValidMove(int x, int y);
