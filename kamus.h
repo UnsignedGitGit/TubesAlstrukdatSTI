@@ -37,7 +37,7 @@ typedef struct {
 #define PieceHasMoved(P) (P).hasmoved
 
 
-// STACK : MOVEMEMORY 		----------------------------------------
+// STACK : HISTORY OF EACH MOVEMENT 		----------------------------------------
 typedef struct {
 	char turn; 
 	char type; // P = pion, R = Rook, H = Horse/Knight, B = Bishop, Q = Queen, K = King
@@ -47,37 +47,38 @@ typedef struct {
 	int yt; // Posisi vertical bidak setelah bergerak
 	char targettype; // type bidak yang ada di posisi setelah bergerak
 	boolean IsCastling;
-} movehistory;
+} infotype; // Isi stack "History"
 
 
-// ARRAY : POSSIBLE MOVE	----------------------------------------
-typedef struct {
-	elmt_arrpossmove arraypiece[16];
-} arr_possible_move;
-
+// ARRAY : PIECE and POSSIBLE MOVE ----------------------------------------
 typedef struct {
 	piece p;
 	List possmove;
-} elmt_arrpossmove;
+} elmt_arrpossmove; // Isi array of possible move tiap bidak
 
 typedef struct {
-	int x;
-	int y;
-} infotype; // Isi List
+	elmt_arrpossmove arr[16];
+} arr_possible_move;
 
-typedef struct tElmtlist *address;
+	//LIST of POSSIBLE MOVE
+	typedef struct {
+		int x;
+		int y;
+	} infotype;
 
-typedef struct tElmtlist { 
-	infotype info;
-	address next;
-} ElmtList;
+	typedef struct tElmtlist *address;
 
-typedef struct {
-	address First;
-} List;
+	typedef struct tElmtlist { 
+		infotype info;
+		address next;
+	} ElmtList;
+
+	typedef struct {
+		address First;
+	} List;
 
 
-// PILIHAN 		-----------------------------------------------------
+// ARRAY : PILIHAN BIDAK yang DAPAT BERGERAK	-----------------------------------------------------
 typedef struct {
 	piece P[16];
 } piece_choice;
