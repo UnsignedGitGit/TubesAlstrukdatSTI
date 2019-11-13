@@ -59,6 +59,7 @@ typedef struct {
 
 typedef struct {
 	elmt_arrpossmove arr[17]; // Index yang digunakan [1..16]
+	int neff;
 } arr_possible_move;
 
 //LIST : LIST of POSSIBLE MOVE
@@ -82,6 +83,7 @@ typedef struct {
 // ARRAY : PILIHAN BIDAK yang DAPAT BERGERAK	-----------------------------------------------------
 typedef struct {
 	piece P[17]; // Index yang digunakan [1..16]
+	int neff;
 } piece_choice;
 
 
