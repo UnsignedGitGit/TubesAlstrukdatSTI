@@ -84,13 +84,6 @@ typedef struct {
 } piece_choice;
 
 
-// KOORDINAT
-typedef struct {
-	int x;
-	int y;
-	} koordinat;
-
-
 // RAJA		---------------------------------------------------------
 typedef struct {
 	int x;
