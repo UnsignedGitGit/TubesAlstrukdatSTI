@@ -23,7 +23,12 @@ void CellCreate(cell *C, piece *P);
 // I.S. Cell C Terdefinisi, Piece P Terdefinisi
 // F.S. Membuat cell C dengan Warna sesuai dengan posisi Piece P
 
-void CellCreateEmpty(cell *C, int X, int Y);
+void CellCreateWEmpty(cell *C, int X, int Y); //White
+// Membuat Cell yang bidaknya empty, X[0..8], Y[0..8]
+// I.S. Cell C Terdefinisi, Piece P Terdefinisi
+// F.S. Membuat cell C dengan Warna sesuai dengan posisi cell
+
+void CellCreateBEmpty(cell *C, int X, int Y); //Black
 // Membuat Cell yang bidaknya empty, X[0..8], Y[0..8]
 // I.S. Cell C Terdefinisi, Piece P Terdefinisi
 // F.S. Membuat cell C dengan Warna sesuai dengan posisi cell

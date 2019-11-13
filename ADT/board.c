@@ -150,7 +150,12 @@ void CreateBoard(board *B)
                 CellCreate(&(BoardCell(*B)[x][y]), &P);
             } else {
                 PieceCreateEmpty(&P, x, y);
-                CellCreateEmpty(&(BoardCell(*B)[x][y]), x, y);
+                if (( (x%2) && (y%2) ) || ( (x%2==0) && (y%2==0) )){ //hitam jika (x ganjil dan y ganjil) atau (x genap dan y genap )
+                    CellCreateBEmpty(&(BoardCell(*B)[x][y]), x, y);
+                }else{ //putih jika (x ganjil dan y genap) atau (x genap dan y ganjil)
+                    CellCreateWEmpty(&(BoardCell(*B)[x][y]), x, y);
+                }
+                
             }
         }
     }

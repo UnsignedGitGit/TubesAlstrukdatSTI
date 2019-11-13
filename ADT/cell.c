@@ -32,13 +32,22 @@ void CellCreate(cell *C, piece *P)
     CellDisplay(*C) = PieceType(*P);
 }
 
-void CellCreateEmpty(cell *C, int X, int Y)
+void CellCreateWEmpty(cell *C, int X, int Y) //White
 //
 {
     piece P;
     PieceCreateEmpty(&P, X, Y);
     CellCreate(C, &P);
-    CellDisplay(*C) = '*';    
+    CellDisplay(*C) = '#';    
+}
+
+void CellCreateBEmpty(cell *C, int X, int Y) //Black
+//
+{
+    piece P;
+    PieceCreateEmpty(&P, X, Y);
+    CellCreate(C, &P);
+    CellDisplay(*C) = ' ';    
 }
 
 void CellCreateOffset(cell *C, int X, int Y)
