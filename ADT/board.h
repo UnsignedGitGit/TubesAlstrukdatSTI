@@ -4,10 +4,10 @@
 #define BOARD_H
 
 typedef struct {
-    cell boardCell [9][9];
+    piece boardPiece [9][9];
 } board;
 
-#define BoardCell(B) (B).boardCell // input B : board
+#define BoardPiece(B) (B).boardPiece // input B : board
 
 
 // **** Dictionary **** //
