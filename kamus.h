@@ -25,7 +25,7 @@ typedef struct {
     int xpos; // Possible int: [0..8] 
     int ypos; // Possible int: [0..8]
     boolean hasmoved;
-	boolean isdead;
+    boolean isdead;
 } piece;
 
 #define Nil 0
