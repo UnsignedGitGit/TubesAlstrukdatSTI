@@ -6,6 +6,7 @@ a. Next
    Nama fungsi (Make empty) dari tiap ADT harus dibedain
    Nama Elemen typedef struct dibenerin
    ADT List, Bikin printinfo
+   typenya piece tambahin komen huruf kecil untuk tim tertentu
 
 b. Ketinggalan
    seluruh fungsi & prosedur piece.c harus ditambah dengan boolean isdead
