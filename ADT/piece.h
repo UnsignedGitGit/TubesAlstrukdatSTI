@@ -12,6 +12,7 @@ typedef struct {
     int xpos; // Possible int: [0..8] 
     int ypos; // Possible int: [0..8]
     boolean hasmoved;
+    boolean isdead;
 } piece;
 
 #define PieceType(P) (P).type

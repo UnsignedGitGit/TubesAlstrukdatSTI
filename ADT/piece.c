@@ -15,6 +15,7 @@ void PieceCreate(piece *P, char Tipe, char Team, int X, int Y)
     PiecePosX(*P) = X;
     PiecePosY(*P) = Y;
     PieceHasMoved(*P) = false;
+    //boolean Isdead janlup
 }
 
 void PieceCreateEmpty(piece *P, int X, int Y)
