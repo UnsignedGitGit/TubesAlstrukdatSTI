@@ -1,6 +1,8 @@
 #ifndef stack_H
 #define stack_H
 
+#include "boolean.h"
+
 /* MODUL STACK
 Deklarasi stack yang diimplementasi dengan tabel kontigu alokasi statik
 dan ukuran sama
@@ -9,16 +11,30 @@ TOP adalah alamat elemen puncak*/
 #define false 0
 #define true 1
 #define Nil 0
-#define MaxEl 10
+#define MaxEl 110
 
-typedef int bool;
-typedef char infotype;
 typedef int address;
+
+//ED
+typedef struct {
+	char turn;
+	char type;
+	int x0; 
+	int y0;
+	int xt;
+	int yt;
+	char targettype;
+	boolean IsCastling;
+} infotype;
+//
 
 typedef struct {
     infotype T[MaxEl];
     address TOP;
 } Stack;
+
+
+
 
 /* Definisi stack S kosong : S.TOP = Nil */
 /* S.TOP = jumlah element stack */
@@ -34,10 +50,10 @@ void CreateEmpty(Stack *S);
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-bool IsEmpty(Stack S);
+boolean IsEmpty(Stack S);
 /* Mengirim true jika Stack kosong*/
 /* Ciri stack kosong : TOP bernilai Nil */
-bool IsFull(Stack S);
+boolean IsFull(Stack S);
 /* Mengirim true jika stack S penuh */
 /* Ciri stack penuh : TOP bernilai MaxEl */
 
