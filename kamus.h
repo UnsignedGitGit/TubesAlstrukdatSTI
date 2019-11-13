@@ -58,30 +58,30 @@ typedef struct {
 } elmt_arrpossmove; // Isi array of possible move tiap bidak
 
 typedef struct {
-	elmt_arrpossmove arr[16];
+	elmt_arrpossmove arr[17]; // Index yang digunakan [1..16]
 } arr_possible_move;
 
-	//LIST of POSSIBLE MOVE
-	typedef struct {
-		int x;
-		int y;
-	} infotype;
+//LIST : LIST of POSSIBLE MOVE
+typedef struct {
+	int x;
+	int y;
+} infotype;
 
-	typedef struct tElmtlist *address;
+typedef struct tElmtlist *address;
 
-	typedef struct tElmtlist { 
-		infotype info;
-		address next;
-	} ElmtList;
+typedef struct tElmtlist { 
+	infotype info;
+	address next;
+} ElmtList;
 
-	typedef struct {
-		address First;
-	} List;
+typedef struct {
+	address First;
+} List;
 
 
 // ARRAY : PILIHAN BIDAK yang DAPAT BERGERAK	-----------------------------------------------------
 typedef struct {
-	piece P[16];
+	piece P[17]; // Index yang digunakan [1..16]
 } piece_choice;
 
 
