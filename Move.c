@@ -60,7 +60,7 @@ void show_movable_piece(/*Array of piece pilihan sebagai masukan*/){
     
     for (i=0;i<=NbElmt-1;i++){
         
-        if(Pilihan[i].Piece.Type == 'P'){
+        if(Pilihan[i].Type == 'P'){
         printf("    %d. Pion (%d,%d)",i+1,translatex(Pilihan[i].Piece.xpos),Pilihan[i].Piece.ypos)
         }
         else if(Pilihan[i].Piece.Type == 'Q'){
@@ -83,6 +83,8 @@ void show_movable_piece(/*Array of piece pilihan sebagai masukan*/){
 }
 
 void special_move()
+
+
 
 
 
