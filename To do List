@@ -4,7 +4,7 @@ To do list:
 
 a. Next
    Nama fungsi (Make empty) dari tiap ADT harus dibedain
-   Nama Elemen typedef struct dibenerin
+   Nama Elemen typedef struct dibenerin (P sama p perlu dibikin lbh beda)
    ADT List, Bikin printinfo
    typenya piece tambahin komen huruf kecil untuk tim tertentu
    (Patrick) tolong coba main buatan kamu dengan adt board dan piece terbaru.
