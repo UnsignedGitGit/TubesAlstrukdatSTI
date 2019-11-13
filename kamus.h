@@ -39,31 +39,31 @@ typedef struct {
 
 // STACK : MOVEMEMORY 		----------------------------------------
 typedef struct {
-	char turn;
-	char type;
-	int x0;
-	int y0;
-	int xt;
-	int yt;
-	char targettype;
+	char turn; 
+	char type; // P = pion, R = Rook, H = Horse/Knight, B = Bishop, Q = Queen, K = King
+	int x0; // Posisi horizontal bidak sebelum bergerak
+	int y0; // Posisi Vertical bidak sebelum bergerak 
+	int xt; // Posisi horizontal bidak setelah bergerak
+	int yt; // Posisi vertical bidak setelah bergerak
+	char targettype; // type bidak yang ada di posisi setelah bergerak
 	boolean IsCastling;
 } movehistory;
 
 
 // ARRAY : POSSIBLE MOVE	----------------------------------------
 typedef struct {
-	elmt_arrposspove arraypiece[16];
+	elmt_arrpossmove arraypiece[16];
 } arr_possible_move;
 
 typedef struct {
 	piece p;
 	List possmove;
-} elmt_arrposspove;
+} elmt_arrpossmove;
 
 typedef struct {
 	int x;
 	int y;
-} infotype;
+} infotype; // Isi List
 
 typedef struct tElmtlist *address;
 
