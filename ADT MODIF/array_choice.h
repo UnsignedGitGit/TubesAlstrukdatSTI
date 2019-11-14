@@ -2,9 +2,10 @@
 #define ARRAYCHOICE_H
 
 #include "boolean.h"
+#include "piece.h"
 
 typedef struct {
-	piece P[17]; // Index yang digunakan [1..16]
+	piece arrpiece[17]; // Index yang digunakan [1..16]
 	int neff;
 } piece_choice;
 

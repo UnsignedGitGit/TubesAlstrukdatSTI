@@ -7,7 +7,12 @@
 #define CharNil ' '
 
 typedef struct {
-    char type; // P = pion, R = Rook, H = Horse/Knight, B = Bishop, Q = Queen, K = King 
+    char type; 
+    // P/p = pion, R/r = Rook, H/h = Horse/Knight, B/b = Bishop,
+    // Q/q = Queen, K/k = King
+    // Huruf besar menandakan bidak tim putih, sedangkan huruf kecil
+    // menandakan bidak tim hitam
+     
     char team; // W = White, B = Black
     int xpos; // Possible int: [0..8] 
     int ypos; // Possible int: [0..8]
@@ -20,6 +25,12 @@ typedef struct {
 #define PiecePosX(P) (P).xpos
 #define PiecePosY(P) (P).ypos
 #define PieceHasMoved(P) (P).hasmoved
+#define PieceIsDead(P) (P).isdead
+
+
+// Definisi piece kosong :
+// Piece kosong adalah piece dengan type dan team bernilai CharNil
+
 
 // *** ================= *** //
 // *** Konstruktor Piece *** //

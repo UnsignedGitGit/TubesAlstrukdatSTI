@@ -8,8 +8,10 @@ void BoardPieceMove (piece *P, int x, int y, board *B)
 // I.S. Piece P terdefinisi, x dan y berada pada [1..8]
 // F.S. P berpindah ke posisi x dan y di board
 {
+	//KAMUS
 	piece emptypiece;
 	
+	//ALGORITMA
 	BoardCell(*B)[x][y] = *P;
 	
 	PieceCreateEmpty(&emptypiece, PiecePosX(*P), PiecePosY(*P));
@@ -29,8 +31,10 @@ void CreateBoard(board *B)
 // I.S. B Sembarang terinisialisasi
 // F.S. Board Kosong 9x9 dengan indikator pada x = 0 dan y = 0. Tersusun bidak caturnya.
 {
+	//KAMUS
     piece P;
 
+	//ALGORITMA
     for(int y = 8; y >= 0; y--){
         for (int x = 0; x <= 8; x++){
             if (y == 8){
@@ -95,6 +99,7 @@ void BoardPrintInfo(board B)
 // I.S. B Terdefinisi
 // F.S. Menampilkan Seluruh Info Board pada CLI
 {
+	//ALGORITMA
     printf("         A       B       C       D       E       F       G       H    \n");
     printf("     _________________________________________________________________\n");
     for (int y=8;y>0;y-=2){
@@ -130,6 +135,7 @@ char TranslateX(int X)
 // Menerjemahkan axis pada sel board
 // x tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
 {
+	//ALGORITMA
     switch (X){
     case 1:
         return 'a';
@@ -173,6 +179,7 @@ char TranslateY(int Y)
 // Menerjemahkan ordinat pada sel board
 // y tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
 {
+	//ALGORITMA
     switch (Y){
     case 1:
         return '1';

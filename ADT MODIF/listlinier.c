@@ -4,64 +4,71 @@
 
 /* PROTOTYPE */
 /****************** TEST LIST KOSONG ******************/
-boolean IsEmpty (List L) {
+boolean IsListEmpty (List L) {
 /* Mengirim true jika list kosong */
-	return (First(L) == Nil);
+	/*ALGORITMA*/
+	return (First(L) == NULL);
 }
 /****************** PEMBUATAN LIST KOSONG ******************/
-void CreateEmpty (List *L) {
+void CreateEmptyList (List *L) {
 /* I.S. sembarang             */
 /* F.S. Terbentuk list kosong */
-	First(*L) = Nil;
+	/*ALGORITMA*/
+	First(*L) = NULL;
 }
 
 /****************** Manajemen Memori ******************/
-address Alokasi (infotype X) {
+address AlokasiElmtList (Linfotype X) {
 /* Mengirimkan address hasil alokasi sebuah elemen */
-/* Jika alokasi berhasil, maka address tidak nil, dan misalnya */
-/* menghasilkan P, maka Info(P)=X, Next(P)=Nil */
-/* Jika alokasi gagal, mengirimkan Nil */
+/* Jika alokasi berhasil, maka address tidak NULL, dan misalnya */
+/* menghasilkan P, maka Info(P)=X, Next(P)=NULL */
+/* Jika alokasi gagal, mengirimkan NULL */
+
+	/*KAMUS*/
 	address P;
 	
+	/*ALGORITMA*/
 	P = (ElmtList*) malloc (sizeof(ElmtList));
 	if (P == NULL) {
-		return(Nil);
+		return(NULL);
 	} else {
-		Info(P).x = X.x;		//ED
-		Info(P).y = X.y;		//
-		Next(P) = Nil;
+		Info(P).x = X.x;
+		Info(P).y = X.y;
+		Next(P) = NULL;
 		return(P);
 	}
 }
 
-void Dealokasi (address *P) {
+void DealokasiElmtList (address *P) {
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
 /* Melakukan dealokasi/pengembalian address P */
-
+	/*ALGORITMA*/
 	free(*P);
 }
 
 
 /****************** PRIMITIF BERDASARKAN NILAI ******************/
 /*** PENAMBAHAN ELEMEN ***/
-void InsVLast (List *L, infotype X) {
+void InsVLast (List *L, Linfotype X) {
 /* I.S. L mungkin kosong */
 /* F.S. Melakukan alokasi sebuah elemen dan */
 /* menambahkan elemen list di akhir: elemen terakhir yang baru */
 /* bernilai X jika alokasi berhasil. Jika alokasi gagal: I.S.= F.S. */
+	/*KAMUS*/
 	address Last;
 	address P;
 	
-	P = Alokasi(X);
+	/*ALGORITMA*/
+	P = AlokasiElmtList(X);
 	
-	if (P != Nil) {
-		if (IsEmpty(*L)) {
+	if (P != NULL) {
+		if (IsListEmpty(*L)) {
 			Next(P) = First(*L);
 			First(*L) = P;
 		} else {
 			Last = First(*L);
-			while (Next(Last) != Nil) {
+			while (Next(Last) != NULL) {
 				Last = Next(Last);
 			}
 			Next(P) = Next(Last);
@@ -71,45 +78,48 @@ void InsVLast (List *L, infotype X) {
 }
 
 /*** PENGHAPUSAN ELEMEN ***/
-void DelVLast (List *L, infotype *X) {
+void DelVLast (List *L, Linfotype *X) {
 /* I.S. list tidak kosong */
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
-
+	/*KAMUS*/
 	address Last, PrecLast;
 	
+	/*ALGORITMA*/
 	Last = First(*L);
-	PrecLast = Nil;
-	while (Next(Last) != Nil) {
+	PrecLast = NULL;
+	while (Next(Last) != NULL) {
 		PrecLast = Last;
 		Last = Next(Last);
 	}
 	
 	(*X) = Info(Last);
 	
-	if (PrecLast == Nil) {
-		First(*L) = Nil;
+	if (PrecLast == NULL) {
+		First(*L) = NULL;
 	} else {
-		Next(PrecLast) = Nil;
+		Next(PrecLast) = NULL;
 	}
 	
-	Dealokasi(&Last);
+	DealokasiElmtList(&Last);
 }
 
 /****************** PROSES SEMUA ELEMEN LIST ******************/
-int NbElmt (List L) {
+int NbElmtList (List L) {
 /* Mengirimkan banyaknya elemen list ; mengirimkan 0 jika list kosong */
-		int count = 0;
-		address P;
-		
-		if (First(L) == Nil) {
-			return 0;
-		} else {
-			P = First(L);
-			do {
-				count++;
-				P = Next(P);
-			} while (P != Nil);
-			return count;
-		}
+	/*KAMUS*/
+	int count = 0;
+	address P;
+	
+	/*ALGORITMA*/
+	if (First(L) == NULL) {
+		return 0;
+	} else {
+		P = First(L);
+		do {
+			count++;
+			P = Next(P);
+		} while (P != NULL);
+		return count;
+	}
 }

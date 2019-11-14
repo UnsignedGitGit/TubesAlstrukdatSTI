@@ -3,11 +3,12 @@
 
 #include "boolean.h"
 #include "listlinier.h"
+#include "piece.h"
 
 typedef struct {
 	piece p;
 	List possmove;
-} ElType;
+} elmt_arrpossmove;
 
 typedef struct {
 	elmt_arrpossmove arr[17]; /*Index yang digunakan [1..16]*/

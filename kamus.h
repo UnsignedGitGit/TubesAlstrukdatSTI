@@ -1,4 +1,4 @@
-// BOARD	---------------------------------------------------------
+// BOARD ------------------------------------------------------------------------------------------------------------------
 typedef struct {
     cell boardCell [9][9];
 } board;
@@ -6,21 +6,19 @@ typedef struct {
 #define BoardCell(B) (B).boardCell
 
 
-// CELL	-tidak kepakai ----------------------------------------------
+// PIECE ------------------------------------------------------------------------------------------------------------------
+
+// Definisi piece kosong: type dan team bernilai CharNil.
+// Atribut isdead piece kosong diinisialisasi dengan false
+// (supaya parameter PieceCreate tidak perlu ditambah)
+
 typedef struct {
-    piece cellPiece;
-    char cellColor;
-    char cellDisplay;
-} cell;
-
-#define CellColor(C) (C).cellColor // input C : char
-#define CellPiece(C) (C).cellPiece // input C : piece
-#define CellDisplay(C) (C).cellDisplay // input C : char
-
-
-// PIECE	---------------------------------------------------------
-typedef struct {
-    char type; // P = pion, R = Rook, H = Horse/Knight, B = Bishop, Q = Queen, K = King 
+    char type; 
+    // P/p = pion, R/r = Rook, H/h = Horse/Knight, B/b = Bishop,
+    // Q/q = Queen, K/k = King
+    // Huruf besar menandakan bidak tim putih, sedangkan huruf kecil
+    // menandakan bidak tim hitam
+     
     char team; // W = White, B = Black
     int xpos; // Possible int: [0..8] 
     int ypos; // Possible int: [0..8]
@@ -36,42 +34,56 @@ typedef struct {
 #define PiecePosX(P) (P).xpos
 #define PiecePosY(P) (P).ypos
 #define PieceHasMoved(P) (P).hasmoved
+#define PieceIsDead(P) (P).isdead
 
 
-// STACK : HISTORY OF EACH MOVEMENT 		----------------------------------------
+// STACK : MOVEMENT HISTORY ------------------------------------------------------------------------------------------------------------------
 typedef struct {
 	char turn; 
-	char type; // P = pion, R = Rook, H = Horse/Knight, B = Bishop, Q = Queen, K = King
+	char type;
+    // P/p = pion, R/r = Rook, H/h = Horse/Knight, B/b = Bishop,
+    // Q/q = Queen, K/k = King
+    
 	int x0; // Posisi horizontal bidak sebelum bergerak
 	int y0; // Posisi Vertical bidak sebelum bergerak 
 	int xt; // Posisi horizontal bidak setelah bergerak
 	int yt; // Posisi vertical bidak setelah bergerak
 	char targettype; // type bidak yang ada di posisi setelah bergerak
 	boolean IsCastling;
-} infotype; // Isi stack "History"
+} infotype;
+
+typedef int address;
+
+#define Nil 0
+#define MaxElStack 110
+
+typedef struct {
+    Sinfotype T[MaxElStack];
+    address TOP;
+} Stack;
 
 
-// ARRAY : PIECE and POSSIBLE MOVE ----------------------------------------
+// ARRAY : PIECE DAN POSSIBLE MOVE-NYA ------------------------------------------------------------------------------------------------------------------
 typedef struct {
 	piece p;
 	List possmove;
-} elmt_arrpossmove; // Isi array of possible move tiap bidak
+} elmt_arrpossmove;
 
 typedef struct {
-	elmt_arrpossmove arr[17]; // Index yang digunakan [1..16]
+	elmt_arrpossmove arr[17]; //Index yang digunakan [1..16]
 	int neff;
 } arr_possible_move;
 
-//LIST : LIST of POSSIBLE MOVE
+// LIST : POSSIBLE MOVE (digunakan di dalam arr_possible_move ------------------------------------------------------------------------------------------------------------------
 typedef struct {
 	int x;
 	int y;
-} infotype;
+} Linfotype;
 
 typedef struct tElmtlist *address;
 
 typedef struct tElmtlist { 
-	infotype info;
+	Linfotype info;
 	address next;
 } ElmtList;
 
@@ -80,14 +92,29 @@ typedef struct {
 } List;
 
 
-// ARRAY : PILIHAN BIDAK yang DAPAT BERGERAK	-----------------------------------------------------
+// ARRAY : PILIHAN BIDAK yang DAPAT BERGERAK ------------------------------------------------------------------------------------------------------------------
 typedef struct {
-	piece P[17]; // Index yang digunakan [1..16]
+	piece arrpiece[17]; // Index yang digunakan [1..16]
 	int neff;
 } piece_choice;
 
 
-// RAJA		---------------------------------------------------------
+// QUEUE : TURN ------------------------------------------------------------------------------------------------------------------
+typedef char Qinfotype;
+
+typedef int address;
+
+typedef struct { 
+	Qinfotype * T;
+	address HEAD;
+	address TAIL;
+	int MaxEl;
+} Queue;
+
+#define Nil 0
+
+
+// RAJA ------------------------------------------------------------------------------------------------------------------
 typedef struct {
 	int x;
 	int y;
