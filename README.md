@@ -1,2 +1,4 @@
 # NOTE
-- raja.c sudah bisa dicompile
+Udh bisa dicompile
+- raja.c
+- turn.c
