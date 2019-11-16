@@ -131,7 +131,7 @@ void BoardPrintInfo(board B)
     } 
 }
 
-char TranslateX(int X)
+char translatex(int X)
 // Menerjemahkan axis pada sel board
 // x tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
 {
@@ -175,7 +175,7 @@ char TranslateX(int X)
     }
 }
 
-char TranslateY(int Y)
+char translatey(int Y)
 // Menerjemahkan ordinat pada sel board
 // y tipe bentukan int yang terdefinisi [1 .. 8] dengan default char ' '
 {

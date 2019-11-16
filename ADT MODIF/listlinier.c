@@ -1,4 +1,5 @@
 #include "listlinier.h"
+#include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -121,5 +122,25 @@ int NbElmtList (List L) {
 			P = Next(P);
 		} while (P != NULL);
 		return count;
+	}
+}
+
+void PrintInfo (List L)
+/* I.S. List tidak kosong */
+/* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
+/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
+/* Jika list kosong : menulis [] */
+/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+{	
+	/*KAMUS*/
+	address P;
+	int i;
+	
+	/*ALGORITMA*/
+	P = First(L);
+	
+	for (i=1; i<= NbElmtList(L); i++) {
+		printf("%d. (%c, %c)\n", i, translatex((*P).info.x), (*P).info.y);
+		P = Next(P);
 	}
 }
