@@ -45,7 +45,7 @@ void move(Stack *S, char team, arr_possible_move *T, board bb){
 
     
 
-    printf("Bidak %c telah berpindah dari (%d,%d) ke(%d,%d)\n"/*Awal posisi,akhirpoisii dari stack move_history*/);
+    printf("Bidak %c telah berpindah dari (%d,%d) ke(%d,%d)\n");
 }
 
 
