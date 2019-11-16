@@ -26,7 +26,7 @@ typedef struct {
 */
 
 
-void BoardPieceMove (piece *P, int x, int y, board *B);
+void BoardPieceMove(piece *P,  board *B, int x, int y);
 // Mengubah posisi piece P di board
 // I.S. Piece P terdefinisi, x dan y berada pada [1..8]
 // F.S. P berpindah ke posisi x dan y di board

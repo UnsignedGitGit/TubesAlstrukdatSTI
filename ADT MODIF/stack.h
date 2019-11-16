@@ -6,8 +6,6 @@
 #define Nil 0
 #define MaxElStack 110
 
-typedef int address;
-
 typedef struct {
 	char turn; 
 	char type;
@@ -20,11 +18,11 @@ typedef struct {
 	int yt; /* Posisi vertical bidak setelah bergerak */
 	char targettype; /* type bidak yang ada di posisi setelah bergerak */
 	boolean IsCastling;
-} infotype;
+} Sinfotype;
 
 typedef struct {
     Sinfotype T[MaxElStack];
-    address TOP;
+    int TOP;
 } Stack;
 
 /* Definisi stack S kosong : S.TOP = Nil */

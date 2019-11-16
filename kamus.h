@@ -1,6 +1,6 @@
 // BOARD ------------------------------------------------------------------------------------------------------------------
 typedef struct {
-    cell boardCell [9][9];
+    piece boardCell [9][9];
 } board;
 
 #define BoardCell(B) (B).boardCell
@@ -50,16 +50,14 @@ typedef struct {
 	int yt; // Posisi vertical bidak setelah bergerak
 	char targettype; // type bidak yang ada di posisi setelah bergerak
 	boolean IsCastling;
-} infotype;
-
-typedef int address;
+} Sinfotype;
 
 #define Nil 0
 #define MaxElStack 110
 
 typedef struct {
     Sinfotype T[MaxElStack];
-    address TOP;
+    int TOP;
 } Stack;
 
 
@@ -102,12 +100,10 @@ typedef struct {
 // QUEUE : TURN ------------------------------------------------------------------------------------------------------------------
 typedef char Qinfotype;
 
-typedef int address;
-
 typedef struct { 
 	Qinfotype * T;
-	address HEAD;
-	address TAIL;
+	int HEAD;
+	int TAIL;
 	int MaxEl;
 } Queue;
 
