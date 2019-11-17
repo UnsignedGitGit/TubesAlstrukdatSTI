@@ -17,6 +17,7 @@ boolean IsStackEmpty (Stack S) {
 	/* Algoritma */
 	return (S.TOP == Nil);
 }
+
 boolean IsStackFull(Stack S) {
 /* Mengirim true jika stack S penuh */
 /* Ciri stack penuh : TOP bernilai MaxEl */
@@ -24,6 +25,7 @@ boolean IsStackFull(Stack S) {
 	/* Algoritma */
 	return(S.TOP == MaxElStack);
 }
+
 void Push (Stack *S, Sinfotype X) {
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, S tidak penuh */
@@ -31,28 +33,29 @@ void Push (Stack *S, Sinfotype X) {
 	/* Kamus Lokal */
 	/* Algoritma */
 	(*S).TOP++;
-	(*S).T[(*S).TOP-1].turn = X.turn;
-	(*S).T[(*S).TOP-1].type = X.type;
-	(*S).T[(*S).TOP-1].x0 = X.x0;
-	(*S).T[(*S).TOP-1].y0 = X.y0;
-	(*S).T[(*S).TOP-1].xt = X.xt;
-	(*S).T[(*S).TOP-1].yt = X.yt;
-	(*S).T[(*S).TOP-1].targettype = X.targettype;
-	(*S).T[(*S).TOP-1].specialmove = X.specialmove;
+	(*S).T[(*S).TOP].turn = X.turn;
+	(*S).T[(*S).TOP].type = X.type;
+	(*S).T[(*S).TOP].x0 = X.x0;
+	(*S).T[(*S).TOP].y0 = X.y0;
+	(*S).T[(*S).TOP].xt = X.xt;
+	(*S).T[(*S).TOP].yt = X.yt;
+	(*S).T[(*S).TOP].targettype = X.targettype;
+	(*S).T[(*S).TOP].specialmove = X.specialmove;
 }
+
 void Pop (Stack *S, Sinfotype *X) {
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
 	/* Kamus Lokal */
 	/* Algoritma */
-	(*X).turn = (*S).T[(*S).TOP-1].turn;
-	(*X).type = (*S).T[(*S).TOP-1].type;
-	(*X).x0 = (*S).T[(*S).TOP-1].x0;
-	(*X).y0 = (*S).T[(*S).TOP-1].y0;
-	(*X).xt = (*S).T[(*S).TOP-1].xt;
-	(*X).yt = (*S).T[(*S).TOP-1].yt;
-	(*X).targettype = (*S).T[(*S).TOP-1].targettype;
-	(*X).specialmove = (*S).T[(*S).TOP-1].specialmove;
+	(*X).turn = (*S).T[(*S).TOP].turn;
+	(*X).type = (*S).T[(*S).TOP].type;
+	(*X).x0 = (*S).T[(*S).TOP].x0;
+	(*X).y0 = (*S).T[(*S).TOP].y0;
+	(*X).xt = (*S).T[(*S).TOP].xt;
+	(*X).yt = (*S).T[(*S).TOP].yt;
+	(*X).targettype = (*S).T[(*S).TOP].targettype;
+	(*X).specialmove = (*S).T[(*S).TOP].specialmove;
 	(*S).TOP--;
 }
