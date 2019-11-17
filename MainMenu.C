@@ -2,14 +2,20 @@
 #include<time.h>
 #include<stdlib.h>
 #include "ADT/board.h"
+#include "ADT/leaderboard.h"
 
 void welcome(); //animasi singkat
+void initiate(); //inisialisasi semua
+void mainscreen(); //UI main menu
 void plyrname(); //input nama pemain
 void readmain(); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
-void initiate();
+void play(); //main game
+void load();
+
 
 int main(){
+
     welcome();
         delay (7);
         printf ("Loading");
@@ -25,25 +31,7 @@ int main(){
         printf("Loading complete. Press enter to continue. \n");
         getchar();
     system("cls");    
-
-    printf("##################################################################\n\n");
-    printf("       _________ __     __ ________  ________ ________    __      \n");
-    printf("      /   ______|  |   |  |  ______|/  ______/  ______|  |  |     \n");
-    printf("      |  |      |  |___|  |  |__   |  (_____ |  (_____   |  |     \n");
-    printf("      |  |      |   ___   |   __|   \\_____   \\______  \\  |__| \n");  
-    printf("      |  |______|  |   |  |  |_____  _____)  | _____)  |  __      \n");
-    printf("      \\_________|__|   |__|________|/________/________/  |__|   \n\n");
-    printf("                                                       (v.0.1)    \n");
-    printf("##################################################################\n\n");
-    printf("               **WELCOME TO CHESS KACANG BUNCHESS**               \n");
-    printf("_________________________________________________________________\n");
-    printf("|                                                               |\n");
-    printf("|                          <(N)ew Game>                         |\n");
-    printf("|                         <(L)oad Game>                         |\n");
-    printf("|                        <Leader(B)oards>                       |\n");
-    printf("|                           <(E)xit>                            |\n");
-    printf("|_______________________________________________________________|  \n");
-    
+    mainscreen();
     readmain();
     
     return 0;
@@ -72,19 +60,40 @@ void welcome(){
     printf("       C  H  E  S  S    M  U  L  T  I  P  L  A  Y  E  R    \n\n");
 }
 
+void mainscreen(){
+    printf("##################################################################\n\n");
+    printf("       _________ __     __ ________  ________ ________    __      \n");
+    printf("      /   ______|  |   |  |  ______|/  ______/  ______|  |  |     \n");
+    printf("      |  |      |  |___|  |  |__   |  (_____ |  (_____   |  |     \n");
+    printf("      |  |      |   ___   |   __|   \\_____   \\______  \\  |__| \n");  
+    printf("      |  |______|  |   |  |  |_____  _____)  | _____)  |  __      \n");
+    printf("      \\_________|__|   |__|________|/________/________/  |__|   \n\n");
+    printf("                                                       (v.0.1)    \n");
+    printf("##################################################################\n\n");
+    printf("               **WELCOME TO CHESS KACANG BUNCHESS**               \n");
+    printf("_________________________________________________________________\n");
+    printf("|                                                               |\n");
+    printf("|                          <(N)ew Game>                         |\n");
+    printf("|                         <(L)oad Game>                         |\n");
+    printf("|                        <Leader(B)oards>                       |\n");
+    printf("|                           <(E)xit>                            |\n");
+    printf("|_______________________________________________________________|  \n");
+}
+
 void readmain(){
     char pil;
     printf("Enter your command: ");
     scanf("%c", &pil);
     if (pil=='N'){
         system("cls");
-        initiate();    
+        play();    
     }else if (pil=='L'){
-        printf("Input your file name: ");
+        load();
         //jalankan fungsi load
     }else if (pil=='B'){
         //jalankan fungsi print leaderboard
-        printf("Leaderboards Empty");
+        system("cls");
+        //printleaderboard();
     }else if (pil=='E'){
             delay (8);
             system("cls");
@@ -120,9 +129,26 @@ void delay(int number_of_seconds)
         ; 
 } 
 
-void initiate(){
+void play(){
     board B;
     CreateBoard(&B);
 
     BoardPrintInfo(B);
+}
+
+void load(){
+    char filename[20];
+    printf("Enter file name: ");
+    scanf("%s", filename);
+    delay(7);
+    printf("%s loaded succesfully, starting in a few seconds", filename);
+    delay(5);
+    printf(".");
+    delay(5);
+    printf(".");
+    delay(5);
+    printf(".");
+    delay(15);
+    system("cls");
+    play();
 }
