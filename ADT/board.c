@@ -171,6 +171,7 @@ void BoardPrintInfo(board B)
 // I.S. B Terdefinisi
 // F.S. Menampilkan Seluruh Info Board pada CLI
 {
+    printf("\n");
     printf("         A       B       C       D       E       F       G       H    \n");
     printf("     _________________________________________________________________\n");
     for (int y=8;y>0;y-=2){
@@ -198,6 +199,7 @@ void BoardPrintInfo(board B)
         (CellDisplay(BoardCell(B)[6][y-1])),
         (CellDisplay(BoardCell(B)[7][y-1])),
         (CellDisplay(BoardCell(B)[8][y-1])));
-        printf("     |_______|#######|_______|#######|_______|#######|_______|#######|\n");
+        printf("     |_______|#######|_______|#######|_______|#######|_______|#######|\n\n");
     } 
 }
+

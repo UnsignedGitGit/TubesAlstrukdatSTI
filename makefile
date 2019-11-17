@@ -1,2 +1,2 @@
 all:
-	gcc -o tesboard .\ADT\piece.c .\ADT\board.c .\ADT\cell.c bidakDriver.c
+	gcc -o mainmenu .\ADT\piece.c .\ADT\board.c .\ADT\cell.c .\ADT\leaderboard.c MainMenu.c
