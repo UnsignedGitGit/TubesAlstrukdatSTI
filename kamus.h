@@ -1,6 +1,6 @@
 // BOARD ------------------------------------------------------------------------------------------------------------------
 typedef struct {
-    piece boardCell [9][9];
+    piece* boardCell [9][9];
 } board;
 
 #define BoardCell(B) (B).boardCell
@@ -49,7 +49,7 @@ typedef struct {
 	int xt; // Posisi horizontal bidak setelah bergerak
 	int yt; // Posisi vertical bidak setelah bergerak
 	char targettype; // type bidak yang ada di posisi setelah bergerak
-	boolean IsCastling;
+	char specialmove; // 'C' jika castling, 'E' jika en passant, 'N' jika gerakan biasa
 } Sinfotype;
 
 #define Nil 0
@@ -63,7 +63,7 @@ typedef struct {
 
 // ARRAY : PIECE DAN POSSIBLE MOVE-NYA ------------------------------------------------------------------------------------------------------------------
 typedef struct {
-	piece p;
+	piece* p;
 	List possmove;
 } elmt_arrpossmove;
 
@@ -95,6 +95,14 @@ typedef struct {
 	piece arrpiece[17]; // Index yang digunakan [1..16]
 	int neff;
 } piece_choice;
+
+
+// ARRAY : PILIHAN ID SPECIAL MOVE yang DAPAT DILAKUKAN ------------------------------------------------------------------------------------------------------------------
+typedef struct {
+	char* T;
+	int Neff;
+	int MaxEl;
+} TabChar;
 
 
 // QUEUE : TURN ------------------------------------------------------------------------------------------------------------------

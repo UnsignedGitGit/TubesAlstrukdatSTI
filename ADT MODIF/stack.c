@@ -38,7 +38,7 @@ void Push (Stack *S, Sinfotype X) {
 	(*S).T[(*S).TOP-1].xt = X.xt;
 	(*S).T[(*S).TOP-1].yt = X.yt;
 	(*S).T[(*S).TOP-1].targettype = X.targettype;
-	(*S).T[(*S).TOP-1].IsCastling = X.IsCastling;
+	(*S).T[(*S).TOP-1].specialmove = X.specialmove;
 }
 void Pop (Stack *S, Sinfotype *X) {
 /* Menghapus X dari Stack S. */
@@ -53,6 +53,6 @@ void Pop (Stack *S, Sinfotype *X) {
 	(*X).xt = (*S).T[(*S).TOP-1].xt;
 	(*X).yt = (*S).T[(*S).TOP-1].yt;
 	(*X).targettype = (*S).T[(*S).TOP-1].targettype;
-	(*X).IsCastling = (*S).T[(*S).TOP-1].IsCastling;
+	(*X).specialmove = (*S).T[(*S).TOP-1].specialmove;
 	(*S).TOP--;
 }

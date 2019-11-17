@@ -17,7 +17,7 @@ typedef struct {
 	int xt; /* Posisi horizontal bidak setelah bergerak */
 	int yt; /* Posisi vertical bidak setelah bergerak */
 	char targettype; /* type bidak yang ada di posisi setelah bergerak */
-	boolean IsCastling;
+	char specialmove; /* 'C' jika castling, 'E' jika en passant, 'N' jika gerakan biasa */
 } Sinfotype;
 
 typedef struct {
@@ -55,6 +55,5 @@ void Pop (Stack *S, Sinfotype *X);
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
-
 
 #endif

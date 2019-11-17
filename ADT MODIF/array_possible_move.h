@@ -6,7 +6,7 @@
 #include "piece.h"
 
 typedef struct {
-	piece p;
+	piece* p;
 	List possmove;
 } elmt_arrpossmove;
 

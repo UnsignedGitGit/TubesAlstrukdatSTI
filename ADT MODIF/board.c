@@ -1,7 +1,6 @@
 #include "board.h"
 #include <stdio.h>
 #include <stdlib.h>
-#include <conio.h>
 
 void BoardPieceMove(piece *P,  board *B, int x, int y)
 // Mengubah posisi piece P di board
@@ -12,10 +11,10 @@ void BoardPieceMove(piece *P,  board *B, int x, int y)
 	piece emptypiece;
 	
 	//ALGORITMA
-	BoardCell(*B)[x][y] = *P;
+	BoardCell(*B)[x][y] = P;
 	
 	PieceCreateEmpty(&emptypiece, PiecePosX(*P), PiecePosY(*P));
-	BoardCell(*B)[PiecePosX(*P)][PiecePosY(*P)] = emptypiece;
+	BoardCell(*B)[PiecePosX(*P)][PiecePosY(*P)] = &emptypiece;
 	
 	PieceMove(P, x, y);
 }
@@ -54,15 +53,15 @@ void CreateBoard(board *B)
                     // Create Black King
                     PieceCreateBKing(&P, 'B', x, y);
                 }
-                BoardCell(*B)[x][y] = P;
+                BoardCell(*B)[x][y] = &P;
             } else if (y == 7){
                 // Create Black Pawn
                 PieceCreateBPawn(&P, 'B', x, y);
-                BoardCell(*B)[x][y] = P;
+                BoardCell(*B)[x][y] = &P;
             } else if (y == 2){
                 // Create White Pawn
                 PieceCreateWPawn(&P, 'W', x, y);
-				BoardCell(*B)[x][y] = P;
+				BoardCell(*B)[x][y] = &P;
             } else if (y == 1){
                 if ((x == 1) || (x == 8)){
                     // Create White Rook
@@ -80,10 +79,10 @@ void CreateBoard(board *B)
                     // Create White King
                     PieceCreateWKing(&P, 'W', x, y);
                 }
-				BoardCell(*B)[x][y] = P;
+				BoardCell(*B)[x][y] = &P;
             } else {
                 PieceCreateEmpty(&P, x, y);
-				BoardCell(*B)[x][y] = P;
+				BoardCell(*B)[x][y] = &P;
             }
         }
     }
@@ -106,27 +105,27 @@ void BoardPrintInfo(board B)
         printf("     |#######|       |#######|       |#######|       |#######|       |\n"); //▓ adalah ascii 178
         printf("  %d  |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |\n",
         y,
-        BoardCell(B)[1][y].type,
-        BoardCell(B)[2][y].type,
-        BoardCell(B)[3][y].type,
-        BoardCell(B)[4][y].type,
-        BoardCell(B)[5][y].type,
-        BoardCell(B)[6][y].type,
-        BoardCell(B)[7][y].type,
-        BoardCell(B)[8][y].type);
+        BoardCell(B)[1][y]->type,
+        BoardCell(B)[2][y]->type,
+        BoardCell(B)[3][y]->type,
+        BoardCell(B)[4][y]->type,
+        BoardCell(B)[5][y]->type,
+        BoardCell(B)[6][y]->type,
+        BoardCell(B)[7][y]->type,
+        BoardCell(B)[8][y]->type);
         
         printf("     |#######|_______|#######|_______|#######|_______|#######|_______|\n");
         printf("     |       |#######|       |#######|       |#######|       |#######|\n");
         printf("  %d  |   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|\n",
         y-1,
-        BoardCell(B)[1][y-1].type,
-        BoardCell(B)[2][y-1].type,
-        BoardCell(B)[3][y-1].type,
-        BoardCell(B)[4][y-1].type,
-        BoardCell(B)[5][y-1].type,
-        BoardCell(B)[6][y-1].type,
-        BoardCell(B)[7][y-1].type,
-        BoardCell(B)[8][y-1].type);
+        BoardCell(B)[1][y-1]->type,
+        BoardCell(B)[2][y-1]->type,
+        BoardCell(B)[3][y-1]->type,
+        BoardCell(B)[4][y-1]->type,
+        BoardCell(B)[5][y-1]->type,
+        BoardCell(B)[6][y-1]->type,
+        BoardCell(B)[7][y-1]->type,
+        BoardCell(B)[8][y-1]->type);
         printf("     |_______|#######|_______|#######|_______|#######|_______|#######|\n");
     } 
 }
