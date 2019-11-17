@@ -1,14 +1,31 @@
 #include<stdio.h>
 #include<time.h>
 #include<stdlib.h>
-#include <conio.h>
 #include "ADT/board.h"
 
-void readmain();
+void welcome(); //animasi singkat
+void plyrname(); //input nama pemain
+void readmain(); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
 void initiate();
 
 int main(){
+    welcome();
+        delay (7);
+        printf ("Loading");
+        delay (5);
+        printf (".");
+        delay (5);
+        printf (".");
+        delay(5);
+        printf (".");
+        delay (10);
+        system("cls");    
+    welcome();
+        printf("Loading complete. Press enter to continue. \n");
+        getchar();
+    system("cls");    
+
     printf("##################################################################\n\n");
     printf("       _________ __     __ ________  ________ ________    __      \n");
     printf("      /   ______|  |   |  |  ______|/  ______/  ______|  |  |     \n");
@@ -31,28 +48,42 @@ int main(){
     
     return 0;
 }
+
+void welcome(){
+    printf("                                                           \n");
+    printf("                 `      :                                  \n");                               
+    printf("             `     ` `.-o-.                                \n");
+    printf("           `   ``   ` `.s-                                 \n");
+    printf("             `   ``` `.:+++/            `  `  `            \n");
+    printf("           `   `  ````-:o+o.       `-`````` `````   `      \n");
+    printf("                 `  ``-/+++        /o+/:...  ```` `        \n");
+    printf("             `    ` `-+oooo:     .ossooo+:- `` ` `         \n");
+    printf("                  ```-++sss-    -o+:-/so+/-..````  `       \n");
+    printf("                 ` ` .-+ooo`        -ooo++-`` ` `          \n");
+    printf("                  `.`.:+soo`      .+oosoo/-`` `   `        \n");
+    printf("                    `.-+ooo:     :sssoss+/.` ` `           \n");
+    printf("                 `  --/+oooo.`   +sssosss+` `              \n");
+    printf("                  `.osyyyyyyo-  `/sssssso/-``   `          \n");
+    printf("                   .-+ossoss/.  ./sssoso/-.`` `            \n");
+    printf("                  `+ssssssssss. osssssssso/-`              \n");
+    printf("                  `://////////.`://////////.               \n");
+    printf("                                                            \n");                              
+    printf("                 W  E  L  C  O  M  E    T  O               \n");
+    printf("       C  H  E  S  S    M  U  L  T  I  P  L  A  Y  E  R    \n\n");
+}
+
 void readmain(){
     char pil;
     printf("Enter your command: ");
     scanf("%c", &pil);
     if (pil=='N'){
-        for(int i=1;i<=3;i++){
-            delay (7);
-            system("cls");
-            printf ("Loading.");
-            delay (5);
-            system("cls");
-            printf ("Loading..");
-            delay(5);
-            system("cls");
-            printf ("Loading...");
-        }
-    delay (10);
-    system("cls");
-    initiate();    
+        system("cls");
+        initiate();    
     }else if (pil=='L'){
         printf("Input your file name: ");
+        //jalankan fungsi load
     }else if (pil=='B'){
+        //jalankan fungsi print leaderboard
         printf("Leaderboards Empty");
     }else if (pil=='E'){
             delay (8);
