@@ -53,31 +53,31 @@ void PieceCreateBPawn(piece *P, char Team, int X, int Y); //Black
 
 void PieceCreateWRook(piece *P, char Team, int X, int Y); //White
 void PieceCreateBRook(piece *P, char Team, int X, int Y); //Black
-// Membuat piece bertipe pawn pada variabel P.
+// Membuat piece bertipe rook pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Rook 'R', tim piece Team, posisi piece X dan Y.
 
 void PieceCreateWKnight(piece *P, char Team, int X, int Y); //White
 void PieceCreateBKnight(piece *P, char Team, int X, int Y); //Black
-// Membuat piece bertipe pawn pada variabel P.
+// Membuat piece bertipe horse pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Horse 'H', tim piece Team, posisi piece X dan Y.
 
 void PieceCreateWBishop(piece *P, char Team, int X, int Y); //White
 void PieceCreateBBishop(piece *P, char Team, int X, int Y); //Black
-// Membuat piece bertipe pawn pada variabel P.
+// Membuat piece bertipe bishop pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Bishop 'B', tim piece Team, posisi piece X dan Y.
 
 void PieceCreateWQueen(piece *P, char Team, int X, int Y); //White
 void PieceCreateBQueen(piece *P, char Team, int X, int Y); //Black
-// Membuat piece bertipe pawn pada variabel P.
+// Membuat piece bertipe queen pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece Queen 'Q', tim piece Team, posisi piece X dan Y.
 
 void PieceCreateWKing(piece *P, char Team, int X, int Y); //White
 void PieceCreateBKing(piece *P, char Team, int X, int Y); //Black
-// Membuat piece bertipe pawn pada variabel P.
+// Membuat piece bertipe king pada variabel P.
 // I.S. P Terdefinisi
 // F.S. Terbentuk P dengan tipe piece King 'K', tim piece Team, posisi piece X dan Y.
 
