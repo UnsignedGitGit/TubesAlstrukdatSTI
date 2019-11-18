@@ -332,9 +332,6 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
 	}
 	
 	BoardPieceMove(P, B, xtarget, ytarget);
-
-	/*Pengubahan info piece P*/
-	PieceMove(P, xtarget, ytarget);
 }
 
 
