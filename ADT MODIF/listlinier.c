@@ -105,6 +105,20 @@ void DelVLast (List *L, Linfotype *X) {
 	DealokasiElmtList(&Last);
 }
 
+void DelVFirst (List *L, Linfotype *X) {
+/* I.S. List L tidak kosong  */
+/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
+/*      dan alamat elemen pertama di-dealokasi */
+	address P;
+	
+	P = First(*L);
+	First(*L) = Next(First(*L));
+	Next(P) = Nil;
+	
+	(*X) = Info(P);
+	Dealokasi(&P);
+}
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 int NbElmtList (List L) {
 /* Mengirimkan banyaknya elemen list ; mengirimkan 0 jika list kosong */
@@ -142,5 +156,16 @@ void PrintInfo (List L)
 	for (i=1; i<= NbElmtList(L); i++) {
 		printf("%d. (%c, %c)\n", i, translatex((*P).info.x), (*P).info.y);
 		P = Next(P);
+	}
+}
+
+DelList(List* L)
+/* I.S. List mungkin kosong */
+/* F.S. Semua elemen L di-dealokasi */
+{
+	int i;
+	Linfotype x;
+	for(i=1; i<= NbElmtList(*L); i++) {
+		DelVFirst(L, &x);
 	}
 }

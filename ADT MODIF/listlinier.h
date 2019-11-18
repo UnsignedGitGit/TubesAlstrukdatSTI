@@ -44,6 +44,7 @@ address AlokasiElmtList (Linfotype X);
 /* Jika alokasi berhasil, maka address tidak NULL, dan misalnya */
 /* menghasilkan P, maka Info(P)= X, Next(P)= NULL */
 /* Jika alokasi gagal, mengirimkan NULL */
+
 void DealokasiElmtList (address *P);
 /* I.S. P terdefinisi */
 /* F.S. P dikembalikan ke sistem */
@@ -63,6 +64,11 @@ void DelVLast (List *L, Linfotype *X);
 /* F.S. Elemen terakhir list dihapus: nilai info disimpan pada X */
 /*      dan alamat elemen terakhir di-dealokasi */
 
+void DelVFirst (List *L, Linfotype *X);
+/* I.S. List L tidak kosong  */
+/* F.S. Elemen pertama list dihapus: nilai info disimpan pada X */
+/*      dan alamat elemen pertama di-dealokasi */
+
 /****************** PROSES SEMUA ELEMEN LIST ******************/
 int NbElmtList (List L);
 /* Mengirimkan banyaknya elemen list; mengirimkan 0 jika list kosong */
@@ -73,6 +79,10 @@ void PrintInfo (List L);
 /* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
 /* Jika list kosong : menulis [] */
 /* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+
+DelList(List* L)
+/* I.S. List mungkin kosong */
+/* F.S. Semua elemen L di-dealokasi */
 
 
 #endif
