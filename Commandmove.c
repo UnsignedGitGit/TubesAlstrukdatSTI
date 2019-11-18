@@ -13,7 +13,6 @@ void king(arr_possible_move* M, piece P, board B, char T)
  * 		(bidak raja tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
 
-
 {	
 	/*KAMUS*/
 	int i;
@@ -48,7 +47,6 @@ void horse(arr_possible_move* M, piece P, board B, char T)
 	addValidCoor(M, i, P.xpos+1, P.ypos+2, B, T);
 	addValidCoor(M, i, P.xpos+2, P.ypos+1, B, T);
 	addValidCoor(M, i, P.xpos+2, P.ypos-1, B, T);
-	
 	addValidCoor(M, i, P.xpos+1 , P.ypos-2, B, T);
 	addValidCoor(M, i, P.xpos-1 , P.ypos-2, B, T);
 	addValidCoor(M, i, P.xpos-2, P.ypos-1, B, T);
@@ -68,32 +66,61 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
 	i = findPieceIdx(*M, P);
 	
 
-	if (T == 'W'){ if (P.hasmoved) {
-		addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
-	} else {
-		addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
-		addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
-	}
-	
-	/* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
-	 * bidak lawan, alamat kotak tersebut akan ditambahkan
-	 * ke list-of-possible-move */
-	 
-	if (PieceIsValidMove(P.xpos+1, P.ypos+1)) {
-		if (B.boardCell[P.xpos+1][P.ypos+1].team != T) {
-			k.x = P.xpos+1;
-			k.y = P.ypos+1;
-			InsVLast (&(*M).arr[i].possmove, k);
-		}
-	}
-	
-	if (PieceIsValidMove(P.xpos-1, P.ypos+1)) {
-		if (B.boardCell[P.xpos-1][P.ypos+1].team != T) {
-			k.x = P.xpos-1;
-			k.y = P.ypos+1;
-			InsVLast (&(*M).arr[i].possmove, k);
-		}
-	}
+	if (T == 'W'){ 
+        if (P.hasmoved) {
+	    	addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
+	    } else {
+	    	addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
+	    	addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+	    }
+    
+	    /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
+	     * bidak lawan, alamat kotak tersebut akan ditambahkan
+	     * ke list-of-possible-move */
+    
+	    if (PieceIsValidMove(P.xpos+1, P.ypos+1)) {
+	    	if (B.boardCell[P.xpos+1][P.ypos+1].team != T) {
+	    		k.x = P.xpos+1;
+	    		k.y = P.ypos+1;
+	    		InsVLast (&(*M).arr[i].possmove, k);
+	    	}
+	    }
+    
+	    if (PieceIsValidMove(P.xpos-1, P.ypos+1)) {
+	    	if (B.boardCell[P.xpos-1][P.ypos+1].team != T) {
+	    		k.x = P.xpos-1;
+	    		k.y = P.ypos+1;
+	    		InsVLast (&(*M).arr[i].possmove, k);
+	    	}
+	    }
+    }
+    else{
+        if (P.hasmoved) {
+	    	addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
+	    } else {
+	    	addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
+	    	addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+	    }
+    
+	    /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
+	     * bidak lawan, alamat kotak tersebut akan ditambahkan
+	     * ke list-of-possible-move */
+    
+	    if (PieceIsValidMove(P.xpos+1, P.ypos-1)) {
+	    	if (B.boardCell[P.xpos+1][P.ypos-1].team != T) {
+	    		k.x = P.xpos+1;
+	    		k.y = P.ypos-1;
+	    		InsVLast (&(*M).arr[i].possmove, k);
+	    	}
+	    }
+    
+	    if (PieceIsValidMove(P.xpos-1, P.ypos-1)) {
+	    	if (B.boardCell[P.xpos-1][P.ypos-1].team != T) {
+	    		k.x = P.xpos-1;
+	    		k.y = P.ypos-1;
+	    		InsVLast (&(*M).arr[i].possmove, k);
+	    	}
+	    }
     }
 }
 void rook(arr_possible_move *M, piece P,board B,char T){
@@ -322,7 +349,7 @@ void move(Stack *S, char team, arr_possible_move *T, board bb){
     // Inisialisasi
 
 
-    generate_valid_move(T); // Traversal mengakses satu' bidak di arr_possible_move
+    // Traversal mengakses satu' bidak di arr_possible_move
 
 
     // Mengcopy bidak yang bisa ke array of pilihan
@@ -389,9 +416,33 @@ void show_movable_piece(piece_choice pc){
 }
 
 
+void generate_valid_move(arr_possible_move *T, board B){
+    int i;
+    int j;
 
-
-
+    for (i=1;i<17;i++){
+        if ((*T).arr[i].p.isdead == false){
+            if (((*T).arr[i].p.type == 'K') || ((*T).arr[i].p.type == 'K')){
+                king(T,(*T).arr[i].p,B,(*T).arr[i].p.team);
+            }
+            else if (((*T).arr[i].p.type == 'Q') || ((*T).arr[i].p.type == 'q')){
+                queen(T,(*T).arr[i].p,B,(*T).arr[i].p.team);
+            }
+            else if (((*T).arr[i].p.type == 'R') || ((*T).arr[i].p.type == 'r')){
+                rook(T,(*T).arr[i].p,B,(*T).arr[i].p.team);
+            }
+            else if (((*T).arr[i].p.type == 'B') || ((*T).arr[i].p.type == 'b')){
+                bishop(T,(*T).arr[i].p,B,(*T).arr[i].p.team);
+            }
+            else if (((*T).arr[i].p.type == 'P') || ((*T).arr[i].p.type == 'p')){
+                pawn(T,(*T).arr[i].p,B,(*T).arr[i].p.team);
+            }    
+            else if (((*T).arr[i].p.type == 'H') || ((*T).arr[i].p.type == 'h')){
+                horse(T,(*T).arr[i].p,B,(*T).arr[i].p.team);
+            }
+        }
+    } 
+}
 
 
 

@@ -80,7 +80,9 @@ void move(Stack *S,char team, arr_possible_move *T, board bb);
             5. Melakukan gerakan dari pilihan pengguna (do move)
 */
 
-void generate_valid_move(arr_possible_move *T); 
+void generate_valid_move(arr_possible_move *T,board B); 
+// I.S arr_possible_move sudah ada, dan list possible move dikosongkan
+// F.S. arr_possible_move sudah terisi
 //di dalam prosedur ini akan dilakukan traversal seluruh elemen array team tersebut
 
 void show_movable_piece(piece_choice pc);
