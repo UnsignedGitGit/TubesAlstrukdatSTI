@@ -366,6 +366,7 @@ void move(Stack *S, char team, arr_possible_move *T, board* B) {
     generate_valid_move(T, *B); // Traversal mengakses satu-satu bidak di arr_possible_move
 
     // Mengcopy bidak yang bisa bergerak ke array of choice
+    Pilihan.neff = 0;
     i = 1;
     while(i<17) {
         if (((*T).arr[i].p->isdead == false) && ((*T).arr[i].possmove.First != Nil)) {
