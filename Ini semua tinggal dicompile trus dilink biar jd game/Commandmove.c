@@ -415,7 +415,6 @@ void move(Stack *S, char team, arr_possible_move *T, board* B) {
 void generate_valid_move(arr_possible_move *T, board B){
     //KAMUS
     int i;
-    int j;
 
 	//ALGORITMA
     for (i=1;i<17;i++){

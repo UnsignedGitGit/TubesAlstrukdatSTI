@@ -5,13 +5,12 @@
 /* Konstruktor : create tabel kosong */
 void MakeEmptyArraySpecMove (TabChar* Tab, int maxel)
 /* I.S. Tab sembarang , maxel >= 0
-/* F.S. Terbentuk tabel Tab kosong dengan kapasitas maxel+1 */
+ * F.S. Terbentuk tabel Tab kosong dengan kapasitas maxel+1 */
 {
 	/*ALGORITMA*/
 	(*Tab).T = (char*) malloc ((maxel+1) * sizeof(char));
 
 	if ((*Tab).T == NULL) {
-		return(NULL);
 		(*Tab).MaxEl = 0;
 	} else {
 		(*Tab).MaxEl = maxel;

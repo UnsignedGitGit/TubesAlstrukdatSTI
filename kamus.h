@@ -99,7 +99,7 @@ typedef struct {
 
 // ARRAY : PILIHAN ID SPECIAL MOVE yang DAPAT DILAKUKAN ------------------------------------------------------------------------------------------------------------------
 typedef struct {
-	char* T;
+	char* T;  /* Index yang digunakan [1..4] */
 	int Neff;
 	int MaxEl;
 } TabChar;

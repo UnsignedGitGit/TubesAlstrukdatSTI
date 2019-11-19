@@ -1,4 +1,5 @@
 #include "Commandspecialmove.h"
+#include <stdio.h>
 
 /*IMPLEMENTASI*/
 void special_move(board* B, Stack* S, char T)
@@ -82,7 +83,6 @@ void DoCastling(board* B, Stack* S, char id, char T)
 /* F.S. Castling dilakukan di B dan dicatat di S */
 {
 	/*KAMUS*/
-	int i;
 	Sinfotype H;
 	
 	/*ALGORITMA*/
@@ -116,8 +116,8 @@ void DoCastling(board* B, Stack* S, char id, char T)
 			Push(S, H);
 
 			/*Pemindahan raja lalu benteng di board B.*/
-			BoardPieceMove(&BoardCell(*B)[5][1], B, 3, 1);
-			BoardPieceMove(&BoardCell(*B)[1][1], B, 4, 1);
+			BoardPieceMove(BoardCell(*B)[5][1], B, 3, 1);
+			BoardPieceMove(BoardCell(*B)[1][1], B, 4, 1);
 
 			printf("Bidak Raja telah berpindah dari (e,1) ke (c,1)\n");
 			printf("Bidak Benteng telah berpindah dari (a,1) ke (d,1)\n");
@@ -148,8 +148,8 @@ void DoCastling(board* B, Stack* S, char id, char T)
 			Push(S, H);
 
 			/*Pemindahan  lalu raja di board B.*/
-			BoardPieceMove(&BoardCell(*B)[5][1], B, 7, 1);
-			BoardPieceMove(&BoardCell(*B)[8][1], B, 6, 1);
+			BoardPieceMove(BoardCell(*B)[5][1], B, 7, 1);
+			BoardPieceMove(BoardCell(*B)[8][1], B, 6, 1);
 
 			printf("Bidak Raja telah berpindah dari (e,1) ke (g,1)\n");
 			printf("Bidak Benteng telah berpindah dari (h,1) ke (f,1)\n");
@@ -182,8 +182,8 @@ void DoCastling(board* B, Stack* S, char id, char T)
 			Push(S, H);
 
 			/*Pemindahan raja lalu benteng di board B.*/
-			BoardPieceMove(&BoardCell(*B)[5][8], B, 3, 8);
-			BoardPieceMove(&BoardCell(*B)[1][8], B, 4, 8);
+			BoardPieceMove(BoardCell(*B)[5][8], B, 3, 8);
+			BoardPieceMove(BoardCell(*B)[1][8], B, 4, 8);
 
 			printf("Bidak Raja telah berpindah dari (e,8) ke (c,8)\n");
 			printf("Bidak Benteng telah berpindah dari (a,8) ke (d,8)\n");

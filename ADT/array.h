@@ -9,7 +9,7 @@
 #include "listlinier.h"
 
 typedef struct {
-	char* T;
+	char* T;  /* Index yang digunakan [1..4] */
 	int Neff;
 	int MaxEl;
 } TabChar;
@@ -32,7 +32,7 @@ typedef struct {
 /* ********** KONSTRUKTOR ********** */
 void MakeEmptyArraySpecMove (TabChar* T, int maxel);
 /* I.S. T sembarang , maxel >= 0
-/* F.S. Terbentuk tabel T kosong dengan kapasitas maxel+1 */
+ * F.S. Terbentuk tabel T kosong dengan kapasitas maxel+1 */
 
 void DealokasiArray (TabChar* T);
 /* I.S. T terdefinisi 
