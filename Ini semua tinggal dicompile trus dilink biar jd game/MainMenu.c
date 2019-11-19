@@ -29,20 +29,22 @@ int main(){
 
     /*ALGORITMA*/
     welcome();
-        delay (7);
-        printf ("Loading");
-        delay (5);
-        printf (".");
-        delay (5);
-        printf (".");
-        delay(5);
-        printf (".");
-        delay (10);
-        system("cls");    
+        //~ delay (7);
+        //~ printf ("Loading");
+        //~ delay (5);
+        //~ printf (".");
+        //~ delay (5);
+        //~ printf (".");
+        //~ delay(5);
+        //~ printf (".");
+        //~ delay (10);
+        //~ system("cls");    
     welcome();
         printf("Loading complete. Press enter to continue. \n");
         getchar();
-    system("cls");   
+    system("cls");
+    
+    CreateEmptyStack(&movehistory);
 
     while (!gameover) {
         mainscreen();
@@ -176,15 +178,17 @@ void play(Stack* S) {
     char str[20];
 
     /*ALGORITMA*/
-
+    
     /*INISIALISASI*/
     CreateBoard(&B);
-
+	
     MakeEmptyArrPMove(&black);
+    
     for (i=1; i<= 8; i++) {
         black.arr[i].p = BoardCell(B)[i][8];
         CreateEmptyList(&black.arr[i].possmove);
     }
+    
     for (i=1; i<= 8; i++) {
          black.arr[i].p = BoardCell(B)[i][7];
         CreateEmptyList(&black.arr[i].possmove);
@@ -200,12 +204,16 @@ void play(Stack* S) {
         CreateEmptyList(&white.arr[i].possmove);
     }
 
-    init_turn(*S, &turn);
+	init_turn(*S, &turn);
+    
+
 
     /*PERMAINAN DIMULAI*/
     BoardPrintInfo(B);
-
-    for (turncounter=1; turncounter<=100; i++) {
+	
+	turncounter = 1;
+	
+    while (turncounter<=100) {
         printf("Masukkan command: ");
         scanf("%s", str);
 
@@ -214,10 +222,13 @@ void play(Stack* S) {
         if (currentteam == 'W') {
             if (strcmp(str, "MOVE") == 0) {
                 move(S, currentteam, &white, &B);
+                i++;
             } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
                 special_move(&B, S, currentteam);
+                i++;
             } else if (strcmp(str, "UNDO") == 0) {
                 Undo(S);
+                i++;
             } else {
                 printf("Command tidak dapat dilakukan.\n");
                 printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
@@ -225,10 +236,13 @@ void play(Stack* S) {
         } else {
             if (strcmp(str, "MOVE") == 0) {
                 move(S, currentteam, &black, &B);
+                i++;
             } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
                 special_move(&B, S, currentteam);
+                i++;
             } else if (strcmp(str, "UNDO") == 0) {
                 Undo(S);
+                i++;
             } else {
                 printf("Command tidak dapat dilakukan.\n");
                 printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
