@@ -370,6 +370,7 @@ void move(Stack *S, char team, arr_possible_move *T, board* B) {
     while(i<17) {
         if (((*T).arr[i].p->isdead == false) && ((*T).arr[i].possmove.First != Nil)) {
             Pilihan.arrpiece[j] = *((*T).arr[i].p);
+            Pilihan.neff++;
             j++;
         }
         i++;
@@ -447,7 +448,7 @@ void show_movable_piece(piece_choice pc) {
     int i;
     
     //ALGORITMA
-    for (i=1;i<=pc.neff/*Harus diupdate TNeffnya*/;i++){
+    for (i=1;i<=pc.neff;i++){
         
         if((pc.arrpiece[i].type == 'P') || (pc.arrpiece[i].type == 'p')){
         printf("    %d. Pion (%d,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
