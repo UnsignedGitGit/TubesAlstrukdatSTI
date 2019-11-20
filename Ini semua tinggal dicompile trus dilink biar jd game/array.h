@@ -9,6 +9,16 @@
 #include "listlinier.h"
 
 typedef struct {
+	int x;
+	int y;
+} elmt_arr_check;
+
+typedef struct {
+	elmt_arr_check arrcheck[9]; /* Index yang digunakan [1..8] */
+	int neff;
+} arr_check;
+
+typedef struct {
 	char* T;  /* Index yang digunakan [1..4] */
 	int Neff;
 	int MaxEl;
