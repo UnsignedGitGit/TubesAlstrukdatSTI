@@ -1,13 +1,13 @@
-#include "piece.h"
+#include "cell.h"
 
 #ifndef BOARD_H 
 #define BOARD_H
 
 typedef struct {
-    piece* boardCell [9][9];
+    piece boardPiece [9][9];
 } board;
 
-#define BoardCell(B) (B).boardCell // input B : board
+#define BoardPiece(B) (B).boardPiece // input B : board
 
 
 // **** Dictionary **** //
@@ -25,19 +25,17 @@ typedef struct {
              a x i s
 */
 
-
-void BoardPieceMove(piece *P,  board *B, int x, int y);
-// Mengubah posisi piece P di board
-// I.S. Piece P terdefinisi, x dan y berada pada [1..8]
-// F.S. P berpindah ke posisi x dan y di board
-
-
 // *** ================= *** //
 // *** Konstruktor Board *** //
 // *** ================= *** //
 
 void CreateBoard(board *B);
 // Membuat Board Tersusun bidak-bidaknya
+// I.S. Sembarang
+// F.S. Board Kosong 9x9 dengan indikator
+
+void CreateEmptyBoard(board *B);
+// Membuat Board Kosong
 // I.S. Sembarang
 // F.S. Board Kosong 9x9 dengan indikator
 

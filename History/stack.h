@@ -1,28 +1,23 @@
 #ifndef stack_H
 #define stack_H
 
-#include "boolean.h"
+/* MODUL STACK
+Deklarasi stack yang diimplementasi dengan tabel kontigu alokasi statik
+dan ukuran sama
+TOP adalah alamat elemen puncak*/
 
+#define false 0
+#define true 1
 #define Nil 0
-#define MaxElStack 110
+#define MaxEl 10
+
+typedef int bool;
+typedef char infotype;
+typedef int address;
 
 typedef struct {
-	char turn; 
-	char type;
-    /* P/p = pion, R/r = Rook, H/h = Horse/Knight, B/b = Bishop,
-     * Q/q = Queen, K/k = King */
-    
-	int x0; /*Posisi horizontal bidak sebelum bergerak */
-	int y0; /* Posisi Vertical bidak sebelum bergerak  */
-	int xt; /* Posisi horizontal bidak setelah bergerak */
-	int yt; /* Posisi vertical bidak setelah bergerak */
-	char targettype; /* type bidak yang ada di posisi setelah bergerak */
-	char specialmove; /* 'C' jika castling, 'E' jika en passant, 'N' jika gerakan biasa */
-} Sinfotype;
-
-typedef struct {
-    Sinfotype T[MaxElStack];
-    int TOP;
+    infotype T[MaxEl];
+    address TOP;
 } Stack;
 
 /* Definisi stack S kosong : S.TOP = Nil */
@@ -33,27 +28,28 @@ typedef struct {
 /* ********* Prototype ********* */
 
 /* *** Konstruktor/Kreator *** */
-void CreateEmptyStack(Stack *S);
+void CreateEmpty(Stack *S);
 /* I.S. Sembarang */
 /* F.S. Membuat sebuah stack S yang kosong berkapasitas MaxEl */
 /* Ciri stack kosong : TOP bernilai Nil */
 
 /* ********* Predikat Untuk test keadaan KOLEKSI ********* */
-boolean IsStackEmpty(Stack S);
+bool IsEmpty(Stack S);
 /* Mengirim true jika Stack kosong*/
 /* Ciri stack kosong : TOP bernilai Nil */
-boolean IsStackFull(Stack S);
+bool IsFull(Stack S);
 /* Mengirim true jika stack S penuh */
 /* Ciri stack penuh : TOP bernilai MaxEl */
 
 /* ********** Operator Dasar Stack ********* */
-void Push(Stack *S, Sinfotype X);
+void Push(Stack *S, infotype X);
 /* Menambahkan X sebagai elemen Stack S. */
 /* I.S. S mungkin kosong, S tidak penuh */
 /*F.S. X menjadi element TOP yang baru, TOP bertambah 1 */
-void Pop (Stack *S, Sinfotype *X);
+void Pop (Stack *S, infotype *X);
 /* Menghapus X dari Stack S. */
 /* I.S. S tidak kosong */
 /* F.S. X adalah nilai elemen TOP yang lama, TOP berkurang 1 */
+
 
 #endif
