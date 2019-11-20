@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "commandmove.h"
+#include "Commandmove.h"
 #include "commandmove.h"
 
 /*IMPLEMENTASI*/
@@ -316,6 +316,7 @@ void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb)
 	int i, xtarget, ytarget;
 	address coorchoice;
 	Sinfotype H;
+    int promotechoice;
 	
 	/*ALGORITMA*/
 	i = findPieceIdx(*M, *P);
@@ -340,13 +341,13 @@ void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb)
 	H.xt = xtarget;
 	H.yt = ytarget;
 	H.targettype = BoardCell(*B)[xtarget][ytarget]->type;
+
+    
 	
-	Push(S, H);
-	
-	/* Pemindahan piece P di board B. Jika ada bidak lawan, info isdead
+	Push(S, H);    
+    /* Pemindahan piece P di board B. Jika ada bidak lawan, info isdead
 	 * bidak lawan di array-possible-move diset menjadi true. */
-	BoardCell(*B)[xtarget][ytarget]->isdead = true;
-	
+	BoardCell(*B)[xtarget][ytarget]->isdead = true;	
 	BoardPieceMove(P, B, xtarget, ytarget);
 }
 
