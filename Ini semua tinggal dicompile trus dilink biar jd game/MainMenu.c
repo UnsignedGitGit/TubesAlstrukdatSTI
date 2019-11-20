@@ -219,9 +219,10 @@ void play(Stack* S) {
         currentteam = get_turn(&turn);
         
         /*Cek skakmat*/
-        if (isSkakmat) {
+        /*if (isSkakmat) {
             break;
         }
+        */
 
         printf("Masukkan command: ");
         scanf("%s", str);
