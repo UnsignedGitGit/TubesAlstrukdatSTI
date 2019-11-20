@@ -342,7 +342,54 @@ void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb)
 	H.yt = ytarget;
 	H.targettype = BoardCell(*B)[xtarget][ytarget]->type;
 
-    
+    if ((*P).team == 'W'){
+        if (((*P).type == 'P') && (ytarget == 8)){
+            printf('Silahkan Pilih tipe bidak promosi !\n');
+            printf('1.Ratu\n');
+            printf('2.Benteng\n');
+            printf('3.Kuda\n');
+            printf('4.Bishop\n');
+            scanf("Pilihan anda : %d",&promotechoice);
+
+            if (promotechoice == 1){
+                (*P).type = 'Q';
+            }
+            else if(promotechoice == 2){
+                (*P).type = 'R';
+            }
+            else if(promotechoice == 3){
+                (*P).type = 'H';
+            }
+            else if(promotechoice == 4){
+                (*P).type = 'B';
+            }
+            H.specialmove ='P';
+        }
+    }
+    else{
+        if (((*P).type == 'p') && (ytarget == 1)){
+            printf('Silahkan Pilih tipe bidak promosi !\n');
+            printf('1.Ratu\n');
+            printf('2.Benteng\n');
+            printf('3.Kuda\n');
+            printf('4.Bishop\n');
+            scanf("Pilihan anda : %d",&promotechoice);
+            
+            if (promotechoice == 1){
+                (*P).type = 'q';
+            }
+            else if(promotechoice == 2){
+                (*P).type = 'r';
+            }
+            else if(promotechoice == 3){
+                (*P).type = 'h';
+            }
+            else if(promotechoice == 4){
+                (*P).type = 'b';
+            }
+            H.specialmove ='P';
+        }
+    }
 	
 	Push(S, H);    
     /* Pemindahan piece P di board B. Jika ada bidak lawan, info isdead
