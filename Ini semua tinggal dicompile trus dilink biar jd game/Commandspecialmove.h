@@ -56,7 +56,7 @@ boolean isRightEmpty(board B, piece k);
  * - raja di (e,8) dan benteng (h,8) untuk tim hitam. */
 boolean isCellAttacked(board B, int x, int y, char T);
 /* Menghasilkan true jika kotak beralamat (x,y) sedang diserang.*/
-boolean hasAttacker(board B, int iterator, char enemyteam, int x, int y);
+boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int y);
 /* Menghasilkan true jika (x,y) memenuhi kondisi ke-'interator'.*/
 
 #endif

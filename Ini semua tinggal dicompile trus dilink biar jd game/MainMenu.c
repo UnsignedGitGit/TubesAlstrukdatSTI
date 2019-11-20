@@ -176,6 +176,7 @@ void play(Stack* S) {
     Queue turn;
     char currentteam;
     char str[20];
+    boolean skakmat;
 
     /*ALGORITMA*/
     
@@ -214,10 +215,16 @@ void play(Stack* S) {
 	turncounter = 1;
 	
     while (turncounter<=100) {
-        printf("Masukkan command: ");
-        scanf("%s", str);
 
         currentteam = get_turn(&turn);
+        
+        /*Cek skakmat*/
+        if (isSkakmat) {
+            break;
+        }
+
+        printf("Masukkan command: ");
+        scanf("%s", str);
 
         if (currentteam == 'W') {
             if (strcmp(str, "MOVE") == 0) {
@@ -247,7 +254,7 @@ void play(Stack* S) {
                 printf("Command tidak dapat dilakukan.\n");
                 printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
             }
-        } 
+        }
     }
     printf("Game telah berakhir.\n");
  }
