@@ -9,27 +9,27 @@ void UndoBoardPieceMove(piece *P,  board *B, Sinfotype X)
 // F.S. P berpindah ke posisi x dan y di board
 {
 	//KAMUS
-	piece emptypiece,Q;
+	piece emptypiece, Q;
 	
 	//ALGORITMA
-	BoardCell(*B)[X.x0][X.y0] = P;
+	BoardCell(*B)[X.x0][X.y0] = *P;
 	
 	if (X.targettype == CharNil )
 	{
 		PieceCreateEmpty(&emptypiece, X.xt, X.yt);
-		BoardCell(*B)[X.xt][X.yt] = &emptypiece;
+		BoardCell(*B)[X.xt][X.yt] = emptypiece;
 	}
 	else
 	{
 		if (X.turn == 'W')
 		{	
 			PieceCreate(&Q,X.targettype, 'B' , X.xt, X.yt);
-			BoardCell(*B)[X.xt][X.yt] = &Q;		
+			BoardCell(*B)[X.xt][X.yt] = Q;		
 		}
 		else if (X.turn == 'B')
 		{	
 			PieceCreate(&Q,X.targettype, 'W' , X.xt, X.yt);
-			BoardCell(*B)[X.xt][X.yt] = &Q;		
+			BoardCell(*B)[X.xt][X.yt] = Q;		
 		}
 	}
 

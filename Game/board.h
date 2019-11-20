@@ -4,7 +4,7 @@
 #define BOARD_H
 
 typedef struct {
-    piece* boardCell [9][9];
+    piece boardCell [9][9];
 } board;
 
 #define BoardCell(B) (B).boardCell // input B : board

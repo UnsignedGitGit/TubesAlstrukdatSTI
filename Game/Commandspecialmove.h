@@ -13,13 +13,13 @@ typedef struct {
 } pawn_enpassant;
 
 /*PROTOTIPE*/
-void special_move( board* B, Stack* S, char T);
+void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T);
 /* I.S. M, S, B, dan T terdefinisi. */
 /* F.S. Special move pilihan pemain dilakukan. Gerakan dilakukan di B dan dicatat di S */
-void DoCastling(board* B, Stack* S, char id, char T);
+void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char id, char T);
 /* I.S. B, S, id, dan T terdefinisi. */
 /* F.S. Castling dilakukan di B dan dicatat di S */
-void DoEnpassant(board* B, Stack* S, char T, pawn_enpassant p);
+void DoEnpassant(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, pawn_enpassant p);
 /* I.S. B, S, id, T, dan p terdefinisi. */
 /* F.S. En passant dilakukan di B dan dicatat di S */
 void EnpassantL(board B, Stack S, pawn_enpassant* C);
