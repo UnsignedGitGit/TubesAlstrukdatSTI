@@ -1,2 +1,2 @@
 all:
-	gcc -o mainmenu .\ADT\piece.c .\ADT\board.c .\ADT\cell.c .\ADT\leaderboard.c MainMenu.c
+	gcc -o mainmenu array.c board.c Commandmove.c Commandspecialmove.c leaderboard.c listlinier.c MainMenu.c  piece.c queue.c stack.c turn.c Undo.c
