@@ -32,11 +32,14 @@ void CreateBoard(board *B)
 {
 	//KAMUS
     piece P;
-
+	int y, x;
+	
 	//ALGORITMA
-    for(int y = 8; y >= 0; y--){
-        for (int x = 0; x <= 8; x++){
-            if (y == 8){
+    for (y = 8; y >= 1; y--) {
+        for (x = 1; x <= 8; x++) {
+			printf("%d,%d ", x, y);
+			
+            if (y == 8) {
                 if ((x == 1) || (x == 8)){
                     // Create Black Rook
                     PieceCreateBRook(&P, 'B', x, y);
@@ -54,14 +57,20 @@ void CreateBoard(board *B)
                     PieceCreateBKing(&P, 'B', x, y);
                 }
                 BoardCell(*B)[x][y] = &P;
+                printf("%c\n",BoardCell(*B)[x][y]->type);
+                
             } else if (y == 7){
                 // Create Black Pawn
                 PieceCreateBPawn(&P, 'B', x, y);
                 BoardCell(*B)[x][y] = &P;
+                printf("%c\n",BoardCell(*B)[x][y]->type);
+                
             } else if (y == 2){
                 // Create White Pawn
                 PieceCreateWPawn(&P, 'W', x, y);
 				BoardCell(*B)[x][y] = &P;
+				printf("%c\n",BoardCell(*B)[x][y]->type);
+				
             } else if (y == 1){
                 if ((x == 1) || (x == 8)){
                     // Create White Rook
@@ -80,6 +89,8 @@ void CreateBoard(board *B)
                     PieceCreateWKing(&P, 'W', x, y);
                 }
 				BoardCell(*B)[x][y] = &P;
+				printf("%c\n",BoardCell(*B)[x][y]->type);
+				
             } else {
                 PieceCreateEmpty(&P, x, y);
 				BoardCell(*B)[x][y] = &P;
@@ -98,34 +109,42 @@ void BoardPrintInfo(board B)
 // I.S. B Terdefinisi
 // F.S. Menampilkan Seluruh Info Board pada CLI
 {
+	int y;
+	
 	//ALGORITMA
+	
+	printf("%c\n",BoardCell(B)[1][1]->type);
+	printf("%c\n",BoardCell(B)[2][1]->type);
+	printf("%c\n",BoardCell(B)[3][1]->type);
+	printf("%c\n",BoardCell(B)[4][1]->type);
+	
     printf("         A       B       C       D       E       F       G       H    \n");
     printf("     _________________________________________________________________\n");
-    for (int y=8;y>0;y-=2){
+    for (y=8;y>0;y-=2){
         printf("     |#######|       |#######|       |#######|       |#######|       |\n"); //▓ adalah ascii 178
         printf("  %d  |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |\n",
         y,
-        BoardCell(B)[1][y]->type,
-        BoardCell(B)[2][y]->type,
-        BoardCell(B)[3][y]->type,
-        BoardCell(B)[4][y]->type,
-        BoardCell(B)[5][y]->type,
-        BoardCell(B)[6][y]->type,
-        BoardCell(B)[7][y]->type,
-        BoardCell(B)[8][y]->type);
+        BoardCell(B)[1][1]->type,
+        BoardCell(B)[2][1]->type,
+        BoardCell(B)[3][1]->type,
+        BoardCell(B)[4][1]->type,
+        BoardCell(B)[5][1]->type,
+        BoardCell(B)[6][1]->type,
+        BoardCell(B)[7][1]->type,
+        BoardCell(B)[8][1]->type);
         
         printf("     |#######|_______|#######|_______|#######|_______|#######|_______|\n");
         printf("     |       |#######|       |#######|       |#######|       |#######|\n");
         printf("  %d  |   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|\n",
         y-1,
-        BoardCell(B)[1][y-1]->type,
-        BoardCell(B)[2][y-1]->type,
-        BoardCell(B)[3][y-1]->type,
-        BoardCell(B)[4][y-1]->type,
-        BoardCell(B)[5][y-1]->type,
-        BoardCell(B)[6][y-1]->type,
-        BoardCell(B)[7][y-1]->type,
-        BoardCell(B)[8][y-1]->type);
+        BoardCell(B)[1][8-1]->type,
+        BoardCell(B)[2][8-1]->type,
+        BoardCell(B)[3][8-1]->type,
+        BoardCell(B)[4][8-1]->type,
+        BoardCell(B)[5][8-1]->type,
+        BoardCell(B)[6][8-1]->type,
+        BoardCell(B)[7][8-1]->type,
+        BoardCell(B)[8][8-1]->type);
         printf("     |_______|#######|_______|#######|_______|#######|_______|#######|\n");
     } 
 }

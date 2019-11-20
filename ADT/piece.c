@@ -70,7 +70,7 @@ void PieceCreateWKnight(piece *P, char Team, int X, int Y) //White
 // F.S. Terbentuk P dengan tipe piece Horse 'H', tim piece Team, posisi piece X dan Y.
 {
 	//ALGORITMA
-    PieceCreate(P, 'N', Team, X, Y);
+    PieceCreate(P, 'H', Team, X, Y);
 }
 
 void PieceCreateBKnight(piece *P, char Team, int X, int Y) //Black
@@ -79,7 +79,7 @@ void PieceCreateBKnight(piece *P, char Team, int X, int Y) //Black
 // F.S. Terbentuk P dengan tipe piece Horse 'H', tim piece Team, posisi piece X dan Y.
 {
 	//ALGORITMA
-    PieceCreate(P, 'n', Team, X, Y);
+    PieceCreate(P, 'h', Team, X, Y);
 }
 
 void PieceCreateWBishop(piece *P, char Team, int X, int Y) //White
