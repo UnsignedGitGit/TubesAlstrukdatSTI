@@ -734,80 +734,80 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
     }
 }
 
-boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
-	arr_check threat 
-	if (isCellAttacked(B, kingxpos, kingypos, T)) {
-		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
-		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
-		isCellAttacked(B, kingxpos+1, kingypos, T) &&
-		isCellAttacked(B, kingxpos+1, kingypos-1, T) &&
-		isCellAttacked(B, kingxpos, kingypos-1, T) &&
-		isCellAttacked(B, kingxpos-1, kingypos-1, T) &&
-		isCellAttacked(B, kingxpos-1, kingypos, T) &&
-		isCellAttacked(B, kingxpos-1, kingypos+1, T)) {
-			if 
-		}
-	} else {
-		return false;
-	}
-}
+// boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
+// 	arr_check threat 
+// 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
+// 		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
+// 		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
+// 		isCellAttacked(B, kingxpos+1, kingypos, T) &&
+// 		isCellAttacked(B, kingxpos+1, kingypos-1, T) &&
+// 		isCellAttacked(B, kingxpos, kingypos-1, T) &&
+// 		isCellAttacked(B, kingxpos-1, kingypos-1, T) &&
+// 		isCellAttacked(B, kingxpos-1, kingypos, T) &&
+// 		isCellAttacked(B, kingxpos-1, kingypos+1, T)) {
+// 			if 
+// 		}
+// 	} else {
+// 		return false;
+// 	}
+// }
 
-void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
-	int i, x, y;
+// void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
+// 	int i, x, y;
 
-	i=1;
-	(*C).arrcheck[i].x = attacker.xpos;
-	(*C).arrcheck[i].y = attacker.ypos;
-	(*C).neff = 1;
+// 	i=1;
+// 	(*C).arrcheck[i].x = attacker.xpos;
+// 	(*C).arrcheck[i].y = attacker.ypos;
+// 	(*C).neff = 1;
 
-	if (!PieceIsKnight(attacker)) {
-		if ((king.xpos > attacker.xpos) && (king.ypos > attacker.xpos)) {
-			x = attacker.xpos + 1;
-			y = attacker.ypos + 1;
+// 	if (!PieceIsKnight(attacker)) {
+// 		if ((king.xpos > attacker.xpos) && (king.ypos > attacker.xpos)) {
+// 			x = attacker.xpos + 1;
+// 			y = attacker.ypos + 1;
 			
-			while(x < 9) {
-			if (PieceIsKing(*BoardCell(B)[x][y])) {
-				break;
-			} else {
-				(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
-				(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
-				(*C).neff++;
-				x++;
-				y++;
-			}
-			}
-		} else if ((king.xpos < attacker.xpos) && (king.ypos > attacker.xpos)) {
-			x = attacker.xpos + 1;
-			y = attacker.ypos + 1;
+// 			while(x < 9) {
+// 			if (PieceIsKing(*BoardCell(B)[x][y])) {
+// 				break;
+// 			} else {
+// 				(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+// 				(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+// 				(*C).neff++;
+// 				x++;
+// 				y++;
+// 			}
+// 			}
+// 		} else if ((king.xpos < attacker.xpos) && (king.ypos > attacker.xpos)) {
+// 			x = attacker.xpos + 1;
+// 			y = attacker.ypos + 1;
 			
-			while(x < 9) {
-			if (PieceIsKing(*BoardCell(B)[x][y])) {
-				break;
-			} else {
-				(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
-				(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
-				(*C).neff++;
-				x++;
-				y++;
-			}
-			}
+// 			while(x < 9) {
+// 			if (PieceIsKing(*BoardCell(B)[x][y])) {
+// 				break;
+// 			} else {
+// 				(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+// 				(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+// 				(*C).neff++;
+// 				x++;
+// 				y++;
+// 			}
+// 			}
 
-		}  else if ((king.xpos < attacker.xpos) && (king.ypos < attacker.xpos)) {
+// 		}  else if ((king.xpos < attacker.xpos) && (king.ypos < attacker.xpos)) {
 			
-		}  else if ((king.xpos > attacker.xpos) && (king.ypos < attacker.xpos)) {
+// 		}  else if ((king.xpos > attacker.xpos) && (king.ypos < attacker.xpos)) {
 			
-		}  else if ((king.xpos > attacker.xpos) && (king.ypos > attacker.xpos)) {
+// 		}  else if ((king.xpos > attacker.xpos) && (king.ypos > attacker.xpos)) {
 			
-		}  else if ((king.xpos > attacker.xpos) && (king.ypos = attacker.xpos)) {
+// 		}  else if ((king.xpos > attacker.xpos) && (king.ypos = attacker.xpos)) {
 			
-		}  else if ((king.xpos = attacker.xpos) && (king.ypos > attacker.xpos)) {
+// 		}  else if ((king.xpos = attacker.xpos) && (king.ypos > attacker.xpos)) {
 			
-		}  else if ((king.xpos < attacker.xpos) && (king.ypos = attacker.xpos)) {
+// 		}  else if ((king.xpos < attacker.xpos) && (king.ypos = attacker.xpos)) {
 			
-		}  else if ((king.xpos = attacker.xpos) && (king.ypos < attacker.xpos)) {
+// 		}  else if ((king.xpos = attacker.xpos) && (king.ypos < attacker.xpos)) {
 			
-		}
-	}
-}
+// 		}
+// 	}
+// }
 
-boolean searchElmt
+// boolean searchElmt
