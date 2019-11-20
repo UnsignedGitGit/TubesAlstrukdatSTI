@@ -734,8 +734,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
     }
 }
 
-boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
-	arr_check threat 
+/*boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
+	arr_check threat; 
 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
 		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
 		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
@@ -751,6 +751,7 @@ boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
 		return false;
 	}
 }
+
 
 void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
 	int i, x, y;
@@ -811,3 +812,4 @@ void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
 }
 
 boolean searchElmt
+*/
