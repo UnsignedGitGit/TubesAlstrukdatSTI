@@ -93,7 +93,13 @@ void CellMove(cell *C, cell *C1, cell *CTemp)
     CellDisplay(*C1) = PieceType(CellPiece(*C1));
 }
 
-
+void CellMovePawn(cell *C, cell *C1, cell *CTemp)
+// Memindahkan pion dari C ke C1 sesuai dengan aturan jalan pion
+// I.S. 
+// F.S.
+{
+        
+}
 
 // *** =================== *** //
 // *** Input/Output Screen *** //

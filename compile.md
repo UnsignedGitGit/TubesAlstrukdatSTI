@@ -1,0 +1,1 @@
+gcc -o tes ADT/cell.c ADT/piece.c ADT/board.c bidakDriver.c 

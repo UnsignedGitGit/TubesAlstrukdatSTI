@@ -59,7 +59,12 @@ void CellMove(cell *C, cell *C1, cell *CTemp);
 // I.S. C, C1, dan CTemp terdefinisi. C dan C1 bagian dari board
 // F.S. C menjadi cell kosong, C1 menyimpan informasi C, dan CTemp menyimpan informasi C1 jika C1 bukan cell kosong
 
-void CellMovePawn(cell *C);
+void CellMovePawn(cell *C, cell *C1, cell *CTemp);
+void CellMoveRook(cell *C, cell *C1, cell *CTemp);
+void CellMoveHorse(cell *C, cell *C1, cell *CTemp);
+void CellMoveBishop(cell *C, cell *C1, cell *CTemp);
+void CellMoveQueen(cell *C, cell *C1, cell *CTemp);
+void CellMoveKing(cell *C, cell *C1, cell *CTemp);
 
 
 // *** =================== *** //
