@@ -20,7 +20,7 @@ void readmain(boolean* g, Stack *S); //input user memilih new game, load game, l
 void delay(int number_of_seconds); 
 void play(Stack* S); //main game
 void load();
-void exit();
+void eksit();
 
 
 int main(){
@@ -29,17 +29,18 @@ int main(){
     Stack movehistory;
 
     /*ALGORITMA*/
-    //welcome();
-        //~ delay (7);
-        //~ printf ("Loading");
-        //~ delay (5);
-        //~ printf (".");
-        //~ delay (5);
-        //~ printf (".");
-        //~ delay(5);
-        //~ printf (".");
-        //~ delay (8);
-        //~ system("cls");    
+    /*welcome();
+        delay (7);
+        printf ("Loading");
+        delay (5);
+        printf (".");
+        delay (5);
+        printf (".");
+        delay(5);
+        printf (".");
+        delay (8);
+        */
+        system("cls");    
         printf("                                                           \n");
         printf("                 `      :                                  \n");                               
         printf("             `     ` `.-o-.                                \n");
@@ -97,7 +98,6 @@ void welcome(){
     printf("                                                           \n");  
     delay(2); system("cls");
     
-
     printf("                                                           \n");
     printf("                                                           \n");                               
     printf("                                                           \n");
@@ -117,7 +117,6 @@ void welcome(){
     printf("                                    `:`                    \n");
     printf("                                                           \n");  
     delay(2); system("cls");
-    
     
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -140,7 +139,6 @@ void welcome(){
     printf("                             W  E  L                       \n");
     delay(2); system("cls");
     
-
     printf("                                                           \n");
     printf("                                                           \n");                               
     printf("                                                           \n");
@@ -402,22 +400,9 @@ void readmain(boolean* g, Stack* S) {
         system("cls");
         //printleaderboard();
     }else if (pil=='E'){
-            delay (8);
-            system("cls");
-            printf ("Exiting");
-            delay (7);
-            system("cls");
-            printf ("Exiting.");
-            delay (6);
-            system("cls");
-            printf ("Exiting..");
-            delay(10);
-            system("cls");
-            printf ("Bye!");
-            delay(8);
-            system("cls");
-
             *g = true;
+            eksit();
+            
     }
     else {
         printf("Please input the correct command.\n");
@@ -547,7 +532,7 @@ void play(Stack* S) {
     printf("Game telah berakhir.\n");
  }
 
-void exit(){
+void eksit(){
     printf("                                                           \n");
     printf("                 `      :                                  \n");                               
     printf("             `     ` `.-o-.                                \n");
@@ -566,20 +551,243 @@ void exit(){
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
     printf("                                                            \n"); 
-    printf ("                           Exiting                           ");
-    delay (8);
-    system("cls");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                     `.-o-.                                \n");
+    printf("                    ` `.s-                                 \n");
+    printf("                 ``` `.:+++/            `  `               \n");
+    printf("                  ````-:o+o.       `-`````` ``` `          \n");
+    printf("                 `  ``-/+++        /o+/:...  `` `          \n");
+    printf("                  ` `-+oooo:     .ossooo+:- `` `           \n");
+    printf("                  ```-++sss-    -o+:-/so+/-..`` `          \n");
+    printf("                 ` ` .-+ooo`        -ooo++-`` `            \n");
+    printf("                  `.`.:+soo`      .+oosoo/-`` `            \n");
+    printf("                    `.-+ooo:     :sssoss+/.` `             \n");
+    printf("                 `  --/+oooo.`   +sssosss+` `              \n");
+    printf("                  `.osyyyyyyo-  `/sssssso/-``              \n");
+    printf("                   .-+ossoss/.  ./sssoso/-.``              \n");
+    printf("                  `+ssssssssss. osssssssso/-`              \n");
+    printf("                  `://////////.`://////////.               \n");
+    delay(2); system("cls");
     
-    
-    delay (7);
-    system("cls");
-    printf ("Exiting.");
-    delay (6);
-    system("cls");
-    printf ("Exiting..");
-    delay(10);
-    system("cls");
-    printf ("Bye!");
-    delay(8);
-    system("cls");
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                     `.-o-.                                \n");
+    printf("                     ``.s-                                 \n");
+    printf("                  ````.:+++/            ` `                \n");
+    printf("                  ````-:o+o.       `-````````` `           \n");
+    printf("                  ` ``-/+++        /o+/:...  ```           \n");
+    printf("                  ```-+oooo:     .ossooo+:- ```            \n");
+    printf("                  ```-++sss-    -o+:-/so+/-..```           \n");
+    printf("                   ``.-+ooo`        -ooo++-```             \n");
+    printf("                   ``.:+soo`      .+oosoo/-```             \n");
+    printf("                    `.-+ooo:     :sssoss+/.``              \n");
+    printf("                  ` --/+oooo.`   +sssosss+``               \n");
+    printf("                  `.osyyyyyyo-  `/sssssso/-``              \n");
+    printf("                   .-+ossoss/.  ./sssoso/-.``              \n");
+    printf("                  `+ssssssssss. osssssssso/-`              \n");
+    printf("                  `://////////.`://////////.               \n");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                      .-o-.                                \n");
+    printf("                     ``.s-                                 \n");
+    printf("                   ```.:+++/            ``                 \n");
+    printf("                  ````-:o+o.       `-`````````             \n");
+    printf("                    ``-/+++        /o+/:...  ``            \n");
+    printf("                   ``-+oooo:     .ossooo+:- ``             \n");
+    printf("                   ``-++sss-    -o+:-/so+/-..``            \n");
+    printf("                    `.-+ooo`        -ooo++-```             \n");
+    printf("                    `.:+soo`      .+oosoo/-``              \n");
+    printf("                     .-+ooo:     :sssoss+/.`               \n");
+    printf("                    --/+oooo.`   +sssosss+`                \n");
+    printf("                   .osyyyyyyo-  `/sssssso/-`               \n");
+    printf("                   .-+ossoss/.  ./sssoso/-.`               \n");
+    printf("                   +ssssssssss. osssssssso/-               \n");
+    printf("                   ://////////.`://////////.               \n");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                     .-o-.                                 \n");
+    printf("                    ` `.s-              `  `  `            \n");
+    printf("                  `` `.:+++/       `-`````` ``````         \n");
+    printf("                 `````-:o+o...      /o+/:...  `````        \n");
+    printf("                 ````-+oooo:::   .ossooo+:- `` ``          \n");
+    printf("                  ```-++sss---  -o+:-/so+/-..`````         \n");
+    printf("                   ` .-+ooo```      -ooo++-`` ``           \n");
+    printf("                  `.`.:+soo```   .+oosoo/-`` ``            \n");
+    printf("                    `.-+ooo:::   :ssss+/.```               \n");
+    printf("                     -/+oooo.``  +sssoss+                  \n");
+    printf("                      yyyyyyo-- `/ssssso/-                 \n");
+    printf("                       soss/.. ./sssos/-.                  \n");
+    printf("                        ssssss. osssssss                   \n");
+    printf("                         /////.`://///                     \n");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                      `.s-              `  `               \n");
+    printf("                     `.:+++///     `-`````` ```            \n");
+    printf("                  ````-:o+o...  /////o+/:...``             \n");
+    printf("                 ````-+oooo:::+=-.ossooo+:- ````           \n");
+    printf("                 ````-++sss---  -o+:-/so+/-..``            \n");
+    printf("                   ` .-+ooo```sssssssooo++-````            \n");
+    printf("                  `.`.:+soo```oo0a``osoo/-````             \n");
+    printf("                    `.-+ooo:::   :ssss+/.```               \n");
+    printf("                     -/+oooo.``  +sssoss+''                \n");
+    printf("                       yyyyyo-- `/ssssso/-                 \n");
+    printf("                         ss/.. ./sssos/-                   \n");
+    printf("                          ssss. ossssss                    \n");
+    printf("                            //.`:////                      \n");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                     `.:+++/       `-`````` `              \n");
+    printf("                  ````-:o+o+o+  /////o+/:...``             \n");
+    printf("                 ````-+oooo:::+=-.ossooo++=:-``            \n");
+    printf("                 ````-++sss---+o-o+:-/so+/--```            \n");
+    printf("                   ` .-+ooo```sssssssooo++-```             \n");
+    printf("                  `.`.:+soo```oo0a``osoo/-```              \n");
+    printf("                    `.-+ooo:::==o:ssss+/````               \n");
+    printf("                      /+oooo.``+o=+sssoss+'                \n");
+    printf("                        yyyyo--o+`/sssss-                   \n");
+    printf("                          s/..+./sssos                     \n");
+    printf("                           sss. ossss                      \n");
+    printf("                              .`://                        \n");
+    printf ("                   B        y        e        !             ");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                      .:+++       //-`..                   \n");
+    printf("                    ``-:o+o+o+  /////o+/:..                \n");
+    printf("                   ``-+oooo:::+=-.ossooo++=:               \n");
+    printf("                   ``-++sss---+o-o+:-/so+/--               \n");
+    printf("                   ``-+ooo```sssssssooo++-`                \n");
+    printf("                    `.:+soo```oo0a``osoo/`                 \n");
+    printf("                      -+ooo:::==o:ssssss                   \n");
+    printf("                       +oooo.``+o=+ssso                    \n");
+    printf("                         yyyo--o+`/ss                      \n");
+    printf("                           /..+./sss                       \n");
+    printf("                             s. os                         \n");
+    printf("                              `:`                          \n");
+    printf ("                    B      y      e      !                  ");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                    .:+++       //-`..                     \n");
+    printf("                       ``-:o+o+o+  /////o+/:..             \n");
+    printf("                 ``-+oooo:::+=-.ossooo++=:                 \n");
+    printf("                     ``-++sss---+o-o+:-/so+/--             \n");
+    printf("                 ``-+ooo```sssssssooo++-`                  \n");
+    printf("                      `.:+soo```oo0a``osoo/`               \n");
+    printf("                  -+ooo:::==o:ssssss                       \n");
+    printf("                         +oooo.``+o=+ssso                  \n");
+    printf("                       yyyo--o+`/ss                        \n");
+    printf("                             /..+./sss                     \n");
+    printf("                           s. os                           \n");
+    printf("                                `:`                        \n");
+    printf ("                      B    y    e    !                      ");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                  .:+++       //-`..                       \n");
+    printf("                         ``-:o+o+o+  /////o+/:..           \n");
+    printf("               ``-+oooo:::+=-.ossooo++=:                   \n");
+    printf("                       ``-++sss---+o-o+:-/so+/--           \n");
+    printf("               ``-+ooo```sssssssooo++-`                    \n");
+    printf("                        `.:+soo```oo0a``osoo/`             \n");
+    printf("                -+ooo:::==o:ssssss                         \n");
+    printf("                           +oooo.``+o=+ssso                \n");
+    printf("                     yyyo--o+`/ss                          \n");
+    printf("                               /..+./sss                   \n");
+    printf("                         s. os                             \n");
+    printf("                                  `:`                      \n");
+    printf ("                       B   y   e   !                        ");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                 .:+++       //-`..                        \n");
+    printf("                          ``-:o+o+o+  /////o+/:..          \n");
+    printf("              ``-+oooo:::+=-.ossooo++=:                    \n");
+    printf("                        ``-++sss---+o-o+:-/so+/--          \n");
+    printf("              ``-+ooo```sssssssooo++-`                     \n");
+    printf("                         `.:+soo```oo0a``osoo/`            \n");
+    printf("               -+ooo:::==o:ssssss                          \n");
+    printf("                            +oooo.``+o=+ssso               \n");
+    printf("                    yyyo--o+`/ss                           \n");
+    printf("                                /..+./sss                  \n");
+    printf("                        s. os                              \n");
+    printf("                                   `:`                     \n");
+    printf("                                                           \n");  
+    printf ("                        B  y  e  !                          ");
+    delay(2); system("cls");
+
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                .:+++       //-`..                         \n");
+    printf("                           ``-:o+o+o+  /////o+/:..         \n");
+    printf("             ``-+oooo:::+=-.ossooo++=:                     \n");
+    printf("                         ``-++sss---+o-o+:-/so+/--         \n");
+    printf("             ``-+ooo```sssssssooo++-`                      \n");
+    printf("                          `.:+soo```oo0a``osoo/`           \n");
+    printf("              -+ooo:::==o:ssssss                           \n");
+    printf("                             +oooo.``+o=+ssso              \n");
+    printf("                  yyyo--o+`/ss                             \n");
+    printf("                                 /..+./sss                 \n");
+    printf("                       s. os                               \n");
+    printf("                                    `:`                    \n");
+    printf("                                                           \n");  
+    printf ("                           B y e !                          ");
+    delay(2); system("cls");
+     
+    printf("                                                           \n");
+    printf("                                                           \n");                               
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("                                                           \n");
+    printf("      + + +         // - ` . .                             \n");
+    printf("                     ` ` - : o +o + o +     / / / /        \n");
+    printf("         + oo o o : : : + = - . o s s o o o                \n");
+    printf("             ` ` - + +s s s- -- +o - o+ :- / s o+ / --     \n");
+    printf("          `  o  `` ` s ss s s  o o                         \n");
+    printf("                    s  o o` ` `   a ` ` os o o  / `        \n");
+    printf("            -  : :  o : s                                  \n");
+    printf("                   + o o oo . ` ` + o = +  s s s o         \n");
+    printf("               - o + ` / s s                               \n");
+    printf("                              / .. + . / s ss              \n");
+    printf("                         s.   o s                          \n");
+    printf("                                       `:`                 \n");
+    printf("                                                           \n");  
+    printf ("                            Bye!                            ");
+    delay(8); system("cls");
 }
