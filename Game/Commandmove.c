@@ -45,6 +45,7 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     }
 
     i = findPieceIdx(*player, Pilihan.arrpiece[l]);
+    PP = (*player).arr[i].p;
 
     printf("Daftar posisi tujuan yang mungkin:\n");
     PrintInfo((*player).arr[i].possmove);
@@ -66,17 +67,17 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     yt = (*S).T[(*S).TOP].yt;
 
     if (PieceIsPawn(PP)) {
-        printf("Bidak Pion telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Bidak Pion telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     } else if (PieceIsRook(PP)) {
-        printf("Bidak Benteng telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Bidak Benteng telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     } else if (PieceIsKnight(PP)) {
-        printf("Bidak Kuda telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Bidak Kuda telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     } else if (PieceIsBishop(PP)) {
-        printf("Bidak Menteri telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Bidak Menteri telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     } else if (PieceIsQueen(PP)) {
-        printf("Bidak Ratu telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Bidak Ratu telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     } else {
-        printf("Bidak Raja telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Bidak Raja telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     }
 }
 
@@ -113,10 +114,10 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
 	H.xt = xtarget;
 	H.yt = ytarget;
 	H.targettype = BoardCell(*B)[xtarget][ytarget].type;
-
+    
+    i = findPieceIdx(*player, *P);
+    
     /*Promosi*/
-
-
     if ((*P).team == 'W') {
         if (((*P).type == 'P') && (ytarget == 8)) {
             printf("Silahkan Pilih tipe bidak promosi !\n");
@@ -140,7 +141,7 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
             }
             H.specialmove ='P';
             H.targettype = (*P).type;
-            i = findPieceIdx(*player, *P);
+
             (*player).arr[i].p.type = (*P).type;
         }
     } else {
@@ -166,7 +167,6 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
             }
             H.specialmove ='P';
             H.targettype = (*P).type;
-            i = findPieceIdx(*player, *P);
             (*player).arr[i].p.type = (*P).type;
         }
     }
@@ -175,15 +175,18 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
 
     /* Pembaruan info piece di array of possible move. Jika ada bidak lawan, info isdead
 	 * bidak lawan di array-possible-move diset menjadi true. */
-    i = findPieceIdx(*player, *P);
     (*player).arr[i].p.xpos = xtarget;
     (*player).arr[i].p.ypos = ytarget;
+    (*player).arr[i].p.hasmoved = true;
     
-    i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
-    (*enemy).arr[i].p.isdead = true;
+    if (!(BoardCell(*B)[xtarget][ytarget].type == CharNil)) {
+        i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
+        (*enemy).arr[i].p.isdead = true;
+    }
 
-	/* Pemindahan piece P di board B. */	
+	/* Pemindahan piece P di board B. */
 	BoardPieceMove(P, B, xtarget, ytarget);
+    BoardCell(*B)[xtarget][ytarget].hasmoved = true;
 }
 
 void generate_valid_move(arr_possible_move *T, board B){
@@ -239,7 +242,7 @@ void show_movable_piece(piece_choice pc) {
         printf("    %d. Menteri (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'R') || (pc.arrpiece[i].type == 'r')){
-        printf("    %d. Benteng (%c,%c)",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("    %d. Benteng (%c,%c)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
     }
 }
@@ -316,7 +319,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         * ke list-of-possible-move */
         
         if (PieceIsValidMove(P.xpos+1, P.ypos+1)) {
-            if (BoardCell(B)[P.xpos+1][P.ypos+1].team != T) {
+            if (BoardCell(B)[P.xpos+1][P.ypos+1].team == 'B') {
                 k.x = P.xpos+1;
                 k.y = P.ypos+1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -324,7 +327,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         }
         
         if (PieceIsValidMove(P.xpos-1, P.ypos+1)) {
-            if (BoardCell(B)[P.xpos-1][P.ypos+1].team != T) {
+            if (BoardCell(B)[P.xpos-1][P.ypos+1].team == 'B') {
                 k.x = P.xpos-1;
                 k.y = P.ypos+1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -344,7 +347,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         * ke list-of-possible-move */
         
         if (PieceIsValidMove(P.xpos+1, P.ypos-1)) {
-            if (BoardCell(B)[P.xpos+1][P.ypos-1].team != T) {
+            if (BoardCell(B)[P.xpos+1][P.ypos-1].team == 'W') {
                 k.x = P.xpos+1;
                 k.y = P.ypos-1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -352,7 +355,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         }
         
         if (PieceIsValidMove(P.xpos-1, P.ypos-1)) {
-            if (BoardCell(B)[P.xpos-1][P.ypos-1].team != T) {
+            if (BoardCell(B)[P.xpos-1][P.ypos-1].team == 'W') {
                 k.x = P.xpos-1;
                 k.y = P.ypos-1;
                 InsVLast (&(*M).arr[i].possmove, k);

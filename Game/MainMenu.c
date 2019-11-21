@@ -139,12 +139,10 @@ void play(Stack* S) {
 
 	init_turn(*S, &turn);
     
-    /*PERMAINAN DIMULAI*/
-    BoardPrintInfo(B);
-	
+    /*PERMAINAN DIMULAI*/	
 	turncounter = 1;
-	
     while (turncounter<=100) {
+        BoardPrintInfo(B);
 
         currentteam = get_turn(&turn);
         i = 1;

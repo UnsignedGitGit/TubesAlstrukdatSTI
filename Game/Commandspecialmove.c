@@ -121,15 +121,20 @@ void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, St
 			i = findPieceIdx(*white, BoardCell(*B)[5][1]);
 			(*white).arr[i].p.xpos = 3;
 			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
 
 			/* Pembaruan info piece benteng di array of possible move. */
 			i = findPieceIdx(*white, BoardCell(*B)[1][1]);
 			(*white).arr[i].p.xpos = 4;
 			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
 
 			/*Pemindahan raja lalu benteng di board B.*/
 			BoardPieceMove(&BoardCell(*B)[5][1], B, 3, 1);
+			BoardCell(*B)[3][1].hasmoved = true;
+
 			BoardPieceMove(&BoardCell(*B)[1][1], B, 4, 1);
+			BoardCell(*B)[4][1].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,1) ke (c,1)\n");
 			printf("Bidak Benteng telah berpindah dari (a,1) ke (d,1)\n");
@@ -163,15 +168,20 @@ void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, St
 			i = findPieceIdx(*white, BoardCell(*B)[5][1]);
 			(*white).arr[i].p.xpos = 7;
 			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
 
 			/* Pembaruan info piece benteng di array of possible move. */
 			i = findPieceIdx(*white, BoardCell(*B)[8][1]);
 			(*white).arr[i].p.xpos = 6;
 			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
 
 			/*Pemindahan  lalu raja di board B.*/
 			BoardPieceMove(&BoardCell(*B)[5][1], B, 7, 1);
+			BoardCell(*B)[7][1].hasmoved = true;
+
 			BoardPieceMove(&BoardCell(*B)[8][1], B, 6, 1);
+			BoardCell(*B)[6][1].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,1) ke (g,1)\n");
 			printf("Bidak Benteng telah berpindah dari (h,1) ke (f,1)\n");
@@ -207,15 +217,20 @@ void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, St
 			i = findPieceIdx(*black, BoardCell(*B)[5][8]);
 			(*black).arr[i].p.xpos = 3;
 			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
 
 			/* Pembaruan info piece benteng di array of possible move. */
 			i = findPieceIdx(*black, BoardCell(*B)[1][8]);
 			(*black).arr[i].p.xpos = 4;
 			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
 
 			/*Pemindahan raja lalu benteng di board B.*/
 			BoardPieceMove(&BoardCell(*B)[5][8], B, 3, 8);
+			BoardCell(*B)[3][8].hasmoved = true;
+
 			BoardPieceMove(&BoardCell(*B)[1][8], B, 4, 8);
+			BoardCell(*B)[4][8].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,8) ke (c,8)\n");
 			printf("Bidak Benteng telah berpindah dari (a,8) ke (d,8)\n");
@@ -248,15 +263,20 @@ void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, St
 			i = findPieceIdx(*black, BoardCell(*B)[5][8]);
 			(*black).arr[i].p.xpos = 7;
 			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
 
 			/* Pembaruan info piece benteng di array of possible move. */
 			i = findPieceIdx(*black, BoardCell(*B)[8][8]);
 			(*black).arr[i].p.xpos = 6;
 			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
 
 			/*Pemindahan raja lalu benteng di board B.*/
 			BoardPieceMove(&BoardCell(*B)[5][8], B, 7, 8);
+			BoardCell(*B)[7][8].hasmoved = true;
+
 			BoardPieceMove(&BoardCell(*B)[8][8], B, 6, 8);
+			BoardCell(*B)[6][8].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,8) ke (g,8)\n");
 			printf("Bidak Benteng telah berpindah dari (h,8) ke (f,8)\n");
