@@ -28,7 +28,7 @@ int main(){
     Stack movehistory;
 
     /*ALGORITMA*/
-    welcome();
+  /*   welcome();
         delay (7);
         printf ("Loading");
         delay (5);
@@ -61,7 +61,7 @@ int main(){
         printf("       C  H  E  S  S    M  U  L  T  I  P  L  A  Y  E  R    \n\n");
         printf("Loading complete. Press enter to continue. \n");
         getchar();
-    system("cls");
+    system("cls"); */
     
     CreateEmptyStack(&movehistory);
 
@@ -72,6 +72,185 @@ int main(){
     
     return 0;
 }
+
+
+void readmain(boolean* g, Stack* S) {
+    /*KAMUS*/
+    char pil;
+
+    /*ALGORITMA*/
+    printf("Enter your command: ");
+    scanf("%c", &pil);
+    if (pil=='N'){
+        system("cls");
+        play(S);
+    }else if (pil=='L'){
+        load(g, S);
+        //jalankan fungsi load
+    }else if (pil=='B'){
+        //jalankan fungsi print leaderboard
+        system("cls");
+        //printleaderboard();
+    }else if (pil=='E'){
+            *g = true;
+            eksit();
+    }
+    else {
+        printf("Please input the correct command.\n");
+        readmain(g, S);
+    }         
+}
+
+void play(Stack* S) {
+    /*KAMUS*/
+    board B;
+    arr_possible_move black, white;
+    int i, turncounter;
+    Queue turn;
+    char currentteam;
+    char str[20];
+
+    /*ALGORITMA*/
+    
+    /*INISIALISASI*/
+    CreateBoard(&B);
+	
+    MakeEmptyArrPMove(&black);
+    
+    for (i=1; i<= 8; i++) {
+        black.arr[i].p = BoardCell(B)[i][8];
+        CreateEmptyList(&black.arr[i].possmove);
+    }
+    
+    for (i=9; i<= 16; i++) {
+        black.arr[i].p = BoardCell(B)[i-8][7];
+        CreateEmptyList(&black.arr[i].possmove);
+    }
+    
+    MakeEmptyArrPMove(&white);
+    for (i=1; i<= 8; i++) {
+        white.arr[i].p = BoardCell(B)[i][1];
+        CreateEmptyList(&white.arr[i].possmove);
+    }
+    for (i=1; i<= 8; i++) {
+        white.arr[i].p = BoardCell(B)[i][2];
+        CreateEmptyList(&white.arr[i].possmove);
+    }
+
+	init_turn(*S, &turn);
+    
+    /*PERMAINAN DIMULAI*/
+    BoardPrintInfo(B);
+	
+	turncounter = 1;
+	
+    while (turncounter<=100) {
+
+        currentteam = get_turn(&turn);
+		
+        i = 1;
+
+        /*Cek skakmat*/
+        if (currentteam == 'W') {
+            while (white.arr[i].p.type != 'K') {
+                i++;
+            }
+
+            if (isCheckmate(B, white.arr[i].p.xpos, white.arr[i].p.ypos, currentteam)) {
+                break;
+            }
+        } else {
+            while (black.arr[i].p.type != 'k') {
+                i++;
+            }
+
+            if (isCheckmate(B, black.arr[i].p.xpos, black.arr[i].p.ypos, currentteam)) {
+                break;
+            }
+        }
+
+        printf("Masukkan command: ");
+        scanf("%s", str);
+
+        if (currentteam == 'W') {
+            if (strcmp(str, "MOVE") == 0) {
+                move(S, currentteam, &white, &black, &B);
+                turncounter++;
+            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
+                special_move(&white, &black, &B, S, currentteam);
+                turncounter++;
+            } else if (strcmp(str, "UNDO") == 0) {
+                if (turncounter == 1)
+                {
+                    printf("Command tidak dapat dilakukan.\n");
+                    printf("Belum ada gerakan yang dilakukan.\n");
+                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                }
+                else
+                {    
+                    Undo(S);
+                    turncounter++;
+                }
+            } else {
+                printf("Command tidak dapat dilakukan.\n");
+                printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+            }
+        } else {
+            if (strcmp(str, "MOVE") == 0) {
+                move(S, currentteam, &black, &white, &B);
+                turncounter++;
+            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
+                special_move(&white, &black, &B, S, currentteam);
+                turncounter++;
+            } else if (strcmp(str, "UNDO") == 0) {
+                if (turncounter == 1)
+                {
+                    printf("Command tidak dapat dilakukan.\n");
+                    printf("Belum ada gerakan yang dilakukan.\n");
+                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                }
+                else
+                {    
+                    Undo(S);
+                    turncounter++;
+                }
+            } else {
+                printf("Command tidak dapat dilakukan.\n");
+                printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+            }
+        }
+    }
+    printf("Game telah berakhir.\n");
+}
+
+void load(boolean* g, Stack* S){
+    char filename[20];
+    printf("Enter file name: ");
+    scanf("%s", filename);
+    delay(7);
+    printf("%s loaded succesfully, starting in a few seconds", filename);
+    delay(5);
+    printf(".");
+    delay(5);
+    printf(".");
+    delay(5);
+    printf(".");
+    delay(15);
+    system("cls");
+    play(S);
+}
+
+void delay(int number_of_seconds){ 
+    // Converting time into milli_seconds 
+    int milli_seconds = 100 * number_of_seconds; 
+  
+    // Stroing start time 
+    clock_t start_time = clock(); 
+  
+    // looping till required time is not acheived 
+    while (clock() < start_time + milli_seconds) 
+        ; 
+} 
 
 void welcome(){
 	printf("                                                           \n");
@@ -376,184 +555,6 @@ void mainscreen(){
     printf("|                        <Leader(B)oards>                       |\n");
     printf("|                           <(E)xit>                            |\n");
     printf("|_______________________________________________________________|  \n");
-}
-
-void readmain(boolean* g, Stack* S) {
-    /*KAMUS*/
-    char pil;
-
-    /*ALGORITMA*/
-    printf("Enter your command: ");
-    scanf("%c", &pil);
-    if (pil=='N'){
-        system("cls");
-        play(S);
-    }else if (pil=='L'){
-        load();
-        //jalankan fungsi load
-    }else if (pil=='B'){
-        //jalankan fungsi print leaderboard
-        system("cls");
-        //printleaderboard();
-    }else if (pil=='E'){
-            *g = true;
-            eksit();
-    }
-    else {
-        printf("Please input the correct command.\n");
-        readmain(g, S);
-    }         
-}
-
-void delay(int number_of_seconds) 
-{ 
-    // Converting time into milli_seconds 
-    int milli_seconds = 100 * number_of_seconds; 
-  
-    // Stroing start time 
-    clock_t start_time = clock(); 
-  
-    // looping till required time is not acheived 
-    while (clock() < start_time + milli_seconds) 
-        ; 
-} 
-
-void load(boolean* g, Stack* S){
-    char filename[20];
-    printf("Enter file name: ");
-    scanf("%s", filename);
-    delay(7);
-    printf("%s loaded succesfully, starting in a few seconds", filename);
-    delay(5);
-    printf(".");
-    delay(5);
-    printf(".");
-    delay(5);
-    printf(".");
-    delay(15);
-    system("cls");
-    play(S);
-}
-
-void play(Stack* S) {
-    /*KAMUS*/
-    board B;
-    arr_possible_move black, white;
-    int i, turncounter;
-    Queue turn;
-    char currentteam;
-    char str[20];
-
-    /*ALGORITMA*/
-    
-    /*INISIALISASI*/
-    CreateBoard(&B);
-	
-    MakeEmptyArrPMove(&black);
-    
-    for (i=1; i<= 8; i++) {
-        black.arr[i].p = BoardCell(B)[i][8];
-        CreateEmptyList(&black.arr[i].possmove);
-    }
-    
-    for (i=1; i<= 8; i++) {
-         black.arr[i].p = BoardCell(B)[i][7];
-        CreateEmptyList(&black.arr[i].possmove);
-    }
-    
-    MakeEmptyArrPMove(&white);
-    for (i=1; i<= 8; i++) {
-        white.arr[i].p = BoardCell(B)[i][1];
-        CreateEmptyList(&white.arr[i].possmove);
-    }
-    for (i=1; i<= 8; i++) {
-        white.arr[i].p = BoardCell(B)[i][2];
-        CreateEmptyList(&white.arr[i].possmove);
-    }
-
-	init_turn(*S, &turn);
-    
-    /*PERMAINAN DIMULAI*/
-    BoardPrintInfo(B);
-	
-	turncounter = 1;
-	
-    while (turncounter<=100) {
-
-        currentteam = get_turn(&turn);
-		
-        i = 1;
-        /*Cek skakmat*/
-        if (currentteam == 'W') {
-            while (white.arr[i].p.type != 'K') {
-                i++;
-            }
-
-            if (isCheckmate(B, white.arr[i].p.xpos, white.arr[i].p.ypos, currentteam)) {
-                break;
-            }
-        } else {
-            while (black.arr[i].p.type != 'k') {
-                i++;
-            }
-
-            if (isCheckmate(B, black.arr[i].p.xpos, black.arr[i].p.ypos, currentteam)) {
-                break;
-            }
-        }
-
-        printf("Masukkan command: ");
-        scanf("%s", str);
-
-        if (currentteam == 'W') {
-            if (strcmp(str, "MOVE") == 0) {
-                move(S, currentteam, &white, &black, &B);
-                turncounter++;
-            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
-                special_move(&white, &black, &B, S, currentteam);
-                turncounter++;
-            } else if (strcmp(str, "UNDO") == 0) {
-                if (turncounter == 1)
-                {
-                    printf("Command tidak dapat dilakukan.\n");
-                    printf("Belum ada gerakan yang dilakukan.\n");
-                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                }
-                else
-                {    
-                    Undo(S);
-                    turncounter++;
-                }
-            } else {
-                printf("Command tidak dapat dilakukan.\n");
-                printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-            }
-        } else {
-            if (strcmp(str, "MOVE") == 0) {
-                move(S, currentteam, &black, &white, &B);
-                turncounter++;
-            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
-                special_move(&white, &black, &B, S, currentteam);
-                turncounter++;
-            } else if (strcmp(str, "UNDO") == 0) {
-                if (turncounter == 1)
-                {
-                    printf("Command tidak dapat dilakukan.\n");
-                    printf("Belum ada gerakan yang dilakukan.\n");
-                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                }
-                else
-                {    
-                    Undo(S);
-                    turncounter++;
-                }
-            } else {
-                printf("Command tidak dapat dilakukan.\n");
-                printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-            }
-        }
-    }
-    printf("Game telah berakhir.\n");
 }
 
 void eksit(){

@@ -522,6 +522,7 @@ boolean isCellAttacked(board B, int x, int y, char T)
 	int i;
 	
 	/*ALGORITMA*/
+	
 	if (T == 'B') {
 		enemyteam = 'W';
 	} else {
@@ -804,7 +805,7 @@ boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
 	boolean value;
 
 	value = false;
-
+	
 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
 		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
 		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
@@ -819,7 +820,6 @@ boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
 			}
 		}
 	}
-	 
 
 	return value;
 }
