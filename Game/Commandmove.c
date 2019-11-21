@@ -76,7 +76,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         * ke list-of-possible-move */
         
         if (PieceIsValidMove(P.xpos+1, P.ypos+1)) {
-            if (BoardCell(B)[P.xpos+1][P.ypos+1]->team != T) {
+            if (BoardCell(B)[P.xpos+1][P.ypos+1].team != T) {
                 k.x = P.xpos+1;
                 k.y = P.ypos+1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -84,7 +84,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         }
         
         if (PieceIsValidMove(P.xpos-1, P.ypos+1)) {
-            if (BoardCell(B)[P.xpos-1][P.ypos+1]->team != T) {
+            if (BoardCell(B)[P.xpos-1][P.ypos+1].team != T) {
                 k.x = P.xpos-1;
                 k.y = P.ypos+1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -104,7 +104,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         * ke list-of-possible-move */
         
         if (PieceIsValidMove(P.xpos+1, P.ypos-1)) {
-            if (BoardCell(B)[P.xpos+1][P.ypos-1]->team != T) {
+            if (BoardCell(B)[P.xpos+1][P.ypos-1].team != T) {
                 k.x = P.xpos+1;
                 k.y = P.ypos-1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -112,7 +112,7 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         }
         
         if (PieceIsValidMove(P.xpos-1, P.ypos-1)) {
-            if (BoardCell(B)[P.xpos-1][P.ypos-1]->team != T) {
+            if (BoardCell(B)[P.xpos-1][P.ypos-1].team != T) {
                 k.x = P.xpos-1;
                 k.y = P.ypos-1;
                 InsVLast (&(*M).arr[i].possmove, k);
@@ -275,7 +275,7 @@ void addValidCoor(arr_possible_move* M, int idx, int x, int y, board B, char T)
 	if (PieceIsValidMove(x, y)) {
 		
 		/*Cek ada bidak tim sendiri atau tidak di alamat kotak tujuan */
-		if (BoardCell(B)[x][y]->team != T) {
+		if (BoardCell(B)[x][y].team != T) {
 			k.x = x;
 			k.y = y;
 			InsVLast (&(*M).arr[idx].possmove, k);
@@ -291,7 +291,7 @@ int findPieceIdx(arr_possible_move M, piece P)
 	
 	/*ALGORITMA*/
 	i = 0;
-	while ((M.arr[i].p->xpos != P.xpos) || (M.arr[i].p->ypos != P.ypos)) {
+	while ((M.arr[i].p.xpos != P.xpos) || (M.arr[i].p.ypos != P.ypos)) {
 		i++;
 	}
 	
@@ -303,22 +303,23 @@ boolean Iscellempty (board B, int x, int y) {
  * Definisi piece kosong: type dan team bernilai CharNil. */
 
     /*ALGORITMA*/
-    return((BoardCell(B)[x][y]->type == CharNil) && (BoardCell(B)[x][y]->team == CharNil));
+    return((BoardCell(B)[x][y].type == CharNil) && (BoardCell(B)[x][y].team == CharNil));
 }
 
 
-void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb)
-/* I.S. P, B, S, choicenb, array player, dan array enemy terdefinisi */
-/* F.S. Posisi piece P di papan diperbarui. S berisi catatan gerakan 
+void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb)
+/* I.S. Array player, enemy, P, B, S, dan choicenb terdefinisi */
+/* F.S. Posisi piece P di papan diperbarui. Info P di array M diperbarui. S berisi catatan gerakan 
  * bidak tersebut. */
 {
 	/*KAMUS*/
 	int i, xtarget, ytarget;
 	address coorchoice;
 	Sinfotype H;
+    int promotechoice;
 	
 	/*ALGORITMA*/
-	i = findPieceIdx(*M, *P);
+	i = findPieceIdx(*player, *P);
 	
 	/*Pencatatan ke stack movement history*/
 	H.turn = (*P).team;
@@ -329,7 +330,7 @@ void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb)
 	
 	/* Mencari koordinat kotak tujuan pilihan pemain di 
 	 * list-possible-move */
-	coorchoice = First((*M).arr[i].possmove);
+	coorchoice = First((*player).arr[i].possmove);
 	for (i=1; i<= choicenb-1; i++) {
 		coorchoice =  Next(coorchoice);
 	}
@@ -339,38 +340,94 @@ void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb)
 	/*Lanjutan pencatatan stack movement history*/
 	H.xt = xtarget;
 	H.yt = ytarget;
-	H.targettype = BoardCell(*B)[xtarget][ytarget]->type;
+	H.targettype = BoardCell(*B)[xtarget][ytarget].type;
 	
+    if ((*P).team == 'W') {
+        if (((*P).type == 'P') && (ytarget == 8)) {
+            printf("Silahkan Pilih tipe bidak promosi !\n");
+            printf("1.Ratu\n");
+            printf("2.Benteng\n");
+            printf("3.Kuda\n");
+            printf("4.Bishop\n");
+            scanf("Pilihan anda : %d",&promotechoice);
+
+            if (promotechoice == 1){
+                (*P).type = 'Q';
+            }
+            else if(promotechoice == 2){
+                (*P).type = 'R';
+            }
+            else if(promotechoice == 3){
+                (*P).type = 'H';
+            }
+            else if(promotechoice == 4){
+                (*P).type = 'B';
+            }
+            H.specialmove ='P';
+        }
+    }
+    else{
+        if (((*P).type == 'p') && (ytarget == 1)) {
+            printf("Silahkan Pilih tipe bidak promosi !\n");
+            printf("1.Ratu\n");
+            printf("2.Benteng\n");
+            printf("3.Kuda\n");
+            printf("4.Bishop\n");
+            scanf("Pilihan anda : %d",&promotechoice);
+
+            if (promotechoice == 1){
+                (*P).type = 'q';
+            }
+            else if(promotechoice == 2){
+                (*P).type = 'r';
+            }
+            else if(promotechoice == 3){
+                (*P).type = 'h';
+            }
+            else if(promotechoice == 4){
+                (*P).type = 'b';
+            }
+            H.specialmove ='P';
+        }
+    }
+
 	Push(S, H);
-	
-	/* Pemindahan piece P di board B. Jika ada bidak lawan, info isdead
+
+
+    /* Pembaruan info piece di array of possible move. Jika ada bidak lawan, info isdead
 	 * bidak lawan di array-possible-move diset menjadi true. */
-	BoardCell(*B)[xtarget][ytarget]->isdead = true;
+    i = findPieceIdx(*player, *P);
+    (*player).arr[i].p.xpos = xtarget;
+    (*player).arr[i].p.ypos = ytarget;
+
+    i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
+    (*enemy).arr[i].p.isdead = true;
 	
-	BoardPieceMove(P, B, xtarget, ytarget);
+	/* Pemindahan piece P di board B. */	
+	BoardPieceMove(P, B, xtarget, ytarget);   
 }
 
 
-void move(Stack *S, char team, arr_possible_move *T, board* B) {
+void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* enemy, board* B) {
     //KAMUS
     int i, j, k, l, x0, y0, xt, yt;
     piece_choice Pilihan;
-    piece* PP;
+    piece PP;
 
     //ALGORITMA
 
     for (i=1; i<= 16; i++) {
-        DelList(&(*T).arr[i].possmove);
+        DelList(&(*player).arr[i].possmove);
     }
 
-    generate_valid_move(T, *B); // Traversal mengakses satu-satu bidak di arr_possible_move
+    generate_valid_move(player, *B); // Traversal mengakses satu-satu bidak di arr_possible_move
 
     // Mengcopy bidak yang bisa bergerak ke array of choice
     Pilihan.neff = 0;
     i = 1;
     while(i<17) {
-        if (((*T).arr[i].p->isdead == false) && ((*T).arr[i].possmove.First != Nil)) {
-            Pilihan.arrpiece[j] = *((*T).arr[i].p);
+        if (((*player).arr[i].p.isdead == false) && ((*player).arr[i].possmove.First != Nil)) {
+            Pilihan.arrpiece[j] = (*player).arr[i].p;
             Pilihan.neff++;
             j++;
         }
@@ -383,31 +440,31 @@ void move(Stack *S, char team, arr_possible_move *T, board* B) {
     printf("Pilih bidak yang ingin digerakan:");
     scanf("%d", &l);   // Input nomor bidak yang dipilih pengguna untuk digerakkan
 
-    i = findPieceIdx(*T, Pilihan.arrpiece[l]);
-    PP = (*T).arr[i].p;
+    i = findPieceIdx(*player, Pilihan.arrpiece[l]);
+    PP = (*player).arr[i].p;
 
     printf("Daftar posisi tujuan yang mungkin:\n");
-    PrintInfo((*T).arr[l].possmove);
+    PrintInfo((*player).arr[l].possmove);
 
     printf("Pilih posisi tujuan bidak: ");
     scanf("%d", &k); // Input nomor posisi yang dipilih pengguna untuk dituju
 
-    doMove(T, PP, B, S, l);
+    doMove(player, enemy,  &PP, B, S, l);
 
     x0 = (*S).T[(*S).TOP].x0;
     y0 = (*S).T[(*S).TOP].y0;
     xt =  (*S).T[(*S).TOP].xt;
     yt = (*S).T[(*S).TOP].yt;
 
-    if (PieceIsPawn(*PP)) {
+    if (PieceIsPawn(PP)) {
         printf("Bidak Pion telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
-    } else if (PieceIsRook(*PP)) {
+    } else if (PieceIsRook(PP)) {
         printf("Bidak Benteng telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
-    } else if (PieceIsKnight(*PP)) {
+    } else if (PieceIsKnight(PP)) {
         printf("Bidak Kuda telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
-    } else if (PieceIsBishop(*PP)) {
+    } else if (PieceIsBishop(PP)) {
         printf("Bidak Menteri telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
-    } else if (PieceIsQueen(*PP)) {
+    } else if (PieceIsQueen(PP)) {
         printf("Bidak Ratu telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
     } else {
         printf("Bidak Raja telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
@@ -420,24 +477,24 @@ void generate_valid_move(arr_possible_move *T, board B){
 
 	//ALGORITMA
     for (i=1;i<17;i++){
-        if ((*T).arr[i].p->isdead == false){
-            if (((*T).arr[i].p->type == 'K') || ((*T).arr[i].p->type == 'k')){
-                king(T, *(*T).arr[i].p, B, (*T).arr[i].p->team);
+        if ((*T).arr[i].p.isdead == false){
+            if (((*T).arr[i].p.type == 'K') || ((*T).arr[i].p.type == 'k')){
+                king(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }
-            else if (((*T).arr[i].p->type == 'Q') || ((*T).arr[i].p->type == 'q')){
-                queen(T, *(*T).arr[i].p, B, (*T).arr[i].p->team);
+            else if (((*T).arr[i].p.type == 'Q') || ((*T).arr[i].p.type == 'q')){
+                queen(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }
-            else if (((*T).arr[i].p->type == 'R') || ((*T).arr[i].p->type == 'r')){
-                rook(T, *(*T).arr[i].p, B, (*T).arr[i].p->team);
+            else if (((*T).arr[i].p.type == 'R') || ((*T).arr[i].p.type == 'r')){
+                rook(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }
-            else if (((*T).arr[i].p->type == 'B') || ((*T).arr[i].p->type == 'b')){
-                bishop(T, *(*T).arr[i].p, B, (*T).arr[i].p->team);
+            else if (((*T).arr[i].p.type == 'B') || ((*T).arr[i].p.type == 'b')){
+                bishop(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }
-            else if (((*T).arr[i].p->type == 'P') || ((*T).arr[i].p->type == 'p')){
-                pawn(T, *(*T).arr[i].p, B, (*T).arr[i].p->team);
+            else if (((*T).arr[i].p.type == 'P') || ((*T).arr[i].p.type == 'p')){
+                pawn(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }    
-            else if (((*T).arr[i].p->type == 'H') || ((*T).arr[i].p->type == 'h')){
-                horse(T, *(*T).arr[i].p, B, (*T).arr[i].p->team);
+            else if (((*T).arr[i].p.type == 'H') || ((*T).arr[i].p.type == 'h')){
+                horse(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }
         }
     } 
