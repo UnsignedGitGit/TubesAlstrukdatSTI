@@ -38,11 +38,13 @@ int main(){
         //~ delay(5);
         //~ printf (".");
         //~ delay (10);
-        //~ system("cls");    
+        //~ system("cls");
+system("clear");    
     welcome();
         printf("Loading complete. Press enter to continue. \n");
         getchar();
     system("cls");
+system("clear");
     
     CreateEmptyStack(&movehistory);
 
@@ -106,6 +108,7 @@ void readmain(boolean* g, Stack* S) {
     scanf("%c", &pil);
     if (pil=='N'){
         system("cls");
+        system("clear");
         play(S);
     }else if (pil=='L'){
         load();
@@ -113,22 +116,28 @@ void readmain(boolean* g, Stack* S) {
     }else if (pil=='B'){
         //jalankan fungsi print leaderboard
         system("cls");
+        system("clear");
         //printleaderboard();
     }else if (pil=='E'){
             delay (8);
             system("cls");
+            system("clear");
             printf ("Exiting");
             delay (7);
             system("cls");
+            system("clear");
             printf ("Exiting.");
             delay (6);
             system("cls");
+            system("clear");
             printf ("Exiting..");
             delay(10);
             system("cls");
+            system("clear");
             printf ("Bye!");
             delay(8);
             system("cls");
+            system("clear");
 
             *g = true;
     }
@@ -165,6 +174,7 @@ void load(boolean* g, Stack* S){
     printf(".");
     delay(15);
     system("cls");
+    system("clear");
     play(S);
 }
 

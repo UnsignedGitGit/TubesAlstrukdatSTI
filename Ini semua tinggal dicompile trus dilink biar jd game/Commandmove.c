@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "commandmove.h"
-#include "commandmove.h"
+#include "Commandmove.h"
+#include "Commandmove.h"
 
 /*IMPLEMENTASI*/
 void king(arr_possible_move* M, piece P, board B, char T)

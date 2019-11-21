@@ -37,8 +37,6 @@ void CreateBoard(board *B)
 	//ALGORITMA
     for (y = 8; y >= 1; y--) {
         for (x = 1; x <= 8; x++) {
-			printf("%d,%d ", x, y);
-			
             if (y == 8) {
                 if ((x == 1) || (x == 8)){
                     // Create Black Rook
@@ -57,19 +55,16 @@ void CreateBoard(board *B)
                     PieceCreateBKing(&P, 'B', x, y);
                 }
                 BoardCell(*B)[x][y] = &P;
-                printf("%c\n",BoardCell(*B)[x][y]->type);
                 
             } else if (y == 7){
                 // Create Black Pawn
                 PieceCreateBPawn(&P, 'B', x, y);
                 BoardCell(*B)[x][y] = &P;
-                printf("%c\n",BoardCell(*B)[x][y]->type);
                 
             } else if (y == 2){
                 // Create White Pawn
                 PieceCreateWPawn(&P, 'W', x, y);
 				BoardCell(*B)[x][y] = &P;
-				printf("%c\n",BoardCell(*B)[x][y]->type);
 				
             } else if (y == 1){
                 if ((x == 1) || (x == 8)){
@@ -89,12 +84,13 @@ void CreateBoard(board *B)
                     PieceCreateWKing(&P, 'W', x, y);
                 }
 				BoardCell(*B)[x][y] = &P;
-				printf("%c\n",BoardCell(*B)[x][y]->type);
 				
             } else {
                 PieceCreateEmpty(&P, x, y);
 				BoardCell(*B)[x][y] = &P;
             }
+
+            // PiecePrintInfo(*(BoardCell(*B)[x][y]));
         }
     }
 }
