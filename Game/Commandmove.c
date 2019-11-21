@@ -50,7 +50,6 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     PiecePrintInfo(PP);
 
     printf("Daftar posisi tujuan yang mungkin:\n");
-    PrintInfo((*player).arr[i].possmove);
 
     printf("Pilih posisi tujuan bidak: ");
     scanf("%d", &k); // Input nomor posisi yang dipilih pengguna untuk dituju
