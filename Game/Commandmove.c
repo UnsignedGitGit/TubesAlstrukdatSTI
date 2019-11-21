@@ -11,8 +11,6 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     piece PP;
 
     //ALGORITMA
-
-
     for (i=1; i<= 16; i++) {
         DelList(&(*player).arr[i].possmove);
     }

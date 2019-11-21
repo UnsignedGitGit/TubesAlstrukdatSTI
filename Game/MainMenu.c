@@ -169,55 +169,53 @@ void play(Stack* S) {
         printf("Masukkan command: ");
         scanf("%s", str);
 
-        if (currentteam == 'W') {
-            if (strcmp(str, "MOVE") == 0) {
-                move(S, currentteam, &white, &black, &B);
-                turncounter++;
-            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
-                special_move(&white, &black, &B, S, currentteam);
-                turncounter++;
-            } else if (strcmp(str, "UNDO") == 0) {
-                if (turncounter == 1)
-                {
-                    printf("Command tidak dapat dilakukan.\n");
-                    printf("Belum ada gerakan yang dilakukan.\n");
-                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                    currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
-                }
-                else
-                {    
-                    Undo(S);
-                    turncounter++;
-                }
-            } else {
+        if (turncounter <= 2) {
+            while((strcmp(str, "MOVE") != 0) && (strcmp(str, "SPECIAL_MOVE") != 0)) {
+                printf("Command tidak dapat dilakukan.\n");
+                printf("Command-command yang dapat dijalankan adalah 'MOVE' dan 'SPECIAL_MOVE'.\n");
+                printf("Masukkan command: ");
+                scanf("%s", str);
+            }
+        } else {
+            while((strcmp(str, "MOVE") != 0) && (strcmp(str, "SPECIAL_MOVE") != 0) && (strcmp(str, "UNDO") != 0)) {
                 printf("Command tidak dapat dilakukan.\n");
                 printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
+                printf("Masukkan command: ");
+                scanf("%s", str);
+            }
+        }
+
+        if (currentteam == 'W') {
+            if (strcmp(str, "MOVE") == 0) {
+
+                move(S, currentteam, &white, &black, &B);
+                turncounter++;
+
+            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
+
+                special_move(&white, &black, &B, S, currentteam);
+                turncounter++;
+
+            } else if (strcmp(str, "UNDO") == 0) {
+
+                Undo(S);
+                turncounter++;
             }
         } else {
             if (strcmp(str, "MOVE") == 0) {
+
                 move(S, currentteam, &black, &white, &B);
                 turncounter++;
+
             } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
+
                 special_move(&white, &black, &B, S, currentteam);
                 turncounter++;
+
             } else if (strcmp(str, "UNDO") == 0) {
-                if (turncounter == 1)
-                {
-                    printf("Command tidak dapat dilakukan.\n");
-                    printf("Belum ada gerakan yang dilakukan.\n");
-                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                    currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
-                }
-                else
-                {    
-                    Undo(S);
-                    turncounter++;
-                }
-            } else {
-                printf("Command tidak dapat dilakukan.\n");
-                printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
+
+                Undo(S);
+                turncounter++;
             }
         }
     }

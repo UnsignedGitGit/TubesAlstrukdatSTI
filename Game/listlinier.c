@@ -163,9 +163,13 @@ void DelList(List* L)
 /* I.S. List mungkin kosong */
 /* F.S. Semua elemen L di-dealokasi */
 {
-	int i;
+	/*KAMUS*/
+	int i, count;
 	Linfotype x;
-	for(i=1; i<= NbElmtList(*L); i++) {
+
+	/*ALGORITMA*/
+	count = NbElmtList(*L);
+	for(i=1; i<= count; i++) {
 		DelVFirst(L, &x);
 	}
 }
