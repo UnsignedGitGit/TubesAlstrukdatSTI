@@ -1,4 +1,4 @@
-Folder "Game" = "Ini semua tinggal dicompile trus dilink biar jd game"
+Pake yg di folder game aja yaa
 
 ## To Do List
 - DEBUG
