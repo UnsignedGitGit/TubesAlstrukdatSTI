@@ -4,107 +4,6 @@
 #include "commandmove.h"
 
 /*IMPLEMENTASI*/
-void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb)
-/* I.S. Array player, enemy, P, B, S, dan choicenb terdefinisi */
-/* F.S. Posisi piece P di papan diperbarui. Info P di array M diperbarui. S berisi catatan gerakan 
- * bidak tersebut. */
-{
-	/*KAMUS*/
-	int i, xtarget, ytarget;
-	address coorchoice;
-	Sinfotype H;
-    int promotechoice;
-	
-	/*ALGORITMA*/
-	i = findPieceIdx(*player, *P);
-	
-	/*Pencatatan ke stack movement history*/
-	H.turn = (*P).team;
-	H.type = (*P).type;
-	H.x0 = (*P).xpos;
-	H.y0 = (*P).ypos;
-	H.specialmove = 'N';
-	
-	/* Mencari koordinat kotak tujuan pilihan pemain di 
-	 * list-possible-move */
-	coorchoice = First((*player).arr[i].possmove);
-	for (i=1; i<= choicenb-1; i++) {
-		coorchoice =  Next(coorchoice);
-	}
-	xtarget = (*coorchoice).info.x;
-	ytarget = (*coorchoice).info.y;
-	
-	/*Lanjutan pencatatan stack movement history*/
-	H.xt = xtarget;
-	H.yt = ytarget;
-	H.targettype = BoardCell(*B)[xtarget][ytarget].type;
-	
-    if ((*P).team == 'W') {
-        if (((*P).type == 'P') && (ytarget == 8)) {
-            printf("Silahkan Pilih tipe bidak promosi !\n");
-            printf("1.Ratu\n");
-            printf("2.Benteng\n");
-            printf("3.Kuda\n");
-            printf("4.Bishop\n");
-            scanf("Pilihan anda : %d",&promotechoice);
-
-            if (promotechoice == 1){
-                (*P).type = 'Q';
-            }
-            else if(promotechoice == 2){
-                (*P).type = 'R';
-            }
-            else if(promotechoice == 3){
-                (*P).type = 'H';
-            }
-            else if(promotechoice == 4){
-                (*P).type = 'B';
-            }
-            H.specialmove ='P';
-        }
-    }
-    else{
-        if (((*P).type == 'p') && (ytarget == 1)) {
-            printf("Silahkan Pilih tipe bidak promosi !\n");
-            printf("1.Ratu\n");
-            printf("2.Benteng\n");
-            printf("3.Kuda\n");
-            printf("4.Bishop\n");
-            scanf("Pilihan anda : %d",&promotechoice);
-
-            if (promotechoice == 1){
-                (*P).type = 'q';
-            }
-            else if(promotechoice == 2){
-                (*P).type = 'r';
-            }
-            else if(promotechoice == 3){
-                (*P).type = 'h';
-            }
-            else if(promotechoice == 4){
-                (*P).type = 'b';
-            }
-            H.specialmove ='P';
-        }
-    }
-
-	Push(S, H);
-
-
-    /* Pembaruan info piece di array of possible move. Jika ada bidak lawan, info isdead
-	 * bidak lawan di array-possible-move diset menjadi true. */
-    i = findPieceIdx(*player, *P);
-    (*player).arr[i].p.xpos = xtarget;
-    (*player).arr[i].p.ypos = ytarget;
-
-    i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
-    (*enemy).arr[i].p.isdead = true;
-	
-	/* Pemindahan piece P di board B. */	
-	BoardPieceMove(P, B, xtarget, ytarget);   
-}
-
-
 void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* enemy, board* B) {
     //KAMUS
     int i, j, k, l, x0, y0, xt, yt;
@@ -148,13 +47,21 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     i = findPieceIdx(*player, Pilihan.arrpiece[l]);
     PP = (*player).arr[i].p;
 
+    PiecePrintInfo(PP);
+
     printf("Daftar posisi tujuan yang mungkin:\n");
     PrintInfo((*player).arr[i].possmove);
 
     printf("Pilih posisi tujuan bidak: ");
     scanf("%d", &k); // Input nomor posisi yang dipilih pengguna untuk dituju
+    
+    while((k > NbElmtList((*player).arr[i].possmove)) || (k < 1)) {
+        printf("Masukkan salah.\n");
+        printf("Pilih posisi tujuan bidak: ");
+        scanf("%d", &k);
+    }
 
-    doMove(player, enemy,  &PP, B, S, l);
+    doMove(player, enemy,  &PP, B, S, k);
 
     x0 = (*S).T[(*S).TOP].x0;
     y0 = (*S).T[(*S).TOP].y0;
@@ -174,6 +81,105 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     } else {
         printf("Bidak Raja telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(x0), y0, translatex(xt), yt);
     }
+}
+
+void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb)
+/* I.S. Array player, enemy, P, B, S, dan choicenb terdefinisi */
+/* F.S. Posisi piece P di papan diperbarui. Info P di array M diperbarui. S berisi catatan gerakan 
+ * bidak tersebut. */
+{
+	/*KAMUS*/
+	int i, xtarget, ytarget;
+	address coorchoice;
+	Sinfotype H;
+    int promotechoice;
+	
+	/*ALGORITMA*/
+	i = findPieceIdx(*player, *P);
+    
+	/*Pencatatan ke stack movement history*/
+	H.turn = (*P).team;
+	H.type = (*P).type;
+	H.x0 = (*P).xpos;
+	H.y0 = (*P).ypos;
+	H.specialmove = 'N';
+	
+	/* Mencari koordinat kotak tujuan pilihan pemain di 
+	 * list-possible-move */
+	coorchoice = First((*player).arr[i].possmove);
+	for (i=1; i<= (choicenb-1); i++) {
+		coorchoice =  Next(coorchoice);
+	}
+	xtarget = (*coorchoice).info.x;
+	ytarget = (*coorchoice).info.y;
+	
+	/*Lanjutan pencatatan stack movement history*/
+	H.xt = xtarget;
+	H.yt = ytarget;
+	H.targettype = BoardCell(*B)[xtarget][ytarget].type;
+	
+    if ((*P).team == 'W') {
+        if (((*P).type == 'P') && (ytarget == 8)) {
+            printf("Silahkan Pilih tipe bidak promosi !\n");
+            printf("1.Ratu\n");
+            printf("2.Benteng\n");
+            printf("3.Kuda\n");
+            printf("4.Bishop\n");
+            scanf("Pilihan anda : %d",&promotechoice);
+
+            if (promotechoice == 1){
+                (*P).type = 'Q';
+            }
+            else if(promotechoice == 2){
+                (*P).type = 'R';
+            }
+            else if(promotechoice == 3){
+                (*P).type = 'H';
+            }
+            else if(promotechoice == 4){
+                (*P).type = 'B';
+            }
+            H.specialmove ='P';
+        }
+    } else {
+        if (((*P).type == 'p') && (ytarget == 1)) {
+            printf("Silahkan Pilih tipe bidak promosi !\n");
+            printf("1.Ratu\n");
+            printf("2.Benteng\n");
+            printf("3.Kuda\n");
+            printf("4.Bishop\n");
+            scanf("Pilihan anda : %d",&promotechoice);
+
+            if (promotechoice == 1){
+                (*P).type = 'q';
+            }
+            else if(promotechoice == 2){
+                (*P).type = 'r';
+            }
+            else if(promotechoice == 3){
+                (*P).type = 'h';
+            }
+            else if(promotechoice == 4){
+                (*P).type = 'b';
+            }
+            H.specialmove ='P';
+        }
+    }
+
+	Push(S, H);
+
+
+    /* Pembaruan info piece di array of possible move. Jika ada bidak lawan, info isdead
+	 * bidak lawan di array-possible-move diset menjadi true. */
+    i = findPieceIdx(*player, *P);
+    (*player).arr[i].p.xpos = xtarget;
+    (*player).arr[i].p.ypos = ytarget;
+
+    i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
+    (*enemy).arr[i].p.isdead = true;
+	
+	/* Pemindahan piece P di board B. */	
+	BoardPieceMove(P, B, xtarget, ytarget);   
 }
 
 void generate_valid_move(arr_possible_move *T, board B){

@@ -147,7 +147,6 @@ void play(Stack* S) {
     while (turncounter<=100) {
 
         currentteam = get_turn(&turn);
-		
         i = 1;
 
         /*Cek skakmat*/
@@ -185,6 +184,7 @@ void play(Stack* S) {
                     printf("Command tidak dapat dilakukan.\n");
                     printf("Belum ada gerakan yang dilakukan.\n");
                     printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                    currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
                 }
                 else
                 {    
@@ -194,6 +194,7 @@ void play(Stack* S) {
             } else {
                 printf("Command tidak dapat dilakukan.\n");
                 printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
             }
         } else {
             if (strcmp(str, "MOVE") == 0) {
@@ -208,6 +209,7 @@ void play(Stack* S) {
                     printf("Command tidak dapat dilakukan.\n");
                     printf("Belum ada gerakan yang dilakukan.\n");
                     printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                    currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
                 }
                 else
                 {    
@@ -217,6 +219,7 @@ void play(Stack* S) {
             } else {
                 printf("Command tidak dapat dilakukan.\n");
                 printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                currentteam = get_turn(&turn); /* Agar turn tidak berganti ketika kembali masuk loop*/
             }
         }
     }
