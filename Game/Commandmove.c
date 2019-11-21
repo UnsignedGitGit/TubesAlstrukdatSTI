@@ -45,11 +45,9 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     }
 
     i = findPieceIdx(*player, Pilihan.arrpiece[l]);
-    PP = (*player).arr[i].p;
-
-    PiecePrintInfo(PP);
 
     printf("Daftar posisi tujuan yang mungkin:\n");
+    PrintInfo((*player).arr[i].possmove);
 
     printf("Pilih posisi tujuan bidak: ");
     scanf("%d", &k); // Input nomor posisi yang dipilih pengguna untuk dituju
@@ -60,7 +58,7 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
         scanf("%d", &k);
     }
 
-    doMove(player, enemy,  &PP, B, S, k);
+    doMove(player, enemy,  &PP, B, S, k, &(*player).arr[i].possmove);
 
     x0 = (*S).T[(*S).TOP].x0;
     y0 = (*S).T[(*S).TOP].y0;
@@ -82,8 +80,8 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     }
 }
 
-void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb)
-/* I.S. Array player, enemy, P, B, S, dan choicenb terdefinisi */
+void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb, List* L)
+/* I.S. Array player, enemy, P, B, S, choicenb, dan L terdefinisi */
 /* F.S. Posisi piece P di papan diperbarui. Info P di array M diperbarui. S berisi catatan gerakan 
  * bidak tersebut. */
 {
@@ -94,8 +92,6 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
     int promotechoice;
 	
 	/*ALGORITMA*/
-	i = findPieceIdx(*player, *P);
-    
 	/*Pencatatan ke stack movement history*/
 	H.turn = (*P).team;
 	H.type = (*P).type;
@@ -105,18 +101,22 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
 	
 	/* Mencari koordinat kotak tujuan pilihan pemain di 
 	 * list-possible-move */
-	coorchoice = First((*player).arr[i].possmove);
-	for (i=1; i<= (choicenb-1); i++) {
+	coorchoice = First(*L);
+	for (i=1; i<= choicenb-1; i++) {
 		coorchoice =  Next(coorchoice);
 	}
 	xtarget = (*coorchoice).info.x;
 	ytarget = (*coorchoice).info.y;
-	
+
+   
 	/*Lanjutan pencatatan stack movement history*/
 	H.xt = xtarget;
 	H.yt = ytarget;
 	H.targettype = BoardCell(*B)[xtarget][ytarget].type;
-	
+
+    /*Promosi*/
+
+
     if ((*P).team == 'W') {
         if (((*P).type == 'P') && (ytarget == 8)) {
             printf("Silahkan Pilih tipe bidak promosi !\n");
@@ -139,6 +139,9 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
                 (*P).type = 'B';
             }
             H.specialmove ='P';
+            H.targettype = (*P).type;
+            i = findPieceIdx(*player, *P);
+            (*player).arr[i].p.type = (*P).type;
         }
     } else {
         if (((*P).type == 'p') && (ytarget == 1)) {
@@ -162,23 +165,25 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
                 (*P).type = 'b';
             }
             H.specialmove ='P';
+            H.targettype = (*P).type;
+            i = findPieceIdx(*player, *P);
+            (*player).arr[i].p.type = (*P).type;
         }
     }
 
 	Push(S, H);
-
 
     /* Pembaruan info piece di array of possible move. Jika ada bidak lawan, info isdead
 	 * bidak lawan di array-possible-move diset menjadi true. */
     i = findPieceIdx(*player, *P);
     (*player).arr[i].p.xpos = xtarget;
     (*player).arr[i].p.ypos = ytarget;
-
+    
     i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
     (*enemy).arr[i].p.isdead = true;
-	
+
 	/* Pemindahan piece P di board B. */	
-	BoardPieceMove(P, B, xtarget, ytarget);   
+	BoardPieceMove(P, B, xtarget, ytarget);
 }
 
 void generate_valid_move(arr_possible_move *T, board B){
