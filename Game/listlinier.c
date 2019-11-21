@@ -154,7 +154,7 @@ void PrintInfo (List L)
 	P = First(L);
 	
 	for (i=1; i<= NbElmtList(L); i++) {
-		printf("%d. (%c, %c)\n", i, translatex((*P).info.x), (*P).info.y);
+		printf("%d. (%c, %d)\n", i, translatex((*P).info.x), (*P).info.y);
 		P = Next(P);
 	}
 }

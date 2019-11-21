@@ -136,12 +136,12 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     printf("Daftar bidak yang bisa bergerak:\n");
     show_movable_piece(Pilihan);
     
-    printf("Pilih bidak yang ingin digerakan:");
+    printf("Pilih bidak yang ingin digerakan: ");
     scanf("%d", &l);   // Input nomor bidak yang dipilih pengguna untuk digerakkan
 
     while((l > Pilihan.neff) || (l < 1)) {
         printf("Masukkan salah.\n");
-        printf("Pilih bidak yang ingin digerakan:");
+        printf("Pilih bidak yang ingin digerakan: ");
         scanf("%d", &l);
     }
 
@@ -149,7 +149,7 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     PP = (*player).arr[i].p;
 
     printf("Daftar posisi tujuan yang mungkin:\n");
-    PrintInfo((*player).arr[l].possmove);
+    PrintInfo((*player).arr[i].possmove);
 
     printf("Pilih posisi tujuan bidak: ");
     scanf("%d", &k); // Input nomor posisi yang dipilih pengguna untuk dituju
