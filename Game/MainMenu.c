@@ -141,7 +141,7 @@ void play(Stack* S) {
     
     /*PERMAINAN DIMULAI*/	
 	turncounter = 1;
-    while (turncounter<=100) {
+    while (turncounter <= 100) {
         BoardPrintInfo(B);
 
         currentteam = get_turn(&turn);
@@ -198,8 +198,9 @@ void play(Stack* S) {
 
             } else if (strcmp(str, "UNDO") == 0) {
 
-                Undo(S);
-                turncounter++;
+                Undo(&white, &black, S, &B);
+                turncounter = turncounter - 2;
+                currentteam = get_turn(&turn); /*Agar saat masuk ke loop, turn tetap tim W*/
             }
         } else {
             if (strcmp(str, "MOVE") == 0) {
@@ -214,8 +215,9 @@ void play(Stack* S) {
 
             } else if (strcmp(str, "UNDO") == 0) {
 
-                Undo(S);
-                turncounter++;
+                Undo(&white, &black, S, &B);
+                turncounter = turncounter - 2;
+                currentteam = get_turn(&turn); /*Agar saat masuk ke loop, turn tetap tim B*/
             }
         }
     }

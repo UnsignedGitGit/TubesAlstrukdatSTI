@@ -123,7 +123,7 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
             printf("2.Benteng\n");
             printf("3.Kuda\n");
             printf("4.Bishop\n");
-            scanf("Pilihan anda : %d",&promotechoice);
+            scanf("Pilihan anda : %d", &promotechoice);
 
             if (promotechoice == 1){
                 (*P).type = 'Q';
@@ -138,8 +138,6 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
                 (*P).type = 'B';
             }
             H.specialmove ='P';
-            H.targettype = (*P).type;
-
             (*player).arr[i].p.type = (*P).type;
         }
     } else {
@@ -164,7 +162,6 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
                 (*P).type = 'b';
             }
             H.specialmove ='P';
-            H.targettype = (*P).type;
             (*player).arr[i].p.type = (*P).type;
         }
     }
@@ -177,7 +174,7 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
     (*player).arr[i].p.ypos = ytarget;
     (*player).arr[i].p.hasmoved = true;
     
-    if (!(BoardCell(*B)[xtarget][ytarget].type == CharNil)) {
+    if (BoardCell(*B)[xtarget][ytarget].type != CharNil) {
         i = findPieceIdx(*enemy, BoardCell(*B)[xtarget][ytarget]);
         (*enemy).arr[i].p.isdead = true;
     }
