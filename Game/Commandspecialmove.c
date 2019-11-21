@@ -798,8 +798,12 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
     }
 }
 
-/* boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
+boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
+/* Menghasilkan true jika ada raja tim T berada dalam kondisi skakmat. */
 	arr_check threat;
+	boolean value;
+
+	value = false;
 
 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
 		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
@@ -810,14 +814,20 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		isCellAttacked(B, kingxpos-1, kingypos-1, T) &&
 		isCellAttacked(B, kingxpos-1, kingypos, T) &&
 		isCellAttacked(B, kingxpos-1, kingypos+1, T)) {
-			if 
+			if (!canDisrupt(B, threat, T)) {
+				value = true;
+			}
 		}
-	} else {
-		return false;
 	}
+	 
+
+	return value;
 }
 
 void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
+/* I.S. B, C, attacker, dan king terdefinisi
+ * F.S. C berisi koordinat posisi awal penyekak dan alamat kotak-kotak di antara
+ * posisi awal penyekak dan raja yang sedang diserangnya. */
 	int i, x, y;
 
 	i=1;
@@ -950,9 +960,12 @@ void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
 	}
 }
 
-boolean canDisrupt(board B, arr_check C, arr_possible_move white, arr_possible_move black, char T) {
+boolean canDisrupt(board B, arr_check C, char T) {
+/* Menghasilkan true jika ada bidak tim T yang dapat berpindah atau makan ke salah satu alamat
+ * di C */
 	int i;
 	char enemyteam;
+
 
 	if (T == 'B') {
 		enemyteam = 'W';
@@ -961,9 +974,9 @@ boolean canDisrupt(board B, arr_check C, arr_possible_move white, arr_possible_m
 	}
 
 	i = 1;
-	while (i <= C.neff) {
-		if (isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam)) {
-
-		}
+	while ((i < C.neff) && (!isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam))) {
+		i++;
 	}
-} */
+
+	return (isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam));
+}
