@@ -139,6 +139,12 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     printf("Pilih bidak yang ingin digerakan:");
     scanf("%d", &l);   // Input nomor bidak yang dipilih pengguna untuk digerakkan
 
+    while((l > Pilihan.neff) || (l < 1)) {
+        printf("Masukkan salah.\n");
+        printf("Pilih bidak yang ingin digerakan:");
+        scanf("%d", &l);
+    }
+
     i = findPieceIdx(*player, Pilihan.arrpiece[l]);
     PP = (*player).arr[i].p;
 

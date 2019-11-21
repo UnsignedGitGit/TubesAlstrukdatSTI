@@ -132,8 +132,8 @@ void play(Stack* S) {
         white.arr[i].p = BoardCell(B)[i][1];
         CreateEmptyList(&white.arr[i].possmove);
     }
-    for (i=1; i<= 8; i++) {
-        white.arr[i].p = BoardCell(B)[i][2];
+    for (i=9; i<= 16; i++) {
+        white.arr[i].p = BoardCell(B)[i-8][2];
         CreateEmptyList(&white.arr[i].possmove);
     }
 
