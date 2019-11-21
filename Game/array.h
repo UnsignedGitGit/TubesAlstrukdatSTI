@@ -30,7 +30,7 @@ typedef struct {
 } piece_choice;
 
 typedef struct {
-	piece* p;
+	piece p;
 	List possmove;
 } elmt_arrpossmove;
 

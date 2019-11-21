@@ -13,13 +13,13 @@ typedef struct {
 } pawn_enpassant;
 
 /*PROTOTIPE*/
-void special_move( board* B, Stack* S, char T);
+void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T);
 /* I.S. M, S, B, dan T terdefinisi. */
 /* F.S. Special move pilihan pemain dilakukan. Gerakan dilakukan di B dan dicatat di S */
-void DoCastling(board* B, Stack* S, char id, char T);
+void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char id, char T);
 /* I.S. B, S, id, dan T terdefinisi. */
 /* F.S. Castling dilakukan di B dan dicatat di S */
-void DoEnpassant(board* B, Stack* S, char T, pawn_enpassant p);
+void DoEnpassant(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, pawn_enpassant p);
 /* I.S. B, S, id, T, dan p terdefinisi. */
 /* F.S. En passant dilakukan di B dan dicatat di S */
 void EnpassantL(board B, Stack S, pawn_enpassant* C);
@@ -58,5 +58,15 @@ boolean isCellAttacked(board B, int x, int y, char T);
 /* Menghasilkan true jika kotak beralamat (x,y) sedang diserang.*/
 boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int y);
 /* Menghasilkan true jika (x,y) memenuhi kondisi ke-'interator'.*/
+
+boolean isCheckmate(board B, int kingxpos, int kingypos, char T);
+/* Menghasilkan true jika ada raja tim T berada dalam kondisi skakmat. */
+void generateThreatLane(board B, arr_check* C, piece attacker, piece king);
+/* I.S. B, C, attacker, dan king terdefinisi
+ * F.S. C berisi koordinat posisi awal penyekak dan alamat kotak-kotak di antara
+ * posisi awal penyekak dan raja yang sedang diserangnya. */
+boolean canDisrupt(board B, arr_check C, char T);
+/* Menghasilkan true jika ada bidak tim T yang dapat berpindah atau makan ke salah satu alamat
+ * di C */
 
 #endif

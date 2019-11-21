@@ -154,7 +154,7 @@ void PrintInfo (List L)
 	P = First(L);
 	
 	for (i=1; i<= NbElmtList(L); i++) {
-		printf("%d. (%c, %c)\n", i, translatex((*P).info.x), (*P).info.y);
+		printf("%d. (%c, %d)\n", i, translatex((*P).info.x), (*P).info.y);
 		P = Next(P);
 	}
 }
@@ -163,9 +163,13 @@ void DelList(List* L)
 /* I.S. List mungkin kosong */
 /* F.S. Semua elemen L di-dealokasi */
 {
-	int i;
+	/*KAMUS*/
+	int i, count;
 	Linfotype x;
-	for(i=1; i<= NbElmtList(*L); i++) {
+
+	/*ALGORITMA*/
+	count = NbElmtList(*L);
+	for(i=1; i<= count; i++) {
 		DelVFirst(L, &x);
 	}
 }

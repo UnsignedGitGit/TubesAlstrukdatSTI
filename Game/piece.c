@@ -160,7 +160,7 @@ boolean PieceIsRook(piece P)
 boolean PieceIsKnight(piece P)
 {
 	//ALGORITMA
-    return (PieceType(P) == 'N' || PieceType(P) == 'n');    
+    return (PieceType(P) == 'H' || PieceType(P) == 'h');    
 }
 boolean PieceIsBishop(piece P)
 {

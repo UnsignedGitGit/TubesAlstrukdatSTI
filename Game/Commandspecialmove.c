@@ -1,9 +1,10 @@
 #include "Commandspecialmove.h"
+#include "Commandmove.h"
 #include <stdio.h>
 
 /*IMPLEMENTASI*/
-void special_move(board* B, Stack* S, char T)
-/* I.S. M, S, B, dan T terdefinisi. */
+void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T)
+/* I.S. player, enemy, S, B, dan T terdefinisi. */
 /* F.S. Special move pilihan pemain dilakukan. Gerakan dilakukan di B dan dicatat di S */
 {	
 	/*KAMUS*/
@@ -65,25 +66,26 @@ void special_move(board* B, Stack* S, char T)
 		scanf("%d\n", &i);
 
 		if (choice.T[i] == 'F')
-			DoCastling(B, S, 'F', T);
+			DoCastling(white, black, B, S, 'F', T);
 		} else if (choice.T[i] == 'N') {
-			DoCastling(B, S, 'N', T);
+			DoCastling(white, black, B, S, 'N', T);
 		} else if (choice.T[i] == 'L') {
-			DoEnpassant(B, S, T, p1);
+			DoEnpassant(white, black, B, S, T, p1);
 		} else {
-			DoEnpassant(B, S, T, p2);
+			DoEnpassant(white, black, B, S, T, p2);
 		}
 	} else {
 		printf("Tidak ada gerakan khusus yang bisa dilakukan.\n");
 	}
 }
 
-void DoCastling(board* B, Stack* S, char id, char T)
-/* I.S. B, S, id, dan T terdefinisi. */
+void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char id, char T)
+/* I.S. white, black, B, S, id, dan T terdefinisi. */
 /* F.S. Castling dilakukan di B dan dicatat di S */
 {
 	/*KAMUS*/
 	Sinfotype H;
+	int i;
 	
 	/*ALGORITMA*/
 
@@ -115,9 +117,24 @@ void DoCastling(board* B, Stack* S, char id, char T)
 
 			Push(S, H);
 
+			/* Pembaruan info piece raja di array of possible move. */
+			i = findPieceIdx(*white, BoardCell(*B)[5][1]);
+			(*white).arr[i].p.xpos = 3;
+			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
+
+			/* Pembaruan info piece benteng di array of possible move. */
+			i = findPieceIdx(*white, BoardCell(*B)[1][1]);
+			(*white).arr[i].p.xpos = 4;
+			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
+
 			/*Pemindahan raja lalu benteng di board B.*/
-			BoardPieceMove(BoardCell(*B)[5][1], B, 3, 1);
-			BoardPieceMove(BoardCell(*B)[1][1], B, 4, 1);
+			BoardPieceMove(&BoardCell(*B)[5][1], B, 3, 1);
+			BoardCell(*B)[3][1].hasmoved = true;
+
+			BoardPieceMove(&BoardCell(*B)[1][1], B, 4, 1);
+			BoardCell(*B)[4][1].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,1) ke (c,1)\n");
 			printf("Bidak Benteng telah berpindah dari (a,1) ke (d,1)\n");
@@ -147,9 +164,24 @@ void DoCastling(board* B, Stack* S, char id, char T)
 
 			Push(S, H);
 
+			/* Pembaruan info piece raja di array of possible move. */
+			i = findPieceIdx(*white, BoardCell(*B)[5][1]);
+			(*white).arr[i].p.xpos = 7;
+			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
+
+			/* Pembaruan info piece benteng di array of possible move. */
+			i = findPieceIdx(*white, BoardCell(*B)[8][1]);
+			(*white).arr[i].p.xpos = 6;
+			(*white).arr[i].p.ypos = 1;
+			(*white).arr[i].p.hasmoved = true;
+
 			/*Pemindahan  lalu raja di board B.*/
-			BoardPieceMove(BoardCell(*B)[5][1], B, 7, 1);
-			BoardPieceMove(BoardCell(*B)[8][1], B, 6, 1);
+			BoardPieceMove(&BoardCell(*B)[5][1], B, 7, 1);
+			BoardCell(*B)[7][1].hasmoved = true;
+
+			BoardPieceMove(&BoardCell(*B)[8][1], B, 6, 1);
+			BoardCell(*B)[6][1].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,1) ke (g,1)\n");
 			printf("Bidak Benteng telah berpindah dari (h,1) ke (f,1)\n");
@@ -181,9 +213,24 @@ void DoCastling(board* B, Stack* S, char id, char T)
 
 			Push(S, H);
 
+			/* Pembaruan info piece raja di array of possible move. */
+			i = findPieceIdx(*black, BoardCell(*B)[5][8]);
+			(*black).arr[i].p.xpos = 3;
+			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
+
+			/* Pembaruan info piece benteng di array of possible move. */
+			i = findPieceIdx(*black, BoardCell(*B)[1][8]);
+			(*black).arr[i].p.xpos = 4;
+			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
+
 			/*Pemindahan raja lalu benteng di board B.*/
-			BoardPieceMove(BoardCell(*B)[5][8], B, 3, 8);
-			BoardPieceMove(BoardCell(*B)[1][8], B, 4, 8);
+			BoardPieceMove(&BoardCell(*B)[5][8], B, 3, 8);
+			BoardCell(*B)[3][8].hasmoved = true;
+
+			BoardPieceMove(&BoardCell(*B)[1][8], B, 4, 8);
+			BoardCell(*B)[4][8].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,8) ke (c,8)\n");
 			printf("Bidak Benteng telah berpindah dari (a,8) ke (d,8)\n");
@@ -212,9 +259,24 @@ void DoCastling(board* B, Stack* S, char id, char T)
 
 			Push(S, H);
 
+			/* Pembaruan info piece raja di array of possible move. */
+			i = findPieceIdx(*black, BoardCell(*B)[5][8]);
+			(*black).arr[i].p.xpos = 7;
+			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
+
+			/* Pembaruan info piece benteng di array of possible move. */
+			i = findPieceIdx(*black, BoardCell(*B)[8][8]);
+			(*black).arr[i].p.xpos = 6;
+			(*black).arr[i].p.ypos = 8;
+			(*black).arr[i].p.hasmoved = true;
+
 			/*Pemindahan raja lalu benteng di board B.*/
-			BoardPieceMove(BoardCell(*B)[5][8], B, 7, 8);
-			BoardPieceMove(BoardCell(*B)[8][8], B, 6, 8);
+			BoardPieceMove(&BoardCell(*B)[5][8], B, 7, 8);
+			BoardCell(*B)[7][8].hasmoved = true;
+
+			BoardPieceMove(&BoardCell(*B)[8][8], B, 6, 8);
+			BoardCell(*B)[6][8].hasmoved = true;
 
 			printf("Bidak Raja telah berpindah dari (e,8) ke (g,8)\n");
 			printf("Bidak Benteng telah berpindah dari (h,8) ke (f,8)\n");
@@ -222,14 +284,15 @@ void DoCastling(board* B, Stack* S, char id, char T)
 	}
 }
 
-void DoEnpassant(board* B, Stack* S, char T, pawn_enpassant p)
-/* I.S. B, S, id, T, dan p terdefinisi. */
+void DoEnpassant(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, pawn_enpassant p)
+/* I.S. white, black, B, S, id, T, dan p terdefinisi. */
 /* F.S. En passant dilakukan di B dan dicatat di S */
 {
 	/*KAMUS*/
 	Sinfotype H;
 	piece emptypiece;
 	int xenemy, yenemy;
+	int i;
 
 	/*ALGORITMA*/
 	xenemy = (*S).T[(*S).TOP].xt;
@@ -244,11 +307,32 @@ void DoEnpassant(board* B, Stack* S, char T, pawn_enpassant p)
 		H.yt = yenemy+1;
 		H.type = 'P';
 		H.targettype = 'p';
+
+		/* Pembaruan info pion di array of possible move. Info isdead pion
+		 * lawan di array-possible-move diset menjadi true. */
+
+		i = findPieceIdx(*white, BoardCell(*B)[p.x][p.y]);
+		(*white).arr[i].p.xpos = H.xt;
+		(*white).arr[i].p.ypos = H.yt;
+
+		i = findPieceIdx(*black, BoardCell(*B)[xenemy][yenemy]);
+    	(*black).arr[i].p.isdead = true;
+
 	} else {
 		H.xt = xenemy;
 		H.yt = yenemy-1;
 		H.type = 'p';
 		H.targettype = 'P';
+
+		/* Pembaruan info pion di array of possible move. Info isdead pion
+		 * lawan di array-possible-move diset menjadi true. */
+
+		i = findPieceIdx(*black, BoardCell(*B)[p.x][p.y]);
+		(*black).arr[i].p.xpos = H.xt;
+		(*black).arr[i].p.ypos = H.yt;
+
+		i = findPieceIdx(*white, BoardCell(*B)[xenemy][yenemy]);
+  	  	(*white).arr[i].p.isdead = true;
 	}
 	
 	H.specialmove = 'E';
@@ -257,11 +341,11 @@ void DoEnpassant(board* B, Stack* S, char T, pawn_enpassant p)
 	printf("En passant berhasil dilakukan\n");
 	printf("Bidak Pion telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(H.x0), H.y0, translatex(H.xt), H.yt);
 
-	BoardCell(*B)[xenemy][yenemy]->isdead = true;
+	/* Pemindahan pion di board B. */
 	PieceCreateEmpty(&emptypiece, xenemy, yenemy);
-	BoardCell(*B)[xenemy][yenemy] = &emptypiece;
+	BoardCell(*B)[xenemy][yenemy] = emptypiece;
 
-	BoardPieceMove(BoardCell(*B)[H.x0][H.y0], B, H.xt, H.yt);
+	BoardPieceMove(&BoardCell(*B)[H.x0][H.y0], B, H.xt, H.yt);
 }
 
 void EnpassantL(board B, Stack S, pawn_enpassant* C)
@@ -287,8 +371,8 @@ void EnpassantL(board B, Stack S, pawn_enpassant* C)
 	if ((lastmove.type == 'P') || (lastmove.type == 'p')) {
 		if (PieceIsValidMove(lastmove.xt-1, lastmove.yt)) {
 			if (((lastmove.yt - lastmove.y0) == 2) || ((lastmove.yt - lastmove.y0) == (-2))) {
-				if ((PieceIsPawn(*(BoardCell(B)[lastmove.xt-1][lastmove.yt])) && 
-				((BoardCell(B)[lastmove.xt-1][lastmove.yt]->team) == enemyteam))) {
+				if ((PieceIsPawn(BoardCell(B)[lastmove.xt-1][lastmove.yt]) && 
+				(BoardCell(B)[lastmove.xt-1][lastmove.yt].team == enemyteam))) {
 					(*C).x = lastmove.xt-1;
 					(*C).y = lastmove.yt;
 					(*C).canEnpassant = true;					
@@ -321,8 +405,8 @@ void EnpassantR(board B, Stack S, pawn_enpassant* C)
 	if ((lastmove.type == 'P') || (lastmove.type == 'p')) {
 		if (PieceIsValidMove(lastmove.xt+1, lastmove.yt)) {
 			if (((lastmove.yt - lastmove.y0) == 2) || ((lastmove.yt - lastmove.y0) == (-2))) {
-				if ((PieceIsPawn(*BoardCell(B)[lastmove.xt+1][lastmove.yt])) && 
-				((BoardCell(B)[lastmove.xt+1][lastmove.yt]->team) == enemyteam)) {
+				if ((PieceIsPawn(BoardCell(B)[lastmove.xt+1][lastmove.yt])) && 
+				((BoardCell(B)[lastmove.xt+1][lastmove.yt].team) == enemyteam)) {
 					(*C).x = lastmove.xt+1;
 					(*C).y = lastmove.yt;
 					(*C).canEnpassant = true;					
@@ -340,9 +424,9 @@ boolean canNearCastling(board B, char T)
 {
 	/*ALGORITMA*/
 	if (T == 'W') {
-		if ((PieceIsKing(*BoardCell(B)[5][1])) && (BoardCell(B)[5][1]->team == 'W') && (!BoardCell(B)[5][1]->hasmoved)) {
-			if ((PieceIsRook(*BoardCell(B)[8][1])) && (BoardCell(B)[8][1]->team == 'W') && (!BoardCell(B)[8][1]->hasmoved)) {
-				if (isRightEmpty(B, *BoardCell(B)[5][1])) {
+		if ((PieceIsKing(BoardCell(B)[5][1])) && (BoardCell(B)[5][1].team == 'W') && (!BoardCell(B)[5][1].hasmoved)) {
+			if ((PieceIsRook(BoardCell(B)[8][1])) && (BoardCell(B)[8][1].team == 'W') && (!BoardCell(B)[8][1].hasmoved)) {
+				if (isRightEmpty(B, BoardCell(B)[5][1])) {
 					return (
 					(!isCellAttacked(B, 5, 1, T)) &&
 					(!isCellAttacked(B, 6, 1, T)) &&
@@ -358,9 +442,9 @@ boolean canNearCastling(board B, char T)
 			return false;
 		}
 	} else {
-		if ((PieceIsKing(*BoardCell(B)[5][8])) && (BoardCell(B)[5][8]->team == 'B') && (!BoardCell(B)[5][8]->hasmoved)) {
-			if ((PieceIsRook(*BoardCell(B)[8][8])) && (BoardCell(B)[8][1]->team == 'B') && (!BoardCell(B)[8][8]->hasmoved)) {
-				if (isRightEmpty(B, *BoardCell(B)[5][8])) {
+		if ((PieceIsKing(BoardCell(B)[5][8])) && (BoardCell(B)[5][8].team == 'B') && (!BoardCell(B)[5][8].hasmoved)) {
+			if ((PieceIsRook(BoardCell(B)[8][8])) && (BoardCell(B)[8][1].team == 'B') && (!BoardCell(B)[8][8].hasmoved)) {
+				if (isRightEmpty(B, BoardCell(B)[5][8])) {
 					return (
 					(!isCellAttacked(B, 5, 8, T)) &&
 					(!isCellAttacked(B, 6, 8, T)) &&
@@ -386,9 +470,9 @@ boolean canFarCastling(board B, char T)
 {
 	/*ALGORITMA*/
 	if (T == 'W') {
-		if ((PieceIsKing(*BoardCell(B)[5][1])) && (BoardCell(B)[5][1]->team == 'W') && (!BoardCell(B)[5][1]->hasmoved)) {
-			if ((PieceIsRook(*BoardCell(B)[1][1])) && (BoardCell(B)[1][1]->team == 'W') && (!BoardCell(B)[1][1]->hasmoved)) {
-				if (isRightEmpty(B, *BoardCell(B)[5][1])) {
+		if ((PieceIsKing(BoardCell(B)[5][1])) && (BoardCell(B)[5][1].team == 'W') && (!BoardCell(B)[5][1].hasmoved)) {
+			if ((PieceIsRook(BoardCell(B)[1][1])) && (BoardCell(B)[1][1].team == 'W') && (!BoardCell(B)[1][1].hasmoved)) {
+				if (isRightEmpty(B, BoardCell(B)[5][1])) {
 					return (
 					(!isCellAttacked(B, 5, 1, T)) &&
 					(!isCellAttacked(B, 4, 1, T)) &&
@@ -404,9 +488,9 @@ boolean canFarCastling(board B, char T)
 			return false;
 		}
 	} else {
-		if ((PieceIsKing(*BoardCell(B)[5][8])) && (BoardCell(B)[5][8]->team == 'B') && (!BoardCell(B)[5][8]->hasmoved)) {
-			if ((PieceIsRook(*BoardCell(B)[1][8])) && (BoardCell(B)[1][8]->team == 'B') && (!BoardCell(B)[1][8]->hasmoved)) {
-				if (isRightEmpty(B, *BoardCell(B)[5][8])) {
+		if ((PieceIsKing(BoardCell(B)[5][8])) && (BoardCell(B)[5][8].team == 'B') && (!BoardCell(B)[5][8].hasmoved)) {
+			if ((PieceIsRook(BoardCell(B)[1][8])) && (BoardCell(B)[1][8].team == 'B') && (!BoardCell(B)[1][8].hasmoved)) {
+				if (isRightEmpty(B, BoardCell(B)[5][8])) {
 					return (
 					(!isCellAttacked(B, 5, 8, T)) &&
 					(!isCellAttacked(B, 4, 8, T)) &&
@@ -431,9 +515,9 @@ boolean isLeftEmpty(board B, piece k)
 {
 	/*ALGORITMA*/
 	return (
-	(BoardCell(B)[k.xpos-1][k.ypos]->type == CharNil) &&
-	(BoardCell(B)[k.xpos-2][k.ypos]->type == CharNil) &&
-	(BoardCell(B)[k.xpos-3][k.ypos]->type == CharNil)
+	(BoardCell(B)[k.xpos-1][k.ypos].type == CharNil) &&
+	(BoardCell(B)[k.xpos-2][k.ypos].type == CharNil) &&
+	(BoardCell(B)[k.xpos-3][k.ypos].type == CharNil)
 	);
 }
 
@@ -445,8 +529,8 @@ boolean isRightEmpty(board B, piece k)
 {
 	/*ALGORITMA*/
 	return (
-	(BoardCell(B)[k.xpos+1][k.ypos]->type == CharNil) &&
-	(BoardCell(B)[k.xpos+2][k.ypos]->type == CharNil)
+	(BoardCell(B)[k.xpos+1][k.ypos].type == CharNil) &&
+	(BoardCell(B)[k.xpos+2][k.ypos].type == CharNil)
 	);
 }
 
@@ -458,6 +542,7 @@ boolean isCellAttacked(board B, int x, int y, char T)
 	int i;
 	
 	/*ALGORITMA*/
+	
 	if (T == 'B') {
 		enemyteam = 'W';
 	} else {
@@ -484,54 +569,54 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan ratu atau benteng lawan di arah atas
 		cek = y + 1;
 		while(cek < 9){
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				cek++;
 			}
 		}
 		return ((cek < 9) && 
-		(BoardCell(B)[x][y]->team == enemyteam) && 
-		(PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsRook(*BoardCell(B)[x][y])));
+		(BoardCell(B)[x][y].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y])));
         break;
 
     case 2:
 		//Cek keberadaan ratu atau benteng lawan di arah kanan
 		cek = x + 1;
 		while(cek < 9) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				cek++;
 			}
 		}
-        return (cek < 9) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsRook(*BoardCell(B)[x][y]));
+        return (cek < 9) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y]));
         break;
 
     case 3:
 		//Cek keberadaan ratu atau benteng lawan di arah bawah
 		cek = y - 1;
 		while(cek > 0) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				cek--;
 			}
 		}
-        return (cek > 0) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsRook(*BoardCell(B)[x][y]));
+        return (cek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y]));
         break;
 
     case 4:
 		//Cek keberadaan ratu atau benteng lawan di arah kiri
 		cek = x - 1;
 		while(cek > 0) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				cek--;
 			}
 		}
-        return (cek > 0) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsRook(*BoardCell(B)[x][y]));
+        return (cek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y]));
         break;
 
     case 5:
@@ -539,14 +624,14 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x + 1;
 		ycek = y + 1;
 		while (xcek < 9) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				xcek++;
 				ycek++;
 			}
 		}
-        return (xcek < 9) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsBishop(*BoardCell(B)[x][y]));
+        return (xcek < 9) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
         break;
 
     case 6:
@@ -554,14 +639,14 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x + 1;
 		ycek = y - 1;
 		while (xcek < 9) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				xcek++;
 				ycek--;
 			}
 		}
-        return (xcek < 9) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsBishop(*BoardCell(B)[x][y]));
+        return (xcek < 9) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
         break;
 
     case 7:
@@ -569,14 +654,14 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x - 1;
 		ycek = y - 1;
 		while (xcek > 0) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				xcek--;
 				ycek--;
 			}
 		}
-        return (xcek > 0) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsBishop(*BoardCell(B)[x][y]));
+        return (xcek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
         break;
 
     case 8:
@@ -584,22 +669,22 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x - 1;
 		ycek = y + 1;
 		while (xcek > 0) {
-			if (BoardCell(B)[x][y]->team != CharNil) {
+			if (BoardCell(B)[x][y].team != CharNil) {
 				break;
 			} else {
 				xcek--;
 				ycek++;
 			}
 		}
-        return (xcek > 0) && (BoardCell(B)[x][y]->team == enemyteam) && (PieceIsQueen(*BoardCell(B)[x][y]) || PieceIsBishop(*BoardCell(B)[x][y]));
+        return (xcek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
         break;
     
     case 9:
 		//Cek keberadaan kuda lawan di (x+1,y+2)
         return (
 			(PieceIsValidMove(x+1, y+2)) &&
-			(BoardCell(B)[x+1][y+2]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x+1][y+2]))
+			(BoardCell(B)[x+1][y+2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x+1][y+2]))
         );
         break;
     
@@ -607,8 +692,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x+2,y+1)
         return (
 			(PieceIsValidMove(x+2, y+1)) &&
-			(BoardCell(B)[x+2][y+1]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x+2][y+1]))
+			(BoardCell(B)[x+2][y+1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x+2][y+1]))
         );
         break;
     
@@ -616,8 +701,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x+2,y-1)
         return (
 			(PieceIsValidMove(x+2, y-1)) &&
-			(BoardCell(B)[x+1][y+2]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x+2][y-1]))
+			(BoardCell(B)[x+1][y+2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x+2][y-1]))
         );
         break;
     
@@ -625,8 +710,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x+1,y-2)
         return (
 			(PieceIsValidMove(x+1, y-2)) &&
-			(BoardCell(B)[x+1][y+2]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x+1][y+2]))
+			(BoardCell(B)[x+1][y+2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x+1][y+2]))
         );
         break;
     
@@ -634,8 +719,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x-1,y-2)
         return (
 			(PieceIsValidMove(x-1, y-2)) &&
-			(BoardCell(B)[x-1][y-2]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x-1][y-2]))
+			(BoardCell(B)[x-1][y-2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x-1][y-2]))
         );
         break;
     
@@ -643,8 +728,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x-2,y-1)
         return (
 			(PieceIsValidMove(x-2, y-1)) &&
-			(BoardCell(B)[x-2][y-1]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x-2][y-1]))
+			(BoardCell(B)[x-2][y-1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x-2][y-1]))
         );
         break;
     
@@ -652,8 +737,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x-2,y+1)
         return (
 			(PieceIsValidMove(x-2, y+1)) &&
-			(BoardCell(B)[x-2][y+1]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x-2][y+1]))
+			(BoardCell(B)[x-2][y+1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x-2][y+1]))
         );
         break;
     
@@ -661,8 +746,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x-1,y+2)
         return (
 			(PieceIsValidMove(x-1, y+2)) &&
-			(BoardCell(B)[x-1][y+2]->team == enemyteam) && 
-			(PieceIsKnight(*BoardCell(B)[x-1][y+2]))
+			(BoardCell(B)[x-1][y+2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x-1][y+2]))
         );
         break;
     
@@ -671,22 +756,22 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		if (enemyteam == 'B') {
 			return ((
 				(PieceIsValidMove(x+1, y+1)) &&
-				(BoardCell(B)[x+1][y+1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x+1][y+1]))
+				(BoardCell(B)[x+1][y+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x+1][y+1]))
 			) || (
 				(PieceIsValidMove(x-1, y+1)) &&
-				(BoardCell(B)[x-1][y+1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x-1][y+1]))
+				(BoardCell(B)[x-1][y+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x-1][y+1]))
 			));
 		} else {
 			return ((
 				(PieceIsValidMove(x+1, y-1)) &&
-				(BoardCell(B)[x+1][y+1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x+1][y+1]))
+				(BoardCell(B)[x+1][y+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x+1][y+1]))
 			) || (
 				(PieceIsValidMove(x-1, y-1)) &&
-				(BoardCell(B)[x-1][y+1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x-1][y+1]))
+				(BoardCell(B)[x-1][y+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x-1][y+1]))
 			));
 		}
         break;
@@ -695,36 +780,36 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan raja lawan
 		return ((
 				(PieceIsValidMove(x, y+1)) &&
-				(BoardCell(B)[x][y+1]->team == enemyteam) && 
-				(PieceIsKing(*BoardCell(B)[x][y+1]))
+				(BoardCell(B)[x][y+1].team == enemyteam) && 
+				(PieceIsKing(BoardCell(B)[x][y+1]))
 			) || (
 				(PieceIsValidMove(x+1, y+1)) &&
-				(BoardCell(B)[x+1][y+1]->team == enemyteam) && 
-				(PieceIsKing(*BoardCell(B)[x+1][y+1]))
+				(BoardCell(B)[x+1][y+1].team == enemyteam) && 
+				(PieceIsKing(BoardCell(B)[x+1][y+1]))
 			) || (
 				(PieceIsValidMove(x+1, y)) &&
-				(BoardCell(B)[x+1][y]->team == enemyteam) && 
-				(PieceIsKing(*BoardCell(B)[x+1][y]))
+				(BoardCell(B)[x+1][y].team == enemyteam) && 
+				(PieceIsKing(BoardCell(B)[x+1][y]))
 			) || (
 				(PieceIsValidMove(x+1, y-1)) &&
-				(BoardCell(B)[x+1][y-1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x+1][y-1]))
+				(BoardCell(B)[x+1][y-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x+1][y-1]))
 			) || (
 				(PieceIsValidMove(x, y-1)) &&
-				(BoardCell(B)[x][y+1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x][y+1]))
+				(BoardCell(B)[x][y+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x][y+1]))
 			) || (
 				(PieceIsValidMove(x-1, y-1)) &&
-				(BoardCell(B)[x-1][y-1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x-1][y-1]))
+				(BoardCell(B)[x-1][y-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x-1][y-1]))
 			) || (
 				(PieceIsValidMove(x-1, y)) &&
-				(BoardCell(B)[x-1][y]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x-1][y]))
+				(BoardCell(B)[x-1][y].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x-1][y]))
 			) || (
 				(PieceIsValidMove(x-1, y+1)) &&
-				(BoardCell(B)[x-1][y+1]->team == enemyteam) && 
-				(PieceIsPawn(*BoardCell(B)[x-1][y+1]))
+				(BoardCell(B)[x-1][y+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x-1][y+1]))
 			));
         break;
 
@@ -734,6 +819,7 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
     }
 }
 
+<<<<<<< HEAD:Ini semua tinggal dicompile trus dilink biar jd game/Commandspecialmove.c
 // boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
 // 	arr_check threat 
 // 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
@@ -811,3 +897,186 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 // }
 
 // boolean searchElmt
+=======
+boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
+/* Menghasilkan true jika ada raja tim T berada dalam kondisi skakmat. */
+	arr_check threat;
+	boolean value;
+
+	value = false;
+	
+	if (isCellAttacked(B, kingxpos, kingypos, T)) {
+		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
+		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
+		isCellAttacked(B, kingxpos+1, kingypos, T) &&
+		isCellAttacked(B, kingxpos+1, kingypos-1, T) &&
+		isCellAttacked(B, kingxpos, kingypos-1, T) &&
+		isCellAttacked(B, kingxpos-1, kingypos-1, T) &&
+		isCellAttacked(B, kingxpos-1, kingypos, T) &&
+		isCellAttacked(B, kingxpos-1, kingypos+1, T)) {
+			if (!canDisrupt(B, threat, T)) {
+				value = true;
+			}
+		}
+	}
+
+	return value;
+}
+
+void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
+/* I.S. B, C, attacker, dan king terdefinisi
+ * F.S. C berisi koordinat posisi awal penyekak dan alamat kotak-kotak di antara
+ * posisi awal penyekak dan raja yang sedang diserangnya. */
+	int i, x, y;
+
+	i=1;
+	(*C).arrcheck[i].x = attacker.xpos;
+	(*C).arrcheck[i].y = attacker.ypos;
+	(*C).neff = 1;
+
+	if (!PieceIsKnight(attacker) && (!PieceIsKing(attacker)) && (!PieceIsPawn(attacker))) {
+		if ((king.xpos > attacker.xpos) && (king.ypos > attacker.ypos)) {
+			x = attacker.xpos + 1;
+			y = attacker.ypos + 1;
+			
+			while(x < 9) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					x++;
+					y++;
+				}
+			}
+		} else if ((king.xpos < attacker.xpos) && (king.ypos > attacker.ypos)) {
+			x = attacker.xpos - 1;
+			y = attacker.ypos + 1;
+			
+			while(x > 0) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					x--;
+					y++;
+				}
+			}
+		}  else if ((king.xpos < attacker.xpos) && (king.ypos < attacker.ypos)) {
+			x = attacker.xpos - 1;
+			y = attacker.ypos - 1;
+			
+			while(x > 0) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					x--;
+					y--;
+				}
+			}
+		}  else if ((king.xpos > attacker.xpos) && (king.ypos < attacker.ypos)) {
+			x = attacker.xpos + 1;
+			y = attacker.ypos - 1;
+			
+			while(x < 9) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					x++;
+					y--;
+				}
+			}
+		}  else if ((king.xpos > attacker.xpos) && (king.ypos = attacker.ypos)) {
+			x = attacker.xpos + 1;
+			y = attacker.ypos;
+			
+			while(x < 9) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					x++;
+				}
+			}
+		}  else if ((king.xpos = attacker.xpos) && (king.ypos > attacker.ypos)) {
+			x = attacker.xpos;
+			y = attacker.ypos + 1;
+			
+			while(y < 9) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					y++;
+				}
+			}
+		}  else if ((king.xpos < attacker.xpos) && (king.ypos = attacker.xpos)) {
+			x = attacker.xpos - 1;
+			y = attacker.ypos;
+			
+			while(x > 0) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					x--;
+				}
+			}
+		}  else if ((king.xpos = attacker.xpos) && (king.ypos < attacker.xpos)) {
+			x = attacker.xpos;
+			y = attacker.ypos - 1;
+			
+			while(y > 0) {
+				if (PieceIsKing(BoardCell(B)[x][y])) {
+					break;
+				} else {
+					(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
+					(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
+					(*C).neff++;
+					y--;
+				}
+			}
+		}
+
+
+
+
+	}
+}
+
+boolean canDisrupt(board B, arr_check C, char T) {
+/* Menghasilkan true jika ada bidak tim T yang dapat berpindah atau makan ke salah satu alamat
+ * di C */
+	int i;
+	char enemyteam;
+
+
+	if (T == 'B') {
+		enemyteam = 'W';
+	} else {
+		enemyteam = 'B';
+	}
+
+	i = 1;
+	while ((i < C.neff) && (!isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam))) {
+		i++;
+	}
+
+	return (isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam));
+}
+>>>>>>> 5f402ca41dab3fad05b6ab7fe611b4a69071c495:Game/Commandspecialmove.c

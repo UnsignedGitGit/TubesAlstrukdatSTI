@@ -62,12 +62,12 @@ int findPieceIdx(arr_possible_move M, piece P);
 boolean Iscellempty (board B, int x, int y);
 /*Mengecek apakah kotak dengan korrdinat x,y berisi atau kosong*/
 
-void doMove(arr_possible_move* M, piece* P, board* B, Stack* S, int choicenb);
+void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb, List* L);
 /* I.S. M, P, B, S, dan choicenb terdefinisi */
 /* F.S. Posisi piece P di papan diperbarui. S berisi catatan gerakan 
  * bidak tersebut. */
 
-void move(Stack *S, char team, arr_possible_move *T, board* B);
+void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* enemy, board* B);
 /* Secara Berurutan, Prosedur ini Akan melakukan :
             1. Generate Valid Move untuk seluruh bidak dari 1 tim
             2. Mengcopy bidak yang mungkin bergerak ke array of pilihan possible
