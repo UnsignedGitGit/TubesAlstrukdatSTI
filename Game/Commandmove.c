@@ -222,22 +222,22 @@ void show_movable_piece(piece_choice pc) {
     for (i=1;i<=pc.neff;i++){
         
         if((pc.arrpiece[i].type == 'P') || (pc.arrpiece[i].type == 'p')){
-        printf("    %d. Pion (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("\t%d. Pion (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'Q') || (pc.arrpiece[i].type == 'q')){
-        printf("    %d. Ratu (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("\t%d. Ratu (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'K') || (pc.arrpiece[i].type == 'k')){
-        printf("    %d. Raja (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("\t%d. Raja (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'H') || (pc.arrpiece[i].type == 'h')){
-        printf("    %d. Kuda (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("\t%d. Kuda (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'B') || (pc.arrpiece[i].type == 'b')){
-        printf("    %d. Menteri (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("\t%d. Menteri (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'R') || (pc.arrpiece[i].type == 'r')){
-        printf("    %d. Benteng (%c,%c)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("\t%d. Benteng (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
     }
 }

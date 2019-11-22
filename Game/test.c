@@ -17,5 +17,16 @@ int main(){
     board B;
 
     CreateBoard(&B);
-    PiecePrintInfo(BoardCell(B)[2][1]);
+    BoardPrintInfo(B);
+
+    PiecePrintInfo(BoardCell(B)[1][2]);
+    PiecePrintInfo(BoardCell(B)[1][4]);
+    printf("\n");
+    
+    BoardPieceMove(&(BoardCell(B)[1][2]), &B, 1, 4);
+    doMove()
+    PiecePrintInfo(BoardCell(B)[1][2]);
+    PiecePrintInfo(BoardCell(B)[1][4]);
+
+    BoardPrintInfo(B);
 }
