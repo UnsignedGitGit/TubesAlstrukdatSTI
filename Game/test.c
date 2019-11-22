@@ -13,5 +13,9 @@
 #include "leaderboard.h"
 
 int main(){
+    piece P;
+    board B;
 
+    CreateBoard(&B);
+    PiecePrintInfo(BoardCell(B)[2][1]);
 }

@@ -54,29 +54,17 @@ void CreateBoard(board *B)
                     // Create Black King
                     PieceCreateBKing(&P, 'B', x, y);
                 }
-<<<<<<< HEAD:Ini semua tinggal dicompile trus dilink biar jd game/board.c
-                BoardCell(*B)[x][y] = &P;
-=======
                 BoardCell(*B)[x][y] = P;
->>>>>>> 5f402ca41dab3fad05b6ab7fe611b4a69071c495:Game/board.c
                 
             } else if (y == 7){
                 // Create Black Pawn
                 PieceCreateBPawn(&P, 'B', x, y);
-<<<<<<< HEAD:Ini semua tinggal dicompile trus dilink biar jd game/board.c
-                BoardCell(*B)[x][y] = &P;
-=======
                 BoardCell(*B)[x][y] = P;
->>>>>>> 5f402ca41dab3fad05b6ab7fe611b4a69071c495:Game/board.c
                 
             } else if (y == 2){
                 // Create White Pawn
                 PieceCreateWPawn(&P, 'W', x, y);
-<<<<<<< HEAD:Ini semua tinggal dicompile trus dilink biar jd game/board.c
-				BoardCell(*B)[x][y] = &P;
-=======
 				BoardCell(*B)[x][y] = P;
->>>>>>> 5f402ca41dab3fad05b6ab7fe611b4a69071c495:Game/board.c
 				
             } else if (y == 1){
                 if ((x == 1) || (x == 8)){
@@ -95,11 +83,7 @@ void CreateBoard(board *B)
                     // Create White King
                     PieceCreateWKing(&P, 'W', x, y);
                 }
-<<<<<<< HEAD:Ini semua tinggal dicompile trus dilink biar jd game/board.c
-				BoardCell(*B)[x][y] = &P;
-=======
 				BoardCell(*B)[x][y] = P;
->>>>>>> 5f402ca41dab3fad05b6ab7fe611b4a69071c495:Game/board.c
 				
             } else {
                 PieceCreateEmpty(&P, x, y);

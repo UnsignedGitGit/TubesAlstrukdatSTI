@@ -247,6 +247,8 @@ void PiecePrintInfo(piece P)
     printf("Team: %c\n", PieceTeam(P));
     printf("XPos: %d\n", PiecePosX(P));
     printf("YPos: %d\n", PiecePosY(P));
+    printf("HasMoved: %d\n", PieceHasMoved(P));
+    printf("IsDead: %d\n", PieceIsDead(P));
 }
 
 

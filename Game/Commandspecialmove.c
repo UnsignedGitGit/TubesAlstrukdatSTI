@@ -819,85 +819,6 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
     }
 }
 
-<<<<<<< HEAD:Ini semua tinggal dicompile trus dilink biar jd game/Commandspecialmove.c
-// boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
-// 	arr_check threat 
-// 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
-// 		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
-// 		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
-// 		isCellAttacked(B, kingxpos+1, kingypos, T) &&
-// 		isCellAttacked(B, kingxpos+1, kingypos-1, T) &&
-// 		isCellAttacked(B, kingxpos, kingypos-1, T) &&
-// 		isCellAttacked(B, kingxpos-1, kingypos-1, T) &&
-// 		isCellAttacked(B, kingxpos-1, kingypos, T) &&
-// 		isCellAttacked(B, kingxpos-1, kingypos+1, T)) {
-// 			if 
-// 		}
-// 	} else {
-// 		return false;
-// 	}
-// }
-
-// void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
-// 	int i, x, y;
-
-// 	i=1;
-// 	(*C).arrcheck[i].x = attacker.xpos;
-// 	(*C).arrcheck[i].y = attacker.ypos;
-// 	(*C).neff = 1;
-
-// 	if (!PieceIsKnight(attacker)) {
-// 		if ((king.xpos > attacker.xpos) && (king.ypos > attacker.xpos)) {
-// 			x = attacker.xpos + 1;
-// 			y = attacker.ypos + 1;
-			
-// 			while(x < 9) {
-// 			if (PieceIsKing(*BoardCell(B)[x][y])) {
-// 				break;
-// 			} else {
-// 				(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
-// 				(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
-// 				(*C).neff++;
-// 				x++;
-// 				y++;
-// 			}
-// 			}
-// 		} else if ((king.xpos < attacker.xpos) && (king.ypos > attacker.xpos)) {
-// 			x = attacker.xpos + 1;
-// 			y = attacker.ypos + 1;
-			
-// 			while(x < 9) {
-// 			if (PieceIsKing(*BoardCell(B)[x][y])) {
-// 				break;
-// 			} else {
-// 				(*C).arrcheck[(*C).neff + 1].x = attacker.xpos;
-// 				(*C).arrcheck[(*C).neff + 1].y = attacker.ypos;
-// 				(*C).neff++;
-// 				x++;
-// 				y++;
-// 			}
-// 			}
-
-// 		}  else if ((king.xpos < attacker.xpos) && (king.ypos < attacker.xpos)) {
-			
-// 		}  else if ((king.xpos > attacker.xpos) && (king.ypos < attacker.xpos)) {
-			
-// 		}  else if ((king.xpos > attacker.xpos) && (king.ypos > attacker.xpos)) {
-			
-// 		}  else if ((king.xpos > attacker.xpos) && (king.ypos = attacker.xpos)) {
-			
-// 		}  else if ((king.xpos = attacker.xpos) && (king.ypos > attacker.xpos)) {
-			
-// 		}  else if ((king.xpos < attacker.xpos) && (king.ypos = attacker.xpos)) {
-			
-// 		}  else if ((king.xpos = attacker.xpos) && (king.ypos < attacker.xpos)) {
-			
-// 		}
-// 	}
-// }
-
-// boolean searchElmt
-=======
 boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
 /* Menghasilkan true jika ada raja tim T berada dalam kondisi skakmat. */
 	arr_check threat;
@@ -1079,4 +1000,3 @@ boolean canDisrupt(board B, arr_check C, char T) {
 
 	return (isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam));
 }
->>>>>>> 5f402ca41dab3fad05b6ab7fe611b4a69071c495:Game/Commandspecialmove.c
