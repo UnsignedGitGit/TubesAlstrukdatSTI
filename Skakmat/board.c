@@ -89,6 +89,8 @@ void CreateBoard(board *B)
                 PieceCreateEmpty(&P, x, y);
 				BoardCell(*B)[x][y] = P;
             }
+
+            // PiecePrintInfo(*(BoardCell(*B)[x][y]));
         }
     }
 }

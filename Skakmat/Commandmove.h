@@ -13,43 +13,43 @@
 #include "array.h"
 
 /*PROTOTIPE*/
-void king(List* L, piece P, board B, char T);
+void king(arr_possible_move* M, piece P, board B, char T);
 /* I.S. M, P, B, dan T terdefinisi. List possmove di M kosong */
 /* F.S. Di dalam array-possible-move (M), list-of-possible-move piece P 
  * 		(bidak raja tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
 
-void horse(List* L, piece P, board B, char T);
+void horse(arr_possible_move* M, piece P, board B, char T);
 /* I.S. M, P, B, dan T terdefinisi. List possmove di M kosong */
 /* F.S. Di dalam array-possible-move (M), list-of-possible-move piece P 
  * 		(bidak kuda tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
 
-void pawn(List* L, piece P, board B, char T);
+void pawn(arr_possible_move* M, piece P, board B, char T);
 /* I.S. M, P, B, dan T terdefinisi. List possmove di M kosong */
 /* F.S. Di dalam array-possible-move (M), list-of-possible-move piece P 
  * 		(bidak pion tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
 
-void rook(List* L, piece P,board B,char giliran);
+void rook(arr_possible_move *M, piece P,board B,char giliran);
 /* I.S. M, P, B, dan T terdefinisi. List possmove di M kosong */
 /* F.S. Di dalam array-possible-move (M), list-of-possible-move piece P 
  * 		(bidak benteng tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
 
-void bishop(List* L, piece P,board B,char T);
+void bishop(arr_possible_move *M, piece P,board B,char T);
 /* I.S. M, P, B, dan T terdefinisi. List possmove di M kosong */
 /* F.S. Di dalam array-possible-move (M), list-of-possible-move piece P 
  * 		(bidak benteng tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
 
-void queen(List* L, piece P,board B,char T);
+void queen(arr_possible_move *M, piece P,board B,char T);
 /* I.S. M, P, B, dan T terdefinisi. List possmove di M kosong */
 /* F.S. Di dalam array-possible-move (M), list-of-possible-move piece P 
  * 		(bidak benteng tim putih atau hitam) berisi semua alamat kotak
  *  	yang dapat dituju piece P */
  
-void addValidCoor(List* L, int x, int y, board B, char T);
+void addValidCoor(arr_possible_move* M, int idx, int x, int y, board B, char T);
 /* I.S. M, x, y, B, P, dan T terdefinisi */
 /* F.S. Alamat kotak (x dan y) yang valid akan dimasukkan ke list
  * 		-of-possible-move */
