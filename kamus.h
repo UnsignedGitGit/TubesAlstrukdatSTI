@@ -63,7 +63,7 @@ typedef struct {
 
 // ARRAY : PIECE DAN POSSIBLE MOVE-NYA ------------------------------------------------------------------------------------------------------------------
 typedef struct {
-	piece* p;
+	piece p;
 	List possmove;
 } elmt_arrpossmove;
 
