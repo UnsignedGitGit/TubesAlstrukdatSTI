@@ -16,7 +16,7 @@ void BoardPieceMove(piece *P,  board *B, int x, int y)
 	PieceCreateEmpty(&emptypiece, PiecePosX(*P), PiecePosY(*P));
 	BoardCell(*B)[PiecePosX(*P)][PiecePosY(*P)] = emptypiece;
 	
-	PieceMove(P, x, y);
+	PieceMove(&BoardCell(*B)[x][y], x, y);
 }
 
 
@@ -89,6 +89,8 @@ void CreateBoard(board *B)
                 PieceCreateEmpty(&P, x, y);
 				BoardCell(*B)[x][y] = P;
             }
+
+            // PiecePrintInfo(*(BoardCell(*B)[x][y]));
         }
     }
 }

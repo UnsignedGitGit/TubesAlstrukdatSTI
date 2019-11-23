@@ -38,7 +38,8 @@ int main(){
         delay(5);
         printf (".");
         delay (8);
-        system("cls");    
+        system("cls");
+        system("clear");    
         printf("                                                           \n");
         printf("                 `      :                                  \n");
         printf("             `     ` `.-o-.                                \n");
@@ -61,7 +62,8 @@ int main(){
         printf("       C  H  E  S  S    M  U  L  T  I  P  L  A  Y  E  R    \n\n");
         printf("Loading complete. Press enter to continue. \n");
         getchar();
-    system("cls"); */
+        system("cls");
+        system("clear"); */
     
     CreateEmptyStack(&movehistory);
 
@@ -79,26 +81,29 @@ void readmain(boolean* g, Stack* S) {
     char pil;
 
     /*ALGORITMA*/
+
     printf("Enter your command: ");
     scanf("%c", &pil);
-    if (pil=='N'){
+    
+    if (pil=='N'){   
         system("cls");
+        system("clear");
         play(S);
-    }else if (pil=='L'){
+    } else if (pil=='L'){
         load(g, S);
         //jalankan fungsi load
-    }else if (pil=='B'){
+    } else if (pil=='B'){
         //jalankan fungsi print leaderboard
         system("cls");
+        system("clear");
         //printleaderboard();
-    }else if (pil=='E'){
-            *g = true;
-            eksit();
-    }
-    else {
+    } else if (pil=='E'){
+        *g = true;
+        eksit();
+    } else {
         printf("Please input the correct command.\n");
         readmain(g, S);
-    }         
+    }
 }
 
 void play(Stack* S) {
@@ -109,14 +114,17 @@ void play(Stack* S) {
     Queue turn;
     char currentteam;
     char str[20];
+    boolean donemove;
 
     /*ALGORITMA*/
     
-    /*INISIALISASI*/
+
+    /*****INISIALISASI*****/
+    /*Array board/"Papan catur" diisi dengan bidak-bidak. Bidak tim putih ada di bagian bawah papan dan tim hitam ada di bagian atas papan.*/
     CreateBoard(&B);
 	
+    /*Array pencatan list-of-possible-move tiap bidak tim hitam diisi dengan info masing-masing bidak dan list kosong.*/
     MakeEmptyArrPMove(&black);
-    
     for (i=1; i<= 8; i++) {
         black.arr[i].p = BoardCell(B)[i][8];
         CreateEmptyList(&black.arr[i].possmove);
@@ -127,6 +135,7 @@ void play(Stack* S) {
         CreateEmptyList(&black.arr[i].possmove);
     }
     
+     /*Array pencatan list-of-possible-move tiap bidak tim putih diisi dengan info masing-masing bidak dan list kosong.*/
     MakeEmptyArrPMove(&white);
     for (i=1; i<= 8; i++) {
         white.arr[i].p = BoardCell(B)[i][1];
@@ -136,92 +145,120 @@ void play(Stack* S) {
         white.arr[i].p = BoardCell(B)[i-8][2];
         CreateEmptyList(&white.arr[i].possmove);
     }
-
+ 
+    /*Queue giliran (queue yang berisi 2 elemen, yaitu karakter 'W' dan 'B,
+    dengan head awal di 'W' dan tail di 'B' dibuat.*/
 	init_turn(*S, &turn);
     
-    /*PERMAINAN DIMULAI*/	
+
+
+    /*****PERMAINAN*****/	
+    /*Game akan selesai setelah masing-masing pemain mendapat 50 giliran.*/
 	turncounter = 1;
     while (turncounter <= 100) {
+
         BoardPrintInfo(B);
 
+
         currentteam = get_turn(&turn);
+
+
+        /*Cek pemain tim "currentteam" sedang ter-skakmat atau tidak.*/
         i = 1;
-
-        /*Cek skakmat*/
-        if (currentteam == 'W') {
-            while (white.arr[i].p.type != 'K') {
-                i++;
-            }
-
-            if (isCheckmate(B, white.arr[i].p.xpos, white.arr[i].p.ypos, currentteam)) {
-                break;
-            }
-        } else {
-            while (black.arr[i].p.type != 'k') {
-                i++;
-            }
-
-            if (isCheckmate(B, black.arr[i].p.xpos, black.arr[i].p.ypos, currentteam)) {
-                break;
+        if (turncounter >= 3) {
+            if (currentteam == 'W') {
+                while (white.arr[i].p.type != 'K') {
+                    i++;
+                }
+                if (isCheckmate(B, white.arr[i].p.xpos, white.arr[i].p.ypos, currentteam, white)) {
+                    break;
+                }
+            } else {
+                while (black.arr[i].p.type != 'k') {
+                    i++;
+                }
+                if (isCheckmate(B, black.arr[i].p.xpos, black.arr[i].p.ypos, currentteam, black)) {
+                    break;
+                }
             }
         }
 
-        printf("Masukkan command: ");
-        scanf("%s", str);
+        /*Jika pemain tidak sedang dalam kondisi skakmat, pemain dapat memasukkan command.*/
+        /*Jika pemain memasukkan "SPECIAL_MOVE" tetapi tidak ada special move yang dapat dilakukan
+          , pemain akan diminta untuk memasukkan commmand lagi.*/
+        donemove = false;
+        while (donemove == false) {
+            printf("Masukkan command: ");
+            scanf("%s", str);
 
-        if (turncounter <= 2) {
-            while((strcmp(str, "MOVE") != 0) && (strcmp(str, "SPECIAL_MOVE") != 0)) {
-                printf("Command tidak dapat dilakukan.\n");
-                printf("Command-command yang dapat dijalankan adalah 'MOVE' dan 'SPECIAL_MOVE'.\n");
-                printf("Masukkan command: ");
-                scanf("%s", str);
+            /*Setelah tim putih dan hitam masing-masing sudah melangkah 1 kali, undo baru dapat dilakukan.*/
+            /*Bagian ini memvalidasi masukkan tim putih dan hitam pertama agar "UNDO" tidak dimasukkan.*/
+            if (turncounter <= 2) {
+                while((strcmp(str, "MOVE") != 0) && (strcmp(str, "SPECIAL_MOVE") != 0)) {
+                    printf("Command tidak dapat dilakukan.\n");
+                    printf("Command-command yang dapat dijalankan adalah 'MOVE' dan 'SPECIAL_MOVE'.\n");
+                    printf("Masukkan command: ");
+                    scanf("%s", str);
+                }
+            } else {
+                while((strcmp(str, "MOVE") != 0) && (strcmp(str, "SPECIAL_MOVE") != 0) && (strcmp(str, "UNDO") != 0)) {
+                    printf("Command tidak dapat dilakukan.\n");
+                    printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
+                    printf("Masukkan command: ");
+                    scanf("%s", str);
+                }
             }
-        } else {
-            while((strcmp(str, "MOVE") != 0) && (strcmp(str, "SPECIAL_MOVE") != 0) && (strcmp(str, "UNDO") != 0)) {
-                printf("Command tidak dapat dilakukan.\n");
-                printf("Command-command yang dapat dijalankan adalah 'MOVE', 'SPECIAL_MOVE', atau 'UNDO'.\n");
-                printf("Masukkan command: ");
-                scanf("%s", str);
-            }
-        }
 
-        if (currentteam == 'W') {
-            if (strcmp(str, "MOVE") == 0) {
+            /*Fungsi move/special_move/Undo akan dijalankan sesuai masukkan pengguna.*/
+            if (currentteam == 'W') {
+                if (strcmp(str, "MOVE") == 0) {
 
-                move(S, currentteam, &white, &black, &B);
-                turncounter++;
+                    move(S, currentteam, &white, &black, &B);
+                    donemove = true;
+                    turncounter++;
 
-            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
+                } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
 
-                special_move(&white, &black, &B, S, currentteam);
-                turncounter++;
+                    special_move(&white, &black, &B, S, currentteam, &donemove);
+                    if (donemove == true) {
+                        turncounter++;
+                    }
 
-            } else if (strcmp(str, "UNDO") == 0) {
+                } else if (strcmp(str, "UNDO") == 0) {
 
-                Undo(&white, &black, S, &B);
-                turncounter = turncounter - 2;
-                currentteam = get_turn(&turn); /*Agar saat masuk ke loop, turn tetap tim W*/
-            }
-        } else {
-            if (strcmp(str, "MOVE") == 0) {
+                    Undo(&white, &black, S, &B);
+                    donemove = true;
+                    turncounter = turncounter - 2;
+                    currentteam = get_turn(&turn); /*Agar saat masuk ke loop, turn tetap tim W*/
+                }
+            } else {
+                if (strcmp(str, "MOVE") == 0) {
 
-                move(S, currentteam, &black, &white, &B);
-                turncounter++;
+                    move(S, currentteam, &black, &white, &B);
+                    donemove = true;
+                    turncounter++;
 
-            } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
+                } else if (strcmp(str, "SPECIAL_MOVE") == 0) {
 
-                special_move(&white, &black, &B, S, currentteam);
-                turncounter++;
+                    special_move(&white, &black, &B, S, currentteam, &donemove);
+                    if (donemove == true) {
+                        turncounter++;
+                    }
 
-            } else if (strcmp(str, "UNDO") == 0) {
+                } else if (strcmp(str, "UNDO") == 0) {
 
-                Undo(&white, &black, S, &B);
-                turncounter = turncounter - 2;
-                currentteam = get_turn(&turn); /*Agar saat masuk ke loop, turn tetap tim B*/
+                    Undo(&white, &black, S, &B);
+                    donemove = true;
+                    turncounter = turncounter - 2;
+                    currentteam = get_turn(&turn); /*Agar saat masuk ke loop, turn tetap tim B*/
+                }
             }
         }
     }
-    printf("Game telah berakhir.\n");
+
+
+    /*****KEMBALI KE MAIN MENU*****/
+    printf("GAME OVER\n");
 }
 
 void load(boolean* g, Stack* S){
@@ -238,6 +275,7 @@ void load(boolean* g, Stack* S){
     printf(".");
     delay(15);
     system("cls");
+    system("clear");
     play(S);
 }
 
@@ -273,6 +311,7 @@ void welcome(){
     printf("                                       `:`                 \n");
     printf("                                                           \n");  
     delay(2); system("cls");
+    system("clear");
     
     printf("                                                           \n");
     printf("                                                           \n");                
@@ -293,6 +332,7 @@ void welcome(){
     printf("                                    `:`                    \n");
     printf("                                                           \n");  
     delay(2); system("cls");
+    system("clear");
     
     printf("                                                           \n");
     printf("                                                           \n");           
@@ -314,6 +354,7 @@ void welcome(){
     printf("                                                           \n");  
     printf("                             W  E  L                       \n");
     delay(2); system("cls");
+    system("clear");
     
     printf("                                                           \n");
     printf("                                                           \n");                
@@ -335,6 +376,7 @@ void welcome(){
     printf("                                                           \n");  
     printf("                      W  E  L  C  O  M  E                  \n");
     delay(2); system("cls");
+    system("clear");
     
 
     printf("                                                           \n");
@@ -357,6 +399,7 @@ void welcome(){
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E                       \n");
     delay(2); system("cls");
+    system("clear");
     
     
     printf("                                                           \n");
@@ -379,6 +422,7 @@ void welcome(){
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     delay(2); system("cls");
+    system("clear");
     
 
     printf("                                                           \n");
@@ -402,6 +446,7 @@ void welcome(){
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("                                                           \n\n");    
     delay(2); system("cls");
+    system("clear");
     
 
     printf("                                                           \n");
@@ -425,6 +470,7 @@ void welcome(){
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("                        C  H  E                            \n\n");
     delay(2); system("cls");
+    system("clear");
     
 
     printf("                                                           \n");
@@ -448,6 +494,7 @@ void welcome(){
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("                        C  H  E  S  S                      \n\n");
     delay(2); system("cls");
+    system("clear");
     
 
     printf("                                                           \n");
@@ -471,6 +518,7 @@ void welcome(){
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("               C  H  E  S  S    M  U  L                   \n\n");
     delay(2); system("cls");
+    system("clear");
     
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -493,6 +541,7 @@ void welcome(){
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("               C  H  E  S  S    M  U  L  T  I             \n\n");
     delay(2); system("cls");
+    system("clear");
     
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -515,6 +564,7 @@ void welcome(){
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("       C  H  E  S  S    M  U  L  T  I  P  L  A            \n\n");
     delay(2); system("cls");
+    system("clear");
 
     printf("                                                           \n");
     printf("                 `      :                                  \n");                               
@@ -578,6 +628,7 @@ void eksit(){
     printf("                  `://////////.`://////////.               \n");
     printf("                                                            \n"); 
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -597,6 +648,7 @@ void eksit(){
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
     delay(2); system("cls");
+system("clear");
     
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -616,6 +668,7 @@ void eksit(){
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -635,6 +688,7 @@ void eksit(){
     printf("                   +ssssssssss. osssssssso/-               \n");
     printf("                   ://////////.`://////////.               \n");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -654,6 +708,7 @@ void eksit(){
     printf("                        ssssss. osssssss                   \n");
     printf("                         /////.`://///                     \n");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -673,6 +728,7 @@ void eksit(){
     printf("                          ssss. ossssss                    \n");
     printf("                            //.`:////                      \n");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -693,6 +749,7 @@ void eksit(){
     printf("                              .`://                        \n");
     printf ("                   B        y        e        !             ");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -713,6 +770,7 @@ void eksit(){
     printf("                              `:`                          \n");
     printf ("                    B      y      e      !                  ");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -733,6 +791,7 @@ void eksit(){
     printf("                                `:`                        \n");
     printf ("                      B    y    e    !                      ");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -753,6 +812,7 @@ void eksit(){
     printf("                                  `:`                      \n");
     printf ("                       B   y   e   !                        ");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -774,6 +834,7 @@ void eksit(){
     printf("                                                           \n");  
     printf ("                        B  y  e  !                          ");
     delay(2); system("cls");
+system("clear");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -795,6 +856,7 @@ void eksit(){
     printf("                                                           \n");  
     printf ("                           B y e !                          ");
     delay(2); system("cls");
+system("clear");
      
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -816,4 +878,5 @@ void eksit(){
     printf("                                                           \n");  
     printf ("                            Bye!                            ");
     delay(8); system("cls");
+system("clear");
 }
