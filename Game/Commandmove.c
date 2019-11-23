@@ -306,7 +306,10 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
 		    addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
 	    } else {
 		    addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
-		    addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+		    if (BoardCell(B)[P.xpos][P.ypos+2].type == Charnil){
+		    	addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+		    }
+		    
 	    }
 	
         /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
@@ -334,7 +337,10 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
 		    addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
 	    } else {
 		    addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
-		    addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+		if (BoardCell(B)[P.xpos][P.ypos-2].type == Charnil){
+		    	addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+		    }
+		    
 	    }
 	
         /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
