@@ -50,14 +50,14 @@ void special_move(arr_possible_move* white, arr_possible_move* black, board* B, 
 		}
 		
 		if (p1.canEnpassant) {
-			printf("%d. En passant with pawn (%c, %c)\n", i, translatex(p1.x), p1.y);
+			printf("%d. En passant dengan Pion (%c,%d)\n", i, translatex(p1.x), p1.y);
 			choice.T[i] = 'L';
 			choice.Neff++;
 			i++;
 		}
 		
 		if (p2.canEnpassant) {
-			printf("%d. En passant with pawn (%c, %c)\n", i, translatex(p2.x), p2.y);
+			printf("%d. En passant dengan Pion (%c,%d)\n", i, translatex(p2.x), p2.y);
 			choice.T[i] = 'R';
 			choice.Neff++;
 			i++;
@@ -349,7 +349,7 @@ void DoEnpassant(arr_possible_move* white, arr_possible_move* black, board* B, S
 	Push(S, H);
 
 	printf("En passant berhasil dilakukan\n");
-	printf("Bidak Pion telah berpindah dari (%c,%c) ke (%c,%c)\n", translatex(H.x0), H.y0, translatex(H.xt), H.yt);
+	printf("Bidak Pion telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(H.x0), H.y0, translatex(H.xt), H.yt);
 
 	/* Pemindahan pion di board B. */
 	PieceCreateEmpty(&emptypiece, xenemy, yenemy);
