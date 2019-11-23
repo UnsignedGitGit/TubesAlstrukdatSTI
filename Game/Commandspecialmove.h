@@ -59,13 +59,13 @@ boolean isCellAttacked(board B, int x, int y, char T);
 boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int y);
 /* Menghasilkan true jika (x,y) memenuhi kondisi ke-'interator'.*/
 
-boolean isCheckmate(board B, int kingxpos, int kingypos, char T);
+boolean isCheckmate(board B, int kingxpos, int kingypos, char T, arr_possible_move disruptor);
 /* Menghasilkan true jika ada raja tim T berada dalam kondisi skakmat. */
 void generateThreatLane(board B, arr_check* C, piece attacker, piece king);
 /* I.S. B, C, attacker, dan king terdefinisi
  * F.S. C berisi koordinat posisi awal penyekak dan alamat kotak-kotak di antara
  * posisi awal penyekak dan raja yang sedang diserangnya. */
-boolean canDisrupt(board B, arr_check C, char T);
+boolean canDisrupt(arr_possible_move disruptor, board B, arr_check C);
 /* Menghasilkan true jika ada bidak tim T yang dapat berpindah atau makan ke salah satu alamat
  * di C */
 

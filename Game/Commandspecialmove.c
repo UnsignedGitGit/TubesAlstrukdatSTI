@@ -553,7 +553,7 @@ boolean isCellAttacked(board B, int x, int y, char T)
 	while (!hasAttacker(B, i, enemyteam, T, x, y)) {
 		i++;
 	}
-	return (i != 19);
+	return (i < 19);
 	
 }
 
@@ -569,54 +569,60 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan ratu atau benteng lawan di arah atas
 		cek = y + 1;
 		while(cek < 9){
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[x][cek].team != CharNil) {
 				break;
 			} else {
 				cek++;
 			}
 		}
 		return ((cek < 9) && 
-		(BoardCell(B)[x][y].team == enemyteam) && 
-		(PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y])));
+		(BoardCell(B)[x][cek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[x][cek]) || PieceIsRook(BoardCell(B)[x][cek])));
         break;
 
     case 2:
 		//Cek keberadaan ratu atau benteng lawan di arah kanan
 		cek = x + 1;
 		while(cek < 9) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[cek][y].team != CharNil) {
 				break;
 			} else {
 				cek++;
 			}
 		}
-        return (cek < 9) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y]));
+        return (cek < 9) && 
+		(BoardCell(B)[cek][y].team == enemyteam) &&
+		(PieceIsQueen(BoardCell(B)[cek][y]) || PieceIsRook(BoardCell(B)[cek][y]));
         break;
 
     case 3:
 		//Cek keberadaan ratu atau benteng lawan di arah bawah
 		cek = y - 1;
 		while(cek > 0) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[x][cek].team != CharNil) {
 				break;
 			} else {
 				cek--;
 			}
 		}
-        return (cek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y]));
+        return (cek > 0) &&
+		(BoardCell(B)[x][cek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[x][cek]) || PieceIsRook(BoardCell(B)[x][cek]));
         break;
 
     case 4:
 		//Cek keberadaan ratu atau benteng lawan di arah kiri
 		cek = x - 1;
 		while(cek > 0) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[cek][y].team != CharNil) {
 				break;
 			} else {
 				cek--;
 			}
 		}
-        return (cek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsRook(BoardCell(B)[x][y]));
+        return (cek > 0) && 
+		(BoardCell(B)[cek][y].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[cek][y]) || PieceIsRook(BoardCell(B)[cek][y]));
         break;
 
     case 5:
@@ -624,14 +630,16 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x + 1;
 		ycek = y + 1;
 		while (xcek < 9) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
 				break;
 			} else {
 				xcek++;
 				ycek++;
 			}
 		}
-        return (xcek < 9) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
+        return (xcek < 9) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]));
         break;
 
     case 6:
@@ -639,14 +647,16 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x + 1;
 		ycek = y - 1;
 		while (xcek < 9) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
 				break;
 			} else {
 				xcek++;
 				ycek--;
 			}
 		}
-        return (xcek < 9) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
+        return (xcek < 9) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]));
         break;
 
     case 7:
@@ -654,14 +664,16 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x - 1;
 		ycek = y - 1;
 		while (xcek > 0) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
 				break;
 			} else {
 				xcek--;
 				ycek--;
 			}
 		}
-        return (xcek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
+        return (xcek > 0) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]));
         break;
 
     case 8:
@@ -669,14 +681,16 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		xcek = x - 1;
 		ycek = y + 1;
 		while (xcek > 0) {
-			if (BoardCell(B)[x][y].team != CharNil) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
 				break;
 			} else {
 				xcek--;
 				ycek++;
 			}
 		}
-        return (xcek > 0) && (BoardCell(B)[x][y].team == enemyteam) && (PieceIsQueen(BoardCell(B)[x][y]) || PieceIsBishop(BoardCell(B)[x][y]));
+        return (xcek > 0) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]));
         break;
     
     case 9:
@@ -710,8 +724,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x+1,y-2)
         return (
 			(PieceIsValidMove(x+1, y-2)) &&
-			(BoardCell(B)[x+1][y+2].team == enemyteam) && 
-			(PieceIsKnight(BoardCell(B)[x+1][y+2]))
+			(BoardCell(B)[x+1][y-2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[x+1][y-2]))
         );
         break;
     
@@ -819,29 +833,33 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
     }
 }
 
-boolean isCheckmate(board B, int kingxpos, int kingypos, char T) {
-/* Menghasilkan true jika ada raja tim T berada dalam kondisi skakmat. */
+boolean isCheckmate(board B, int kingxpos, int kingypos, char T, arr_possible_move disruptor) {
+/* Menghasilkan true jika raja tim T berada dalam kondisi skakmat. */
 	arr_check threat;
-	boolean value;
+	boolean checkmate;
 
-	value = false;
+	checkmate = false;
 	
 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
-		if (isCellAttacked(B, kingxpos, kingypos+1, T) && 
-		isCellAttacked(B, kingxpos+1, kingypos+1, T) &&
-		isCellAttacked(B, kingxpos+1, kingypos, T) &&
-		isCellAttacked(B, kingxpos+1, kingypos-1, T) &&
-		isCellAttacked(B, kingxpos, kingypos-1, T) &&
-		isCellAttacked(B, kingxpos-1, kingypos-1, T) &&
-		isCellAttacked(B, kingxpos-1, kingypos, T) &&
-		isCellAttacked(B, kingxpos-1, kingypos+1, T)) {
-			if (!canDisrupt(B, threat, T)) {
-				value = true;
+
+		if ((!PieceIsValidMove(kingxpos, kingypos+1)) || (BoardCell(B)[kingxpos][kingypos+1].team == T) || (isCellAttacked(B, kingxpos, kingypos+1, T)) && 
+		((!PieceIsValidMove(kingxpos+1, kingypos+1)) || (BoardCell(B)[kingxpos+1][kingypos+1].team == T) || (isCellAttacked(B, kingxpos+1, kingypos+1, T))) &&
+		((!PieceIsValidMove(kingxpos+1, kingypos)) || (BoardCell(B)[kingxpos+1][kingypos].team == T) || (isCellAttacked(B, kingxpos+1, kingypos, T))) &&
+		((!PieceIsValidMove(kingxpos+1, kingypos-1)) || (BoardCell(B)[kingxpos+1][kingypos-1].team == T) || (isCellAttacked(B, kingxpos+1, kingypos-1, T))) &&
+		((!PieceIsValidMove(kingxpos, kingypos-1)) || (BoardCell(B)[kingxpos][kingypos-1].team == T) || (isCellAttacked(B, kingxpos, kingypos-1, T))) &&
+		((!PieceIsValidMove(kingxpos-1, kingypos-1)) || (BoardCell(B)[kingxpos-1][kingypos-1].team == T) || (isCellAttacked(B, kingxpos-1, kingypos-1, T))) &&
+		((!PieceIsValidMove(kingxpos-1, kingypos)) || (BoardCell(B)[kingxpos-1][kingypos].team == T) || (isCellAttacked(B, kingxpos-1, kingypos, T))) &&
+		((!PieceIsValidMove(kingxpos-1, kingypos+1)) || (BoardCell(B)[kingxpos-1][kingypos+1].team == T) || (isCellAttacked(B, kingxpos-1, kingypos+1, T)))) {
+			
+			if (!canDisrupt(disruptor, B, threat)) {
+				checkmate = true;
 			}
+		
 		}
+	
 	}
 
-	return value;
+	return checkmate;
 }
 
 void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
@@ -980,23 +998,78 @@ void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
 	}
 }
 
-boolean canDisrupt(board B, arr_check C, char T) {
+
+boolean canDisrupt(arr_possible_move disruptor, board B, arr_check C) {
 /* Menghasilkan true jika ada bidak tim T yang dapat berpindah atau makan ke salah satu alamat
  * di C */
-	int i;
-	char enemyteam;
+	/*KAMUS*/
+	int i, j, k;
+	address a;
+	boolean stop;
+	piece targetcopy, selfcopy;
+
+	/*ALGORITMA*/
+	 for (i=1; i<= 16; i++) {
+        DelList(&(disruptor.arr[i].possmove));
+    }
+
+    generate_valid_move(&(disruptor), B);
 
 
-	if (T == 'B') {
-		enemyteam = 'W';
-	} else {
-		enemyteam = 'B';
-	}
-
+	stop = false;
 	i = 1;
-	while ((i < C.neff) && (!isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam))) {
+	while ((i<=16) && (!stop)) {
+
+		a = disruptor.arr[i].possmove.First;
+		
+		while (a != NULL) {
+
+			/*Mencari elemen list-of-possible-move di array C.*/
+			k = 1;
+			while ((k < C.neff) && ((*a).info.x != C.arrcheck[k].x) && ((*a).info.y != C.arrcheck[k].y)) {
+				k++;
+			}
+
+			/*Jika elemen list-of-possible-move ada di C.*/
+			if (((*a).info.x == C.arrcheck[k].x) && ((*a).info.y == C.arrcheck[k].y)) {
+				
+				/*Buat salinan target bidak (baik kosong maupun ada lawan) dan bidak yang berpindah.*/
+				targetcopy = BoardCell(B)[C.arrcheck[k].x][C.arrcheck[k].y];
+				selfcopy = BoardCell(B)[disruptor.arr[i].p.xpos][disruptor.arr[i].p.ypos];
+
+				/*Pindahkan bidak*/
+				BoardPieceMove(&disruptor.arr[i].p, &B, C.arrcheck[k].x, C.arrcheck[k].y);
+
+				/*Mencari posisi (index) raja di array-of-possible-move.*/
+				j = 1;
+				while (disruptor.arr[j].p.type != 'K') {
+                	j++;
+            	}
+
+				/*Jika posisi raja menjadi tidak terserang, keluar dari loop "a" dan keluar dari loop "stop". Fungsi mengembalikan true.*/
+				if (!isCellAttacked(B, disruptor.arr[j].p.xpos, disruptor.arr[j].p.ypos, disruptor.arr[j].p.team)) {
+					a = NULL;
+					stop = true;
+				} else {
+					/*Jika posisi raja tetap terserang setelah pemindahan bidak tadi,
+					bidak yang bergerak dikembalikan ke posisi semula, bidak kosong atau lawan
+					ditempatkan kembali di alamat tujuan pemindahan bidak.*/
+					BoardPieceMove(&disruptor.arr[i].p, &B, selfcopy.xpos, selfcopy.ypos);
+					BoardCell(B)[targetcopy.xpos][targetcopy.ypos] = targetcopy;
+
+					/*Lanjut ke elemen selanjutnya dari list.*/
+					a = Next(a);
+				}
+
+			/*Jika elemen list-of-possible-move tidak ada di C, lanjut ke elemen selanjutnya dari list.*/	
+			} else {
+				a = Next(a);
+			}
+		} /*Kondisi keluar: skakmat tercapai atau tidak ada satupun elemen list yang sesuai.*/
+
+		/*Lanjut ke elemen selanjutnya dari array disruptor.*/
 		i++;
 	}
 
-	return (isCellAttacked(B, C.arrcheck[i].x, C.arrcheck[i].y, enemyteam));
+	return (stop);
 }
