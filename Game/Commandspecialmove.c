@@ -3,7 +3,7 @@
 #include <stdio.h>
 
 /*IMPLEMENTASI*/
-void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T)
+void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, boolean* done)
 /* I.S. player, enemy, S, B, dan T terdefinisi. */
 /* F.S. Special move pilihan pemain dilakukan. Gerakan dilakukan di B dan dicatat di S */
 {	
@@ -61,11 +61,18 @@ void special_move(arr_possible_move* white, arr_possible_move* black, board* B, 
 			choice.T[i] = 'R';
 			choice.Neff++;
 			i++;
+		}
 
 		printf("Pilih gerakan khusus yang ingin dilakukan:");
 		scanf("%d\n", &i);
 
-		if (choice.T[i] == 'F')
+		while ((i!='F') || (i!='N') || (i!='L') || (i!='R')) {
+			printf("Masukkan salah. Pilihan masukkan: 'F' untuk far castling, 'N' untuk near castling, 'L' untuk en passant kiri, 'R' untuk en passant kanan\n");
+			printf("Pilih gerakan khusus yang ingin dilakukan:");
+			scanf("%d\n", &i);
+		}
+
+		if (choice.T[i] == 'F') {
 			DoCastling(white, black, B, S, 'F', T);
 		} else if (choice.T[i] == 'N') {
 			DoCastling(white, black, B, S, 'N', T);
@@ -74,6 +81,9 @@ void special_move(arr_possible_move* white, arr_possible_move* black, board* B, 
 		} else {
 			DoEnpassant(white, black, B, S, T, p2);
 		}
+
+		*done = true;
+
 	} else {
 		printf("Tidak ada gerakan khusus yang bisa dilakukan.\n");
 	}
