@@ -162,10 +162,27 @@ void play(Stack* S) {
 
         currentteam = get_turn(&turn);
 
-
-        /*Cek pemain tim "currentteam" sedang ter-skakmat atau tidak.*/
+        /*Cek raja tim "currentteam" sudah termakan di giliran sebelumnya atau tidak. Jika iya, game berakhir.*/
         i = 1;
+        if (currentteam == 'W') {
+            while (white.arr[i].p.type != 'K') {
+                i++;
+            }
+            if (white.arr[i].p.isdead == true) {
+                break;
+            }
+        } else {
+            while (black.arr[i].p.type != 'k') {
+                i++;
+            }
+             if (black.arr[i].p.isdead == true) {
+                break;
+            }
+        }
+
+        /*Cek pemain tim "currentteam" sedang ter-skakmat atau tidak. Jika iya, game berakhir.*/
         if (turncounter >= 3) {
+            i = 1;
             if (currentteam == 'W') {
                 while (white.arr[i].p.type != 'K') {
                     i++;

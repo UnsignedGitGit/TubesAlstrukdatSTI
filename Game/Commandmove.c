@@ -64,6 +64,10 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     xt =  (*S).T[(*S).TOP].xt;
     yt = (*S).T[(*S).TOP].yt;
 
+    if ((*S).T[(*S).TOP].specialmove == 'P') {
+        printf("Bidak Pion telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
+        printf("Pion telah dipromosikan.\n");
+    } else {
     if (PieceIsPawn(PP)) {
         printf("Bidak Pion telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     } else if (PieceIsRook(PP)) {
@@ -77,6 +81,9 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     } else {
         printf("Bidak Raja telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
     }
+    }
+
+  
 }
 
 void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board* B, Stack* S, int choicenb, List* L)
@@ -118,12 +125,19 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
     /*Promosi*/
     if ((*P).team == 'W') {
         if (((*P).type == 'P') && (ytarget == 8)) {
-            printf("Silahkan Pilih tipe bidak promosi !\n");
-            printf("1.Ratu\n");
-            printf("2.Benteng\n");
-            printf("3.Kuda\n");
-            printf("4.Bishop\n");
-            scanf("Pilihan anda : %d", &promotechoice);
+            printf("Silahkan pilih tipe bidak promosi !\n");
+            printf("1. Ratu\n");
+            printf("2. Benteng\n");
+            printf("3. Kuda\n");
+            printf("4. Bishop\n");
+            printf("Pilihan Anda: ");
+            scanf("%d", &promotechoice);
+
+            while ((promotechoice!=1) && (promotechoice!=2) && (promotechoice!=3) && (promotechoice!=4)) {
+                printf("Masukkan salah. Pilihan masukkan: '1'/'2'/'3'/'4'\n");
+                printf("Pilihan Anda: ");
+                scanf("%d", &promotechoice);
+            }
 
             if (promotechoice == 1){
                 (*P).type = 'Q';
@@ -142,12 +156,18 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
         }
     } else {
         if (((*P).type == 'p') && (ytarget == 1)) {
-            printf("Silahkan Pilih tipe bidak promosi !\n");
-            printf("1.Ratu\n");
-            printf("2.Benteng\n");
-            printf("3.Kuda\n");
-            printf("4.Bishop\n");
-            scanf("Pilihan anda : %d",&promotechoice);
+            printf("Silahkan pilih tipe bidak promosi !\n");
+            printf("1. Ratu\n");
+            printf("2. Benteng\n");
+            printf("3. Kuda\n");
+            printf("Pilihan Anda: ");
+            scanf("%d", &promotechoice);
+
+            while ((promotechoice!=1) && (promotechoice!=2) && (promotechoice!=3) && (promotechoice!=4)) {
+                printf("Masukkan salah. Pilihan masukkan: '1'/'2'/'3'/'4'\n");
+                printf("Pilihan Anda: ");
+                scanf("%d", &promotechoice);
+            }
 
             if (promotechoice == 1){
                 (*P).type = 'q';
@@ -303,13 +323,17 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
 
 	if (T == 'W') { 
         if (P.hasmoved) {
-		    addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
-	    } else {
-		    addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
-		    if (BoardCell(B)[P.xpos][P.ypos+2].type == Charnil){
-		    	addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+            if (BoardCell(B)[P.xpos][P.ypos+1].type == CharNil){
+		    	addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
 		    }
-		    
+	    } else {
+            if (BoardCell(B)[P.xpos][P.ypos+1].type == CharNil){
+		    	addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
+
+                 if (BoardCell(B)[P.xpos][P.ypos+2].type == CharNil){
+		    	    addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+		        }
+		    }
 	    }
 	
         /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
@@ -334,13 +358,17 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
 
     } else {
         if (P.hasmoved) {
-		    addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
-	    } else {
-		    addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
-		if (BoardCell(B)[P.xpos][P.ypos-2].type == Charnil){
-		    	addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+            if (BoardCell(B)[P.xpos][P.ypos-1].type == CharNil){
+		    	addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
 		    }
-		    
+	    } else {
+            if (BoardCell(B)[P.xpos][P.ypos-1].type == CharNil){
+		    	addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
+                if (BoardCell(B)[P.xpos][P.ypos-2].type == CharNil){
+		    	    addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+		        }
+		    }
+		   
 	    }
 	
         /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
