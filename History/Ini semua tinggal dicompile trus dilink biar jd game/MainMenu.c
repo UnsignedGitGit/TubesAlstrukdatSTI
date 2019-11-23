@@ -40,7 +40,7 @@ int main(){
         printf (".");
         delay (8);
         */   
-        system("cls");
+        
 system("clear");    
         printf("                                                           \n");
         printf("                 `      :                                  \n");                               
@@ -64,7 +64,7 @@ system("clear");
         printf("       C  H  E  S  S    M  U  L  T  I  P  L  A  Y  E  R    \n\n");
         printf("Loading complete. Press enter to continue. \n");
         getchar();
-    system("cls");
+    
 system("clear");
     
     CreateEmptyStack(&movehistory);
@@ -98,7 +98,7 @@ void welcome(){
     printf("                         s.   o s                          \n");
     printf("                                       `:`                 \n");
     printf("                                                           \n");  
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     printf("                                                           \n");
@@ -119,7 +119,7 @@ system("clear");
     printf("                       s. os                               \n");
     printf("                                    `:`                    \n");
     printf("                                                           \n");  
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     printf("                                                           \n");
@@ -141,7 +141,7 @@ system("clear");
     printf("                                   `:`                     \n");
     printf("                                                           \n");  
     printf("                             W  E  L                       \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     printf("                                                           \n");
@@ -163,7 +163,7 @@ system("clear");
     printf("                                  `:`                      \n");
     printf("                                                           \n");  
     printf("                      W  E  L  C  O  M  E                  \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
 
@@ -186,7 +186,7 @@ system("clear");
     printf("                                `:`                        \n");
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E                       \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     
@@ -209,7 +209,7 @@ system("clear");
     printf("                              `:`                          \n");
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E    T  O               \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
 
@@ -233,7 +233,7 @@ system("clear");
     printf("                                                           \n");  
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("                                                           \n\n");    
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
 
@@ -257,7 +257,7 @@ system("clear");
     printf("                                                           \n");   
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("                        C  H  E                            \n\n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
 
@@ -281,7 +281,7 @@ system("clear");
     printf("                                                           \n");                              
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("                        C  H  E  S  S                      \n\n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
 
@@ -305,7 +305,7 @@ system("clear");
     printf("                                                            \n");                              
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("               C  H  E  S  S    M  U  L                   \n\n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     printf("                                                           \n");
@@ -328,7 +328,7 @@ system("clear");
     printf("                                                            \n");                              
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("               C  H  E  S  S    M  U  L  T  I             \n\n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     printf("                                                           \n");
@@ -351,7 +351,7 @@ system("clear");
     printf("                                                            \n");                              
     printf("                 W  E  L  C  O  M  E    T  O               \n");
     printf("       C  H  E  S  S    M  U  L  T  I  P  L  A            \n\n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -404,7 +404,7 @@ void readmain(boolean* g, Stack* S) {
     printf("Enter your command: ");
     scanf("%c", &pil);
     if (pil=='N'){
-        system("cls");
+        
 system("clear");
         play(S);
     }else if (pil=='L'){
@@ -412,7 +412,7 @@ system("clear");
         //jalankan fungsi load
     }else if (pil=='B'){
         //jalankan fungsi print leaderboard
-        system("cls");
+        
 system("clear");
         //printleaderboard();
     }else if (pil=='E'){
@@ -452,7 +452,7 @@ void load(boolean* g, Stack* S){
     delay(5);
     printf(".");
     delay(15);
-    system("cls");
+    
 system("clear");
     play(S);
 }
@@ -568,7 +568,7 @@ void eksit(){
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
     printf("                                                            \n"); 
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -588,7 +588,7 @@ system("clear");
     printf("                   .-+ossoss/.  ./sssoso/-.``              \n");
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
     
     printf("                                                           \n");
@@ -608,7 +608,7 @@ system("clear");
     printf("                   .-+ossoss/.  ./sssoso/-.``              \n");
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -628,7 +628,7 @@ system("clear");
     printf("                   .-+ossoss/.  ./sssoso/-.`               \n");
     printf("                   +ssssssssss. osssssssso/-               \n");
     printf("                   ://////////.`://////////.               \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -648,7 +648,7 @@ system("clear");
     printf("                       soss/.. ./sssos/-.                  \n");
     printf("                        ssssss. osssssss                   \n");
     printf("                         /////.`://///                     \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -668,7 +668,7 @@ system("clear");
     printf("                         ss/.. ./sssos/-                   \n");
     printf("                          ssss. ossssss                    \n");
     printf("                            //.`:////                      \n");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -689,7 +689,7 @@ system("clear");
     printf("                           sss. ossss                      \n");
     printf("                              .`://                        \n");
     printf ("                   B        y        e        !             ");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -710,7 +710,7 @@ system("clear");
     printf("                             s. os                         \n");
     printf("                              `:`                          \n");
     printf ("                    B      y      e      !                  ");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -731,7 +731,7 @@ system("clear");
     printf("                           s. os                           \n");
     printf("                                `:`                        \n");
     printf ("                      B    y    e    !                      ");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -752,7 +752,7 @@ system("clear");
     printf("                         s. os                             \n");
     printf("                                  `:`                      \n");
     printf ("                       B   y   e   !                        ");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -774,7 +774,7 @@ system("clear");
     printf("                                   `:`                     \n");
     printf("                                                           \n");  
     printf ("                        B  y  e  !                          ");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
 
     printf("                                                           \n");
@@ -796,7 +796,7 @@ system("clear");
     printf("                                    `:`                    \n");
     printf("                                                           \n");  
     printf ("                           B y e !                          ");
-    delay(2); system("cls");
+    delay(2); 
 system("clear");
      
     printf("                                                           \n");
@@ -818,6 +818,6 @@ system("clear");
     printf("                                       `:`                 \n");
     printf("                                                           \n");  
     printf ("                            Bye!                            ");
-    delay(8); system("cls");
+    delay(8); 
 system("clear");
 }
