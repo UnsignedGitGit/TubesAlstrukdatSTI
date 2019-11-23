@@ -63,13 +63,13 @@ void special_move(arr_possible_move* white, arr_possible_move* black, board* B, 
 			i++;
 		}
 
-		printf("Pilih gerakan khusus yang ingin dilakukan:");
-		scanf("%d\n", &i);
+		printf("Pilih gerakan khusus yang ingin dilakukan: ");
+		scanf("%d", &i);
 
-		while ((i!='F') || (i!='N') || (i!='L') || (i!='R')) {
-			printf("Masukkan salah. Pilihan masukkan: 'F' untuk far castling, 'N' untuk near castling, 'L' untuk en passant kiri, 'R' untuk en passant kanan\n");
-			printf("Pilih gerakan khusus yang ingin dilakukan:");
-			scanf("%d\n", &i);
+		while ((i > choice.Neff) || (i < 1)) {
+			printf("Masukkan salah. Masukkan angka (1/2/3/4) yang terdapat pada pilihan.\n");
+			printf("Pilih gerakan khusus yang ingin dilakukan: ");
+			scanf("%d", &i);
 		}
 
 		if (choice.T[i] == 'F') {
@@ -453,7 +453,7 @@ boolean canNearCastling(board B, char T)
 		}
 	} else {
 		if ((PieceIsKing(BoardCell(B)[5][8])) && (BoardCell(B)[5][8].team == 'B') && (!BoardCell(B)[5][8].hasmoved)) {
-			if ((PieceIsRook(BoardCell(B)[8][8])) && (BoardCell(B)[8][1].team == 'B') && (!BoardCell(B)[8][8].hasmoved)) {
+			if ((PieceIsRook(BoardCell(B)[8][8])) && (BoardCell(B)[8][8].team == 'B') && (!BoardCell(B)[8][8].hasmoved)) {
 				if (isRightEmpty(B, BoardCell(B)[5][8])) {
 					return (
 					(!isCellAttacked(B, 5, 8, T)) &&
@@ -482,7 +482,7 @@ boolean canFarCastling(board B, char T)
 	if (T == 'W') {
 		if ((PieceIsKing(BoardCell(B)[5][1])) && (BoardCell(B)[5][1].team == 'W') && (!BoardCell(B)[5][1].hasmoved)) {
 			if ((PieceIsRook(BoardCell(B)[1][1])) && (BoardCell(B)[1][1].team == 'W') && (!BoardCell(B)[1][1].hasmoved)) {
-				if (isRightEmpty(B, BoardCell(B)[5][1])) {
+				if (isLeftEmpty(B, BoardCell(B)[5][1])) {
 					return (
 					(!isCellAttacked(B, 5, 1, T)) &&
 					(!isCellAttacked(B, 4, 1, T)) &&
@@ -500,7 +500,7 @@ boolean canFarCastling(board B, char T)
 	} else {
 		if ((PieceIsKing(BoardCell(B)[5][8])) && (BoardCell(B)[5][8].team == 'B') && (!BoardCell(B)[5][8].hasmoved)) {
 			if ((PieceIsRook(BoardCell(B)[1][8])) && (BoardCell(B)[1][8].team == 'B') && (!BoardCell(B)[1][8].hasmoved)) {
-				if (isRightEmpty(B, BoardCell(B)[5][8])) {
+				if (isLeftEmpty(B, BoardCell(B)[5][8])) {
 					return (
 					(!isCellAttacked(B, 5, 8, T)) &&
 					(!isCellAttacked(B, 4, 8, T)) &&

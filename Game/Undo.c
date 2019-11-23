@@ -15,7 +15,6 @@ void UndoBoardPieceMove(arr_possible_move* white, arr_possible_move* black, piec
 	
 	//ALGORITMA
 	BoardCell(*B)[X.x0][X.y0] = *P;
-	printf("%c\n", BoardCell(*B)[X.x0][X.y0].type);
 
 	if (X.targettype == CharNil) // Jika gerakan yang dicatat X adalah gerakan pindah tanpa memakan
 	{
