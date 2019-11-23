@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include "leaderboard.h"
 
-void printleaderboard(leaderboards L);
+
 
 /*
 leaderboards L;
@@ -21,20 +21,20 @@ int main (){
 }
 */
 
-void printleaderboard(leaderboards L){
+void printleaderboard(leaderboards l){
 
     printf("===================================== \n");
     printf("         CURRENT LEADERBOARDS         \n");
     printf("===================================== \n");
     printf("  No. | Name           | Score       \n");
     printf("-------------------------------------\n");
-    if (L.neff==0){  // kalau kosong ini yang di print
+    if (l.neff==0){  // kalau kosong ini yang di print
         printf("          LEADERBOARD EMPTY          \n");
         printf(" ------------------------------------\n");
     }else{
-        for (int i=1;i<=L.neff;i++){
+        for (int i=1;i<=l.neff;i++){
         printf("  %d   | %c              | %d        \n",
-            L.info[i].pos, L.info[i].name, L.info[i].score);
+            l.info[i].pos, l.info[i].name, l.info[i].score);
         printf("-------------------------------------\n");
         }
     }  
