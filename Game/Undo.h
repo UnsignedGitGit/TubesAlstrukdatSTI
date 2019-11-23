@@ -13,4 +13,5 @@ void UndoBoardPieceMove(arr_possible_move* white, arr_possible_move* black, piec
 
 void UndoEnpassan (arr_possible_move* white, arr_possible_move* black, piece *P,  board *B, Sinfotype X);
 
+boolean UndoHasMoved(Stack S,piece P);
 #endif
