@@ -1,7 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include "boolean.h"
 #include "commandmove.h"
-#include "commandmove.h"
+
 
 /*IMPLEMENTASI*/
 void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* enemy, board* B) {
@@ -15,7 +16,8 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
         DelList(&(*player).arr[i].possmove);
     }
 
-    generate_valid_move(player, *B); // Traversal mengakses satu-satu bidak di arr_possible_move
+    generate_valid_move(&(*player), *B); // Traversal mengakses satu-satu bidak di arr_possible_move
+    
 
     // Mengcopy bidak yang bisa bergerak ke array of choice
     Pilihan.neff = 0;
@@ -38,7 +40,7 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
 
     while((l > Pilihan.neff) || (l < 1)) {
         printf("Masukkan salah.\n");
-        printf("Pilih bidak yang ingin digerakan: ");
+        printf("Pilih bidak yang ingin digerakan: \n");
         scanf("%d", &l);
     }
 
@@ -53,7 +55,7 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
     
     while((k > NbElmtList((*player).arr[i].possmove)) || (k < 1)) {
         printf("Masukkan salah.\n");
-        printf("Pilih posisi tujuan bidak: ");
+        printf("Pilih posisi tujuan bidak:\n ");
         scanf("%d", &k);
     }
 
@@ -190,7 +192,7 @@ void generate_valid_move(arr_possible_move *T, board B){
 
 	//ALGORITMA
     for (i=1;i<17;i++){
-        if ((*T).arr[i].p.isdead == false){
+        if ((*T).arr[i].p.isdead != true){
             if (((*T).arr[i].p.type == 'K') || ((*T).arr[i].p.type == 'k')){
                 king(T, (*T).arr[i].p, B, (*T).arr[i].p.team);
             }
@@ -237,7 +239,7 @@ void show_movable_piece(piece_choice pc) {
         printf("    %d. Menteri (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
         else if((pc.arrpiece[i].type == 'R') || (pc.arrpiece[i].type == 'r')){
-        printf("    %d. Benteng (%c,%c)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
+        printf("    %d. Benteng (%c,%d)\n",i,translatex(pc.arrpiece[i].xpos),pc.arrpiece[i].ypos);
         }
     }
 }
@@ -302,11 +304,16 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
 	i = findPieceIdx(*M, P);
 
 	if (T == 'W') { 
-        if (P.hasmoved) {
+        if (P.hasmoved == true) {
 		    addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
 	    } else {
 		    addValidCoor(M, i, P.xpos, P.ypos+1, B, T);
-		    addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+            if (BoardCell(B)[P.xpos][P.ypos+2].type == CharNil){
+                addValidCoor(M, i, P.xpos, P.ypos+2, B, T);
+            }
+		    else{
+
+            }
 	    }
 	
         /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 
@@ -330,11 +337,16 @@ void pawn(arr_possible_move* M, piece P, board B, char T)
         }
 
     } else {
-        if (P.hasmoved) {
+        if (P.hasmoved == true) {
 		    addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
 	    } else {
 		    addValidCoor(M, i, P.xpos, P.ypos-1, B, T);
-		    addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+		    if (BoardCell(B)[P.xpos][P.ypos-2].type == CharNil){
+                addValidCoor(M, i, P.xpos, P.ypos-2, B, T);
+            }
+		    else{
+                
+            }
 	    }
 	
         /* Mengecek alamat kotak di depan kiri dan depan kanan. Jika ada 

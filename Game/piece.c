@@ -247,6 +247,12 @@ void PiecePrintInfo(piece P)
     printf("Team: %c\n", PieceTeam(P));
     printf("XPos: %d\n", PiecePosX(P));
     printf("YPos: %d\n", PiecePosY(P));
+    if (PieceIsDead(P) == true){
+        printf("Isdead: True\n");
+    }
+    else{
+        printf("Isdead: False\n");
+    }
 }
 
 
