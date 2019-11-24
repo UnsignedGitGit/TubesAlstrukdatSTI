@@ -159,10 +159,14 @@ void play(Stack* S) {
 	turncounter = 1;
     while (turncounter <= 100) {
 
+        BoardPrintInfo(B);
         currentteam = get_turn(&turn);
         
         gamelog(turncounter, currentteam);
         BoardPrintInfo(B);
+
+        printf("%d\n",turncounter);
+        printf("%c\n",currentteam);
 
         /*Cek raja tim "currentteam" sudah termakan di giliran sebelumnya atau tidak. Jika iya, game berakhir.*/
         i = 1;
