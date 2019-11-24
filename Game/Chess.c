@@ -297,10 +297,10 @@ void play(Stack* S, boolean* checkmate) {
 }
 
 void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
-    int dummy,sum;
+    int dummy;
     Sinfotype x;
 
-    if (checkmate) {	
+    if (checkmate){	
         dummy = 20;
         Pop(&S, &x);
         if (x.turn == 'W') {
@@ -332,7 +332,7 @@ void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
                 (*scorewhite) += 10;
             }
             
-        } else {
+        } else if(x.turn == 'B') {
             if(x.targettype ='P'){
                 (*scoreblack) += 1;
             }
