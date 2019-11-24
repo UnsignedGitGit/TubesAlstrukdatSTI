@@ -1,4 +1,36 @@
-// SKAKMAT //
+// PROMOSI ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+5
+2
+MOVE
+4
+2
+MOVE
+6
+2
+MOVE
+1
+2
+MOVE
+6
+1
+MOVE
+11
+1
+MOVE
+6
+1
+MOVE
+12
+1
+MOVE
+6
+1
+1
+
+// SKAKMAT ////////////////////////////////////////////////////////////////////////////
 
 N
 MOVE
@@ -14,7 +46,34 @@ MOVE
 2
 4
 
+<<<<<<< HEAD
 // WHITE NEAR CASTLING //
+=======
+// SKAKMAT 2 ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+1
+1
+MOVE
+5
+2
+MOVE
+10
+1
+MOVE
+2
+3
+MOVE
+11
+1
+MOVE
+2
+6
+
+
+// WHITE NEAR FAR CASTLING ////////////////////////////////////////////////////////////////////////////
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
 
 N
 MOVE
@@ -24,7 +83,65 @@ MOVE
 1
 1
 MOVE
+<<<<<<< HEAD
 10
+=======
+9
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
+2
+MOVE
+1
+1
+MOVE
+2
+2
+MOVE
+1
+1
+<<<<<<< HEAD
+SPECIAL_MOVE
+1
+
+// WHITE FAR CASTLING //
+=======
+MOVE
+9
+2
+MOVE
+1
+1
+MOVE
+3
+2
+MOVE
+1
+1
+MOVE
+2
+4
+MOVE
+1
+1
+MOVE
+1
+2
+MOVE
+1
+1
+SPECIAL_MOVE
+1
+
+// WHITE NEAR CASTLING ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+2
+1
+MOVE
+1
+1
+MOVE
+9
 2
 MOVE
 1
@@ -38,7 +155,8 @@ MOVE
 SPECIAL_MOVE
 1
 
-// WHITE FAR CASTLING //
+// WHITE FAR CASTLING ////////////////////////////////////////////////////////////////////////////
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
 
 N
 MOVE
@@ -68,7 +186,62 @@ MOVE
 SPECIAL_MOVE
 1
 
+<<<<<<< HEAD
 // BLACK NEAR CASTLING //
+=======
+// BLACK NEAR FAR CASTLING ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+1
+1
+MOVE
+7
+2
+MOVE
+1
+1
+MOVE
+4
+5
+MOVE
+1
+1
+MOVE
+5
+1
+MOVE
+1
+1
+MOVE
+10
+2
+MOVE
+1
+1
+MOVE
+3
+2
+MOVE
+1
+1
+MOVE
+2
+4
+MOVE
+1
+1
+MOVE
+1
+3
+MOVE
+1
+1
+SPECIAL_MOVE
+1
+
+// BLACK NEAR CASTLING ////////////////////////////////////////////////////////////////////////////
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
 
 N
 MOVE
@@ -95,7 +268,11 @@ MOVE
 SPECIAL_MOVE
 1
 
+<<<<<<< HEAD
 // BLACK FAR CASTLING //
+=======
+// BLACK FAR CASTLING ////////////////////////////////////////////////////////////////////////////
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
 
 N
 MOVE
@@ -128,7 +305,11 @@ MOVE
 SPECIAL_MOVE
 1
 
+<<<<<<< HEAD
 //WHITE RIGHT EN PASSANT
+=======
+//WHITE RIGHT EN PASSANT ////////////////////////////////////////////////////////////////////////////
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
 
 N
 MOVE
@@ -146,7 +327,11 @@ MOVE
 SPECIAL_MOVE
 1
 
+<<<<<<< HEAD
 //WHITE LEFT EN PASSANT
+=======
+//WHITE LEFT EN PASSANT ////////////////////////////////////////////////////////////////////////////
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
 
 N
 MOVE
@@ -162,4 +347,114 @@ MOVE
 5
 2
 SPECIAL_MOVE
+<<<<<<< HEAD
 1
+=======
+1
+
+//BLACK RIGHT EN PASSANT ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+10
+2
+MOVE
+3
+2
+MOVE
+11
+1
+MOVE
+4
+1
+MOVE
+5
+2
+SPECIAL_MOVE
+1
+
+//BLACK LEFT EN PASSANT ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+3
+2
+MOVE
+10
+2
+MOVE
+4
+1
+MOVE
+11
+1
+MOVE
+10
+2
+SPECIAL_MOVE
+1
+
+//WHITE LEFT RIGHT EN PASSANT ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+5
+2
+MOVE
+1
+1
+MOVE
+8
+2
+MOVE
+1
+1
+MOVE
+8
+1
+MOVE
+1
+1
+MOVE
+10
+1
+MOVE
+7
+2
+SPECIAL_MOVE
+1
+ 
+//BLACK LEFT RIGHT EN PASSANT ////////////////////////////////////////////////////////////////////////////
+
+N
+MOVE
+1
+1
+MOVE
+5
+2
+MOVE
+1
+1
+MOVE
+8
+2
+MOVE
+1
+1
+MOVE
+8
+1
+MOVE
+1
+1
+MOVE
+10
+1
+MOVE
+7
+2
+SPECIAL_MOVE
+1
+
+>>>>>>> 81a1547a925eb24c0e63e2b4661b96987a052252
