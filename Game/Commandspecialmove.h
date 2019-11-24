@@ -68,5 +68,7 @@ void generateThreatLane(board B, arr_check* C, piece attacker, piece king);
 boolean canDisrupt(arr_possible_move disruptor, board B, arr_check C);
 /* Menghasilkan true jika ada bidak tim T yang dapat berpindah atau makan ke salah satu alamat
  * di C */
-
+void findAttackerPosition(board B, char team, int xattacked, int yattacked, int* xattacker, int* yattacker);
+/* I.S. B, enemyteam, team, xattacked, yattacked terdefinisi. xattacker dan yattacker sembarang.
+ * F.S. xattacker dan yattacker terdefinisi.*/
 #endif
