@@ -16,10 +16,10 @@ void welcome(); //animasi singkat
 void initiate(); //inisialisasi semua
 void mainscreen(); //UI main menu
 void plyrname(); //input nama pemain
-void readmain(boolean* g, Stack *S, int* score1, int* score2, char *team1, char *team2); //input user memilih new game, load game, leaderboard, atau exit
+void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
 void play(Stack* S, boolean* checkmate); //main game
-void countscore(Stack S, int* score1, int* score2, boolean checkmate);
+void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate);
 void gamelog(int tc, char ct); //tc untuk turncounter, ct untuk current team
 void gameover();
 void eksit();
@@ -83,7 +83,7 @@ int main(){
 }
 
 
-void readmain(boolean* g, Stack* S, int* score1, int* score2, char * team1, char *team2) {
+void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2) {
     /*KAMUS*/
     char pil;
     boolean lastgame_checkmate;
@@ -102,10 +102,9 @@ void readmain(boolean* g, Stack* S, int* score1, int* score2, char * team1, char
 
         system("cls");
         play(S, &lastgame_checkmate);        
-        countscore(*S, score1, score2, lastgame_checkmate);
+        countscore(*S, scorewhite, scoreblack, lastgame_checkmate);
+        printf(" %s %d %s %d\n", team1, (*scorewhite), team2, (*scoreblack));
 
-        printf(" %s %d %s %d", team1, score1, team2, score2);
-        
     } else if (pil=='B'){
         
         system("cls");
@@ -120,7 +119,7 @@ void readmain(boolean* g, Stack* S, int* score1, int* score2, char * team1, char
     } else {
 
         printf("Please input the correct command.\n");
-        readmain(g, S, score1,score2, team1, team2);
+        readmain(g, S, scorewhite,scoreblack, team1, team2);
     }
 }
 
@@ -297,7 +296,7 @@ void play(Stack* S, boolean* checkmate) {
     gameover();
 }
 
-void countscore(Stack S, int* score1, int* score2, boolean checkmate) {
+void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
     int dummy,sum;
     Sinfotype x;
 
@@ -305,9 +304,9 @@ void countscore(Stack S, int* score1, int* score2, boolean checkmate) {
         dummy = 20;
         Pop(&S, &x);
         if (x.turn == 'W') {
-           (*score1) += dummy;
+           (*scorewhite) += dummy;
         } else {
-            (*score1) += dummy;
+            (*scorewhite) += dummy;
         }
     } 
     
@@ -315,42 +314,42 @@ void countscore(Stack S, int* score1, int* score2, boolean checkmate) {
         Pop(&S, &x);
         if (x.turn == 'W') {
             if(x.targettype ='p'){
-                (*score1) += 1;
+                (*scorewhite) += 1;
             }
             else if(x.targettype ='h'){
-                (*score1) += 2;
+                (*scorewhite) += 2;
             }
             else if(x.targettype ='r'){
-                (*score1) += 4;
+                (*scorewhite) += 4;
             }
             else if(x.targettype ='b'){
-                (*score1) += 4;
+                (*scorewhite) += 4;
             }
             else if(x.targettype ='q'){
-                (*score1) += 8;
+                (*scorewhite) += 8;
             }
             else if(x.targettype ='k'){
-                (*score1) += 10;
+                (*scorewhite) += 10;
             }
             
         } else {
             if(x.targettype ='P'){
-                (*score2) += 1;
+                (*scoreblack) += 1;
             }
             else if(x.targettype ='H'){
-                (*score2) += 2;
+                (*scoreblack) += 2;
             }
             else if(x.targettype ='R'){
-                (*score2) += 4;
+                (*scoreblack) += 4;
             }
             else if(x.targettype ='B'){
-                (*score2) += 4;
+                (*scoreblack) += 4;
             }
             else if(x.targettype ='Q'){
-                (*score2) += 8;
+                (*scoreblack) += 8;
             }
             else if(x.targettype ='K'){
-                (*score2) += 10;
+                (*scoreblack) += 10;
             }
         }
     }
