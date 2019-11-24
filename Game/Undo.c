@@ -3,7 +3,7 @@
 
 #include "Undo.h"
 
-boolean UndoHasMoved(Stack S,piece P)
+boolean UndoHasMoved(Sinfotype SI, Stack S,piece P)
 {
 	//KAMUS
 	Sinfotype X;
@@ -11,10 +11,10 @@ boolean UndoHasMoved(Stack S,piece P)
 
 	// ALGORITMA
 	udahgerak = false;
-	while (!IsStackEmpty(S) && (udahgerak==true))
+	while ((!IsStackEmpty(S)) && (udahgerak==false))
 	{
 		Pop(&S,&X);
-		if (X.type == P.type)
+		if ((X.type == P.type) && (X.xt == SI.x0) && (X.yt == SI.y0))
 		{
 			udahgerak = true;
 		}
@@ -115,12 +115,20 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*white, finder);
 				(*white).arr[i].p.xpos = X.x0;
 				(*white).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*white).arr[i].p))
+				{
+					(*white).arr[i].p.hasmoved = false;
+				}
 			}
 			else if (X.turn == 'B')
 			{
 				i = findPieceIdx(*black, finder);
 				(*black).arr[i].p.xpos = X.x0;
 				(*black).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*black).arr[i].p))
+				{
+					(*black).arr[i].p.hasmoved = false;
+				}
 			}
 			
 			//Pengembalian posisi piece di papan
@@ -135,7 +143,7 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*white, finder);
 				(*white).arr[i].p.xpos = X.x0;
 				(*white).arr[i].p.ypos = X.y0;
-				if (!UndoHasMoved((*S), (*white).arr[i].p))
+				if (!UndoHasMoved(X, (*S), (*white).arr[i].p))
 				{
 					(*white).arr[i].p.hasmoved = false;
 				}
@@ -145,7 +153,7 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*black, finder);
 				(*black).arr[i].p.xpos = X.x0;
 				(*black).arr[i].p.ypos = X.y0;
-				if (!UndoHasMoved((*S), (*black).arr[i].p))
+				if (!UndoHasMoved(X, (*S), (*black).arr[i].p))
 				{
 					(*black).arr[i].p.hasmoved = false;
 				}
@@ -188,7 +196,7 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*white, finder);
 				(*white).arr[i].p.xpos = X.x0;
 				(*white).arr[i].p.ypos = X.y0;
-				if (!UndoHasMoved((*S), (*white).arr[i].p))
+				if (!UndoHasMoved(X, (*S), (*white).arr[i].p))
 				{
 					(*white).arr[i].p.hasmoved = false;
 				}
@@ -198,7 +206,7 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*black, finder);
 				(*black).arr[i].p.xpos = X.x0;
 				(*black).arr[i].p.ypos = X.y0;
-				if (!UndoHasMoved((*S), (*black).arr[i].p))
+				if (!UndoHasMoved(X, (*S), (*black).arr[i].p))
 				{
 					(*black).arr[i].p.hasmoved = false;
 				}
