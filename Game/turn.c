@@ -14,14 +14,6 @@ void init_turn (Stack S, Queue* Q)
 	if (IsStackEmpty(S)) {	/*Jika new game*/
 		Add(Q,'W');
 		Add(Q,'B');
-	} else {	/*Jika load game*/
-		if (S.T[S.TOP].turn == 'W') {
-			Add(Q,'W');
-			Add(Q,'B');
-		} else {
-			Add(Q,'B');
-			Add(Q,'W');
-		}
 	}
 }
 
