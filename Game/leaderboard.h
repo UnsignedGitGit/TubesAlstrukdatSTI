@@ -7,7 +7,7 @@
 
 typedef struct{
     int pos;         //urutan
-    char name;   //nama
+    char name[4];   //nama
     int score;      //score
 }leaderboard;
 

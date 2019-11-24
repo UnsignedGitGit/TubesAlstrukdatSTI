@@ -33,6 +33,8 @@ int main(){
     char player1[4];
     char player2[4];
 
+    leaderboards LB;
+
 
     /*ALGORITMA*/
   /*   welcome();
