@@ -165,9 +165,6 @@ void play(Stack* S) {
         gamelog(turncounter, currentteam);
         BoardPrintInfo(B);
 
-        printf("%d\n",turncounter);
-        printf("%c\n",currentteam);
-
         /*Cek raja tim "currentteam" sudah termakan di giliran sebelumnya atau tidak. Jika iya, game berakhir.*/
         i = 1;
         if (currentteam == 'W') {
@@ -632,9 +629,15 @@ void mainscreen(){
 }
 
 void gamelog(int tc, char ct){
-    printf("     =================================================================\n");
-    printf("                 TURNS : %c                 PLY : %d / 100            \n", ct, tc);
-    printf("     =================================================================\n");
+    if (ct=='W'){
+        printf("     =================================================================\n");
+        printf("               WHITE TEAM'S TURN                PLY : %d / 100        \n", tc);
+        printf("     =================================================================\n");
+    }else{
+        printf("     =================================================================\n");
+        printf("               BLACK TEAM'S TURN                PLY : %d / 100        \n", tc);
+        printf("     =================================================================\n");
+    }
 }
 
 void eksit(){
