@@ -25,7 +25,11 @@ void PieceCreateEmpty(piece *P, int X, int Y)
 // F.S. Terbentuk P dengan tipe piece Charnil, tim piece Charnil, posisi piece X dan posisi piece Y. 
 {
 	//ALGORITMA
-    PieceCreate(P, CharNil, CharNil, X, Y);
+    if ((X%2 && !(Y%2)) || !(X%2) && (Y%2)){
+        PieceCreate(P, '.', CharNil, X, Y);
+    }else{
+        PieceCreate(P, CharNil, CharNil, X, Y);
+    }
 }
 
 void PieceCreateWPawn(piece *P, char Team, int X, int Y) //White

@@ -16,9 +16,10 @@ void welcome(); //animasi singkat
 void initiate(); //inisialisasi semua
 void mainscreen(); //UI main menu
 void plyrname(); //input nama pemain
-void readmain(boolean* g, Stack *S); //input user memilih new game, load game, leaderboard, atau exit
+void readmain(boolean* g, Stack *S, int* score); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
-void play(Stack* S); //main game
+void play(Stack* S, boolean* checkmate); //main game
+void countscore(Stack S, int* score, boolean checkmate);
 void gamelog(int tc, char ct); //tc untuk turncounter, ct untuk current team
 void gameover();
 void load();
@@ -28,6 +29,7 @@ int main(){
     /*KAMUS*/
     boolean gameover = false;
     Stack movehistory;
+    int score = 0;
 
     /*ALGORITMA*/
   /*   welcome();
@@ -71,17 +73,17 @@ int main(){
 
     while (!gameover) {
         mainscreen();
-        readmain(&gameover, &movehistory);
+        readmain(&gameover, &movehistory, &score);
     }
     
     return 0;
 }
 
 
-void readmain(boolean* g, Stack* S) {
+void readmain(boolean* g, Stack* S, int* score) {
     /*KAMUS*/
     char pil;
-
+    boolean lastgame_checkmate;
     /*ALGORITMA*/
 
     printf("Enter your command: ");
@@ -90,25 +92,33 @@ void readmain(boolean* g, Stack* S) {
     if (pil=='N'){   
         
         system("cls");
-        play(S);
+        play(S, &lastgame_checkmate);
+        countscore(*S, score, lastgame_checkmate);
+
     } else if (pil=='L'){
+
         load(g, S);
         //jalankan fungsi load
+
     } else if (pil=='B'){
-        //jalankan fungsi print leaderboard
         
         system("cls");
+        printf("Last score: %d\n", *score);
         //printleaderboard();
+
     } else if (pil=='E'){
+
         *g = true;
         eksit();
+
     } else {
+
         printf("Please input the correct command.\n");
-        readmain(g, S);
+        readmain(g, S, score);
     }
 }
 
-void play(Stack* S) {
+void play(Stack* S, boolean* checkmate) {
     /*KAMUS*/
     board B;
     arr_possible_move black, white;
@@ -158,8 +168,6 @@ void play(Stack* S) {
     /*Game akan selesai setelah masing-masing pemain mendapat 50 giliran.*/
 	turncounter = 1;
     while (turncounter <= 100) {
-
-        BoardPrintInfo(B);
         currentteam = get_turn(&turn);
         
         gamelog(turncounter, currentteam);
@@ -191,6 +199,7 @@ void play(Stack* S) {
                     i++;
                 }
                 if (isCheckmate(B, white.arr[i].p.xpos, white.arr[i].p.ypos, currentteam, white)) {
+                    *checkmate = true;
                     break;
                 }
             } else {
@@ -198,6 +207,7 @@ void play(Stack* S) {
                     i++;
                 }
                 if (isCheckmate(B, black.arr[i].p.xpos, black.arr[i].p.ypos, currentteam, black)) {
+                    *checkmate = true;
                     break;
                 }
             }
@@ -281,8 +291,50 @@ void play(Stack* S) {
     gameover();
 }
 
+void countscore(Stack S, int* score, boolean checkmate) {
+    int whitescore, blackscore, sum;
+    Sinfotype x;
+
+    if (checkmate) {	
+        *score = 20;
+        Pop(&S, &x);
+        if (x.turn == 'W') {
+           /*  if (x.type) == P/R/H/Q/K then score += poin tiap jenis bidak
+            
+            while (!IsStackEmpty(S)) {
+                Pop(&S, &x); 
+                if x.type = P/R/H/Q/K then score += poin tiap jenis bidak
+            }
+
+            *score = sum;*/
+        } else {
+        
+            /*if x.type = P/R/H/Q/K then score += poin tiap jenis bidak
+            
+            while (!IsStackEmpty(S)) {
+                Pop(&S, &x);
+                if x.type = p/r/h/q/k then score += poin tiap jenis bidak
+                
+            *score = sum;*/
+        }
+    } else {
+        whitescore = 0;
+        blackscore = 0;
+        
+        while (!IsStackEmpty(S)) {
+            Pop(&S, &x);
+            if (x.turn == 'W') {
+                /* if x.type = P/R/H/Q/K then whitescore += poin tiap jenis bidak */
+            } else {
+                /* if x.type = p/r/h/q/k then blackscore += poin tiap jenis bidak */
+            }
+        }
+/*         *score =  max(whitescore, blackscore); */
+    }
+}
+
 void load(boolean* g, Stack* S){
-    char filename[20];
+   /*  char filename[20];
     printf("Enter file name: ");
     scanf("%s", filename);
     delay(7);
@@ -296,7 +348,7 @@ void load(boolean* g, Stack* S){
     delay(15);
     
     system("cls");
-    play(S);
+    play(S, chec); */
 }
 
 void delay(int number_of_seconds){ 
