@@ -725,7 +725,7 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		//Cek keberadaan kuda lawan di (x+2,y-1)
         return (
 			(PieceIsValidMove(x+2, y-1)) &&
-			(BoardCell(B)[x+1][y+2].team == enemyteam) && 
+			(BoardCell(B)[x+2][y-1].team == enemyteam) && 
 			(PieceIsKnight(BoardCell(B)[x+2][y-1]))
         );
         break;
@@ -790,12 +790,12 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 		} else {
 			return ((
 				(PieceIsValidMove(x+1, y-1)) &&
-				(BoardCell(B)[x+1][y+1].team == enemyteam) && 
-				(PieceIsPawn(BoardCell(B)[x+1][y+1]))
+				(BoardCell(B)[x+1][y-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x+1][y-1]))
 			) || (
 				(PieceIsValidMove(x-1, y-1)) &&
-				(BoardCell(B)[x-1][y+1].team == enemyteam) && 
-				(PieceIsPawn(BoardCell(B)[x-1][y+1]))
+				(BoardCell(B)[x-1][y-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x-1][y-1]))
 			));
 		}
         break;
@@ -820,8 +820,8 @@ boolean hasAttacker(board B, int iterator, char enemyteam, char team, int x, int
 				(PieceIsPawn(BoardCell(B)[x+1][y-1]))
 			) || (
 				(PieceIsValidMove(x, y-1)) &&
-				(BoardCell(B)[x][y+1].team == enemyteam) && 
-				(PieceIsPawn(BoardCell(B)[x][y+1]))
+				(BoardCell(B)[x][y-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[x][y-1]))
 			) || (
 				(PieceIsValidMove(x-1, y-1)) &&
 				(BoardCell(B)[x-1][y-1].team == enemyteam) && 
@@ -847,7 +847,7 @@ boolean isCheckmate(board B, int kingxpos, int kingypos, char T, arr_possible_mo
 /* Menghasilkan true jika raja tim T berada dalam kondisi skakmat. */
 	arr_check threat;
 	boolean checkmate;
-
+	int kingattacker_xpos, kingattacker_ypos;
 	checkmate = false;
 	
 	if (isCellAttacked(B, kingxpos, kingypos, T)) {
@@ -860,7 +860,9 @@ boolean isCheckmate(board B, int kingxpos, int kingypos, char T, arr_possible_mo
 		((!PieceIsValidMove(kingxpos-1, kingypos-1)) || (BoardCell(B)[kingxpos-1][kingypos-1].team == T) || (isCellAttacked(B, kingxpos-1, kingypos-1, T))) &&
 		((!PieceIsValidMove(kingxpos-1, kingypos)) || (BoardCell(B)[kingxpos-1][kingypos].team == T) || (isCellAttacked(B, kingxpos-1, kingypos, T))) &&
 		((!PieceIsValidMove(kingxpos-1, kingypos+1)) || (BoardCell(B)[kingxpos-1][kingypos+1].team == T) || (isCellAttacked(B, kingxpos-1, kingypos+1, T)))) {
-			
+
+			findAttackerPosition(B, T, kingxpos, kingypos, &kingattacker_xpos, &kingattacker_ypos);
+			generateThreatLane(B, &threat, BoardCell(B)[kingattacker_xpos][kingattacker_ypos], BoardCell(B)[kingxpos][kingypos]);
 			if (!canDisrupt(disruptor, B, threat)) {
 				checkmate = true;
 			}
@@ -883,7 +885,7 @@ void generateThreatLane(board B, arr_check* C, piece attacker, piece king) {
 	(*C).arrcheck[i].y = attacker.ypos;
 	(*C).neff = 1;
 
-	if (!PieceIsKnight(attacker) && (!PieceIsKing(attacker)) && (!PieceIsPawn(attacker))) {
+	if ((!PieceIsKnight(attacker)) && (!PieceIsKing(attacker)) && (!PieceIsPawn(attacker))) {
 		if ((king.xpos > attacker.xpos) && (king.ypos > attacker.ypos)) {
 			x = attacker.xpos + 1;
 			y = attacker.ypos + 1;
@@ -1019,7 +1021,7 @@ boolean canDisrupt(arr_possible_move disruptor, board B, arr_check C) {
 	piece targetcopy, selfcopy;
 
 	/*ALGORITMA*/
-	 for (i=1; i<= 16; i++) {
+	for (i=1; i<= 16; i++) {
         DelList(&(disruptor.arr[i].possmove));
     }
 
@@ -1082,4 +1084,394 @@ boolean canDisrupt(arr_possible_move disruptor, board B, arr_check C) {
 	}
 
 	return (stop);
+}
+
+void findAttackerPosition(board B, char team, int xattacked, int yattacked, int* xattacker, int* yattacker)
+/* I.S. B, enemyteam, team, xattacked, yattacked terdefinisi. xattacker dan yattacker sembarang.
+ * F.S. xattacker dan yattacker terdefinisi.*/
+{
+	/*KAMUS*/
+	int cek, xcek, ycek, i;
+	char enemyteam;
+
+	if (team == 'W') {
+		enemyteam = 'B';
+	} else {
+		enemyteam = 'W';
+	}
+	
+	/*ALGORITMA*/
+	i = 1;
+	switch (i) {
+	case 1:
+		//Cek keberadaan ratu atau benteng lawan di arah atas
+		cek = yattacked + 1;
+		while(cek < 9){
+			if (BoardCell(B)[xattacked][cek].team != CharNil) {
+				break;
+			} else {
+				cek++;
+			}
+		}
+		if ((cek < 9) && 
+		(BoardCell(B)[xattacked][cek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xattacked][cek]) || PieceIsRook(BoardCell(B)[xattacked][cek]))) {
+			*xattacker = xattacked;
+			*yattacker = cek;
+			break;
+		}		
+	case 2:
+		//Cek keberadaan ratu atau benteng lawan di arah kanan
+		cek = xattacked + 1;
+		while(cek < 9) {
+			if (BoardCell(B)[cek][yattacked].team != CharNil) {
+				break;
+			} else {
+				cek++;
+			}
+		}
+		if ((cek < 9) && 
+		(BoardCell(B)[cek][yattacked].team == enemyteam) &&
+		(PieceIsQueen(BoardCell(B)[cek][yattacked]) || PieceIsRook(BoardCell(B)[cek][yattacked]))) {
+			*xattacker = xattacked;
+			*yattacker = cek;
+			break;
+		}
+	case 3:
+		//Cek keberadaan ratu atau benteng lawan di arah bawah
+		cek = yattacked - 1;
+		while(cek > 0) {
+			if (BoardCell(B)[xattacked][cek].team != CharNil) {
+				break;
+			} else {
+				cek--;
+			}
+		}
+		if ((cek > 0) &&
+		(BoardCell(B)[xattacked][cek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xattacked][cek]) || PieceIsRook(BoardCell(B)[xattacked][cek]))) {
+			*xattacker = xattacked;
+			*yattacker = cek;
+			break;
+		}
+	case 4:
+		//Cek keberadaan ratu atau benteng lawan di arah kiri
+		cek = xattacked - 1;
+		while(cek > 0) {
+			if (BoardCell(B)[cek][yattacked].team != CharNil) {
+				break;
+			} else {
+				cek--;
+			}
+		}
+		if ((cek > 0) && 
+		(BoardCell(B)[cek][yattacked].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[cek][yattacked]) || PieceIsRook(BoardCell(B)[cek][yattacked]))) {
+			*xattacker = cek;
+			*yattacker = yattacked;
+			break;
+		}
+	case 5:
+		//Cek keberadaan ratu atau menteri lawan di arah diagonal kanan atas
+		xcek = xattacked + 1;
+		ycek = yattacked + 1;
+		while (xcek < 9) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
+				break;
+			} else {
+				xcek++;
+				ycek++;
+			}
+		}
+		if ((xcek < 9) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]))) {
+			*xattacker = xcek;
+			*yattacker = ycek;
+			break;
+		}
+	case 6:
+		//Cek keberadaan ratu atau menteri lawan di arah diagonal kanan bawah
+		xcek = xattacked + 1;
+		ycek = yattacked - 1;
+		while (xcek < 9) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
+				break;
+			} else {
+				xcek++;
+				ycek--;
+			}
+		}
+		if ((xcek < 9) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]))) {
+			*xattacker = xcek;
+			*yattacker = ycek;
+			break;
+		}
+	case 7:
+		//Cek keberadaan ratu atau menteri lawan di arah diagonal kiri bawah
+		xcek = xattacked - 1;
+		ycek = yattacked - 1;
+		while (xcek > 0) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
+				break;
+			} else {
+				xcek--;
+				ycek--;
+			}
+		}
+		if ((xcek > 0) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]))) {
+			*xattacker = xcek;
+			*yattacker = ycek;
+			break;
+		}
+	case 8:
+		//Cek keberadaan ratu atau menteri lawan di arah diagonal kiri atas
+		xcek = xattacked - 1;
+		ycek = yattacked + 1;
+		while (xcek > 0) {
+			if (BoardCell(B)[xcek][ycek].team != CharNil) {
+				break;
+			} else {
+				xcek--;
+				ycek++;
+			}
+		}
+		if ((xcek > 0) && 
+		(BoardCell(B)[xcek][ycek].team == enemyteam) && 
+		(PieceIsQueen(BoardCell(B)[xcek][ycek]) || PieceIsBishop(BoardCell(B)[xcek][ycek]))) {
+			*xattacker = xcek;
+			*yattacker = ycek;
+			break;
+		}	
+	case 9:
+		//Cek keberadaan kuda lawan di (xattacked+1,yattacked+2)
+		if (
+			(PieceIsValidMove(xattacked+1, yattacked+2)) &&
+			(BoardCell(B)[xattacked+1][yattacked+2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked+1][yattacked+2]))
+		) {
+			*xattacker = xattacked+1;
+			*yattacker = yattacked+2;
+			break;
+		}
+
+	case 10:
+		//Cek keberadaan kuda lawan di (xattacked+2,yattacked+1)
+		if (
+			(PieceIsValidMove(xattacked+2, yattacked+1)) &&
+			(BoardCell(B)[xattacked+2][yattacked+1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked+2][yattacked+1]))
+		) {
+			*xattacker = xattacked+2;
+			*yattacker = yattacked+1;
+			break;
+		}
+
+	case 11:
+		//Cek keberadaan kuda lawan di (xattacked+2,yattacked-1)
+		if (
+			(PieceIsValidMove(xattacked+2, yattacked-1)) &&
+			(BoardCell(B)[xattacked+2][yattacked-1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked+2][yattacked-1]))
+		) {
+			*xattacker = xattacked+2;
+			*yattacker = yattacked-1;
+			break;
+		}
+	
+	case 12:
+		//Cek keberadaan kuda lawan di (xattacked+1,yattacked-2)
+		if (
+			(PieceIsValidMove(xattacked+1, yattacked-2)) &&
+			(BoardCell(B)[xattacked+1][yattacked-2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked+1][yattacked-2]))
+		) {
+			*xattacker = xattacked+1;
+			*yattacker = yattacked-2;
+			break;
+		}
+	
+	case 13:
+		//Cek keberadaan kuda lawan di (xattacked-1,yattacked-2)
+		if (
+			(PieceIsValidMove(xattacked-1, yattacked-2)) &&
+			(BoardCell(B)[xattacked-1][yattacked-2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked-1][yattacked-2]))
+		) {
+			*xattacker = xattacked-1;
+			*yattacker = yattacked-2;
+			break;
+		}
+	
+	case 14:
+		//Cek keberadaan kuda lawan di (xattacked-2,yattacked-1)
+		if (
+			(PieceIsValidMove(xattacked-2, yattacked-1)) &&
+			(BoardCell(B)[xattacked-2][yattacked-1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked-2][yattacked-1]))
+		) {
+			*xattacker = xattacked-2;
+			*yattacker = yattacked-1;
+			break;
+		}
+	
+	case 15:
+		//Cek keberadaan kuda lawan di (xattacked-2,yattacked+1)
+		if (
+			(PieceIsValidMove(xattacked-2, yattacked+1)) &&
+			(BoardCell(B)[xattacked-2][yattacked+1].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked-2][yattacked+1]))
+		) {
+			*xattacker = xattacked-2;
+			*yattacker = yattacked+1;
+			break;
+		}
+	
+	case 16:
+		//Cek keberadaan kuda lawan di (xattacked-1,yattacked+2)
+		if (
+			(PieceIsValidMove(xattacked-1, yattacked+2)) &&
+			(BoardCell(B)[xattacked-1][yattacked+2].team == enemyteam) && 
+			(PieceIsKnight(BoardCell(B)[xattacked-1][yattacked+2]))
+		) {
+			*xattacker = xattacked-1;
+			*yattacker = yattacked+2;
+			break;
+		}
+	
+	case 17:
+		//Cek keberadaan pion lawan
+		if (enemyteam == 'B') {
+			if (
+				(PieceIsValidMove(xattacked+1, yattacked+1)) &&
+				(BoardCell(B)[xattacked+1][yattacked+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked+1][yattacked+1]))
+			) {
+				*xattacker = xattacked+1;
+				*yattacker = yattacked+1;
+				break;
+
+			}
+			
+			if (
+				(PieceIsValidMove(xattacked-1, yattacked+1)) &&
+				(BoardCell(B)[xattacked-1][yattacked+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked-1][yattacked+1]))
+			) {
+				*xattacker = xattacked-1;
+				*yattacker = yattacked+1;
+				break;
+		}
+		} else {
+			if (
+				(PieceIsValidMove(xattacked+1, yattacked-1)) &&
+				(BoardCell(B)[xattacked+1][yattacked-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked+1][yattacked-1]))
+			) {
+				*xattacker = xattacked+1;
+				*yattacker = yattacked-1;
+				break;
+			}
+
+			if (
+				(PieceIsValidMove(xattacked-1, yattacked-1)) &&
+				(BoardCell(B)[xattacked-1][yattacked-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked-1][yattacked-1]))
+			) {
+				*xattacker = xattacked-1;
+				*yattacker = yattacked-1;
+				break;
+		}
+		}
+	
+	case 18:
+		//Cek keberadaan raja lawan
+		if (
+				(PieceIsValidMove(xattacked, yattacked+1)) &&
+				(BoardCell(B)[xattacked][yattacked+1].team == enemyteam) && 
+				(PieceIsKing(BoardCell(B)[xattacked][yattacked+1]))
+			) {
+				*xattacker = xattacked;
+				*yattacker = yattacked+1;
+				break;
+			}
+			
+		if (
+				(PieceIsValidMove(xattacked+1, yattacked+1)) &&
+				(BoardCell(B)[xattacked+1][yattacked+1].team == enemyteam) && 
+				(PieceIsKing(BoardCell(B)[xattacked+1][yattacked+1]))
+			) {
+				*xattacker = xattacked+1;
+				*yattacker = yattacked+1;
+				break;
+			}
+
+		if (
+				(PieceIsValidMove(xattacked+1, yattacked)) &&
+				(BoardCell(B)[xattacked+1][yattacked].team == enemyteam) && 
+				(PieceIsKing(BoardCell(B)[xattacked+1][yattacked]))
+			) {
+				*xattacker = xattacked+1;
+				*yattacker = yattacked;
+				break;
+			}
+
+		if (
+				(PieceIsValidMove(xattacked+1, yattacked-1)) &&
+				(BoardCell(B)[xattacked+1][yattacked-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked+1][yattacked-1]))
+			) {
+				*xattacker = xattacked+1;
+				*yattacker = yattacked-1;
+				break;
+			}
+
+		if (
+				(PieceIsValidMove(xattacked, yattacked-1)) &&
+				(BoardCell(B)[xattacked][yattacked-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked][yattacked-1]))
+			) {
+				*xattacker = xattacked;
+				*yattacker = yattacked-1;
+				break;
+			}
+		
+		if (
+				(PieceIsValidMove(xattacked-1, yattacked-1)) &&
+				(BoardCell(B)[xattacked-1][yattacked-1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked-1][yattacked-1]))
+			) {
+				*xattacker = xattacked-1;
+				*yattacker = yattacked-1;
+				break;
+			}
+			
+		if (
+				(PieceIsValidMove(xattacked-1, yattacked)) &&
+				(BoardCell(B)[xattacked-1][yattacked].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked-1][yattacked]))
+			) {
+				*xattacker = xattacked-1;
+				*yattacker = yattacked;
+				break;
+			}
+		
+		if (
+				(PieceIsValidMove(xattacked-1, yattacked+1)) &&
+				(BoardCell(B)[xattacked-1][yattacked+1].team == enemyteam) && 
+				(PieceIsPawn(BoardCell(B)[xattacked-1][yattacked+1]))
+			) {
+				*xattacker = xattacked-1;
+				*yattacker = yattacked+1;
+				break;
+		}
+	default:
+		*xattacker = 0;
+		*yattacker = 0;
+		break;
+	}
 }

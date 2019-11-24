@@ -3,6 +3,24 @@
 
 #include "Undo.h"
 
+boolean UndoHasMoved(Sinfotype SI, Stack S,piece P)
+{
+	//KAMUS
+	Sinfotype X;
+	boolean udahgerak;
+
+	// ALGORITMA
+	udahgerak = false;
+	while ((!IsStackEmpty(S)) && (udahgerak==false))
+	{
+		Pop(&S,&X);
+		if ((X.type == P.type) && (X.xt == SI.x0) && (X.yt == SI.y0))
+		{
+			udahgerak = true;
+		}
+	}
+	return (udahgerak);
+}
 
 void UndoBoardPieceMove(arr_possible_move* white, arr_possible_move* black, piece *P,  board *B, Sinfotype X)
 // Mengubah posisi piece P di board
@@ -97,12 +115,20 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*white, finder);
 				(*white).arr[i].p.xpos = X.x0;
 				(*white).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*white).arr[i].p))
+				{
+					(*white).arr[i].p.hasmoved = false;
+				}
 			}
 			else if (X.turn == 'B')
 			{
 				i = findPieceIdx(*black, finder);
 				(*black).arr[i].p.xpos = X.x0;
 				(*black).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*black).arr[i].p))
+				{
+					(*black).arr[i].p.hasmoved = false;
+				}
 			}
 			
 			//Pengembalian posisi piece di papan
@@ -117,12 +143,20 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*white, finder);
 				(*white).arr[i].p.xpos = X.x0;
 				(*white).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*white).arr[i].p))
+				{
+					(*white).arr[i].p.hasmoved = false;
+				}
 			}
 			else if (X.turn == 'B')
 			{
 				i = findPieceIdx(*black, finder);
 				(*black).arr[i].p.xpos = X.x0;
 				(*black).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*black).arr[i].p))
+				{
+					(*black).arr[i].p.hasmoved = false;
+				}
 			}
 			
 			//Pengembalian posisi piece di papan
@@ -162,12 +196,20 @@ void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* 
 				i = findPieceIdx(*white, finder);
 				(*white).arr[i].p.xpos = X.x0;
 				(*white).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*white).arr[i].p))
+				{
+					(*white).arr[i].p.hasmoved = false;
+				}
 			}
 			else if (X.turn == 'B')
 			{
 				i = findPieceIdx(*black, finder);
 				(*black).arr[i].p.xpos = X.x0;
 				(*black).arr[i].p.ypos = X.y0;
+				if (!UndoHasMoved(X, (*S), (*black).arr[i].p))
+				{
+					(*black).arr[i].p.hasmoved = false;
+				}
 			}
 			
 			//Pengembalian posisi piece di papan
