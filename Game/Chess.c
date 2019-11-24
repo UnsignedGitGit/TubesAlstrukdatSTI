@@ -19,6 +19,7 @@ void plyrname(); //input nama pemain
 void readmain(boolean* g, Stack *S); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
 void play(Stack* S); //main game
+void gamelog(int tc, char ct); //tc untuk turncounter, ct untuk current team
 void gameover();
 void load();
 void eksit();
@@ -160,6 +161,9 @@ void play(Stack* S) {
 
         BoardPrintInfo(B);
         currentteam = get_turn(&turn);
+        
+        gamelog(turncounter, currentteam);
+        BoardPrintInfo(B);
 
         printf("%d\n",turncounter);
         printf("%c\n",currentteam);
@@ -625,6 +629,12 @@ void mainscreen(){
     printf("|                        <Leader(B)oards>                       |\n");
     printf("|                           <(E)xit>                            |\n");
     printf("|_______________________________________________________________|  \n");
+}
+
+void gamelog(int tc, char ct){
+    printf("     =================================================================\n");
+    printf("                 TURNS : %c                 PLY : %d / 100            \n", ct, tc);
+    printf("     =================================================================\n");
 }
 
 void eksit(){
