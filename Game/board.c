@@ -111,8 +111,8 @@ void BoardPrintInfo(board B)
     printf("         A       B       C       D       E       F       G       H    \n");
     printf("     _________________________________________________________________\n");
     for (y=8;y>0;y-=2){
-        printf("     |#######|       |#######|       |#######|       |#######|       |\n"); //▓ adalah ascii 178
-        printf("  %d  |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |\n",
+        printf("     |.......|       |.......|       |.......|       |.......|       |\n"); //▓ adalah ascii 178
+        printf("  %d  |...%c...|   %c   |...%c...|   %c   |...%c...|   %c   |...%c...|   %c   |\n",
         y,
         BoardCell(B)[1][y].type,
         BoardCell(B)[2][y].type,
@@ -123,9 +123,9 @@ void BoardPrintInfo(board B)
         BoardCell(B)[7][y].type,
         BoardCell(B)[8][y].type);
         
-        printf("     |#######|_______|#######|_______|#######|_______|#######|_______|\n");
-        printf("     |       |#######|       |#######|       |#######|       |#######|\n");
-        printf("  %d  |   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|   %c   |## %c ##|\n",
+        printf("     |.......|_______|.......|_______|.......|_______|.......|_______|\n");
+        printf("     |       |.......|       |.......|       |.......|       |.......|\n");
+        printf("  %d  |   %c   |...%c...|   %c   |...%c...|   %c   |...%c...|   %c   |...%c...|\n",
         y-1,
         BoardCell(B)[1][y-1].type,
         BoardCell(B)[2][y-1].type,
@@ -135,8 +135,9 @@ void BoardPrintInfo(board B)
         BoardCell(B)[6][y-1].type,
         BoardCell(B)[7][y-1].type,
         BoardCell(B)[8][y-1].type);
-        printf("     |_______|#######|_______|#######|_______|#######|_______|#######|\n");
+        printf("     |_______|.......|_______|.......|_______|.......|_______|.......|\n");
     } 
+    printf("\n");
 }
 
 char translatex(int X)

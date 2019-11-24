@@ -16,17 +16,23 @@ void welcome(); //animasi singkat
 void initiate(); //inisialisasi semua
 void mainscreen(); //UI main menu
 void plyrname(); //input nama pemain
-void readmain(boolean* g, Stack *S); //input user memilih new game, load game, leaderboard, atau exit
+void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
-void play(Stack* S); //main game
+void play(Stack* S, boolean* checkmate); //main game
+void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate);
+void gamelog(int tc, char ct); //tc untuk turncounter, ct untuk current team
 void gameover();
-void load();
 void eksit();
 
 int main(){
     /*KAMUS*/
     boolean gameover = false;
     Stack movehistory;
+    int whitescore = 0;
+    int blackscore = 0;
+    char player1[4];
+    char player2[4];
+
 
     /*ALGORITMA*/
   /*   welcome();
@@ -70,44 +76,54 @@ int main(){
 
     while (!gameover) {
         mainscreen();
-        readmain(&gameover, &movehistory);
+        readmain(&gameover, &movehistory, &whitescore, &blackscore,player1,player2);
     }
     
     return 0;
 }
 
 
-void readmain(boolean* g, Stack* S) {
+void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2) {
     /*KAMUS*/
     char pil;
-
+    boolean lastgame_checkmate;
     /*ALGORITMA*/
 
     printf("Enter your command: ");
     scanf("%c", &pil);
     
     if (pil=='N'){   
+        printf("Silakan masukan nama player 1 (teamputih): \n");
+        scanf("%s", team1);
         
+        printf("Silakan masukan nama player 1 (teamgitam): \n");
+        scanf("%s", team2);
+        
+
         system("cls");
-        play(S);
-    } else if (pil=='L'){
-        load(g, S);
-        //jalankan fungsi load
+        play(S, &lastgame_checkmate);        
+        countscore(*S, scorewhite, scoreblack, lastgame_checkmate);
+        printf(" %s %d %s %d\n", team1, (*scorewhite), team2, (*scoreblack));
+
     } else if (pil=='B'){
-        //jalankan fungsi print leaderboard
         
         system("cls");
+        
         //printleaderboard();
+
     } else if (pil=='E'){
+
         *g = true;
         eksit();
+
     } else {
+
         printf("Please input the correct command.\n");
-        readmain(g, S);
+        readmain(g, S, scorewhite,scoreblack, team1, team2);
     }
 }
 
-void play(Stack* S) {
+void play(Stack* S, boolean* checkmate) {
     /*KAMUS*/
     board B;
     arr_possible_move black, white;
@@ -157,11 +173,10 @@ void play(Stack* S) {
     /*Game akan selesai setelah masing-masing pemain mendapat 50 giliran.*/
 	turncounter = 1;
     while (turncounter <= 100) {
-
-        BoardPrintInfo(B);
-
-
         currentteam = get_turn(&turn);
+        
+        gamelog(turncounter, currentteam);
+        BoardPrintInfo(B);
 
         /*Cek raja tim "currentteam" sudah termakan di giliran sebelumnya atau tidak. Jika iya, game berakhir.*/
         i = 1;
@@ -189,6 +204,7 @@ void play(Stack* S) {
                     i++;
                 }
                 if (isCheckmate(B, white.arr[i].p.xpos, white.arr[i].p.ypos, currentteam, white)) {
+                    *checkmate = true;
                     break;
                 }
             } else {
@@ -196,6 +212,7 @@ void play(Stack* S) {
                     i++;
                 }
                 if (isCheckmate(B, black.arr[i].p.xpos, black.arr[i].p.ypos, currentteam, black)) {
+                    *checkmate = true;
                     break;
                 }
             }
@@ -279,23 +296,68 @@ void play(Stack* S) {
     gameover();
 }
 
-void load(boolean* g, Stack* S){
-    char filename[20];
-    printf("Enter file name: ");
-    scanf("%s", filename);
-    delay(7);
-    printf("%s loaded succesfully, starting in a few seconds", filename);
-    delay(5);
-    printf(".");
-    delay(5);
-    printf(".");
-    delay(5);
-    printf(".");
-    delay(15);
+void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
+    int dummy;
+    Sinfotype x;
+
+    if (checkmate){	
+        dummy = 20;
+        Pop(&S, &x);
+        if (x.turn == 'W') {
+           (*scorewhite) += dummy;
+        } else {
+            (*scorewhite) += dummy;
+        }
+    } 
     
-    system("cls");
-    play(S);
+    while (!IsStackEmpty(S)) {
+        Pop(&S, &x);
+        if (x.turn == 'W') {
+            if(x.targettype ='p'){
+                (*scorewhite) += 1;
+            }
+            else if(x.targettype ='h'){
+                (*scorewhite) += 2;
+            }
+            else if(x.targettype ='r'){
+                (*scorewhite) += 4;
+            }
+            else if(x.targettype ='b'){
+                (*scorewhite) += 4;
+            }
+            else if(x.targettype ='q'){
+                (*scorewhite) += 8;
+            }
+            else if(x.targettype ='k'){
+                (*scorewhite) += 10;
+            }
+            
+        } else if(x.turn == 'B') {
+            if(x.targettype ='P'){
+                (*scoreblack) += 1;
+            }
+            else if(x.targettype ='H'){
+                (*scoreblack) += 2;
+            }
+            else if(x.targettype ='R'){
+                (*scoreblack) += 4;
+            }
+            else if(x.targettype ='B'){
+                (*scoreblack) += 4;
+            }
+            else if(x.targettype ='Q'){
+                (*scoreblack) += 8;
+            }
+            else if(x.targettype ='K'){
+                (*scoreblack) += 10;
+            }
+        }
+    }
+    
 }
+
+
+
 
 void delay(int number_of_seconds){ 
     // Converting time into milli_seconds 
@@ -624,6 +686,18 @@ void mainscreen(){
     printf("|                        <Leader(B)oards>                       |\n");
     printf("|                           <(E)xit>                            |\n");
     printf("|_______________________________________________________________|  \n");
+}
+
+void gamelog(int tc, char ct){
+    if (ct=='W'){
+        printf("     =================================================================\n");
+        printf("               WHITE TEAM'S TURN                PLY : %d / 100        \n",tc);
+        printf("     =================================================================\n");
+    }else{
+        printf("     =================================================================\n");
+        printf("               BLACK TEAM'S TURN                PLY : %d / 100        \n",tc);
+        printf("     =================================================================\n");
+    }
 }
 
 void eksit(){
