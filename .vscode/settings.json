@@ -4,6 +4,9 @@
         "boolean.h": "c",
         "MainMenu.C": "cpp",
         "string.h": "c",
-        "leaderboard.h": "c"
+        "leaderboard.h": "c",
+        "time.h": "c",
+        "commandmove.h": "c",
+        "stdio.h": "c"
     }
 }
