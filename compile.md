@@ -42,3 +42,31 @@ $ cd Driver
 $ gcc -o listlinierdriver listlinierdriver.c ../Game/listlinier.c ../Game/board.c ../Game/piece.c
 $ ./listlinierdriver
 ```
+
+* Driver untuk Mesin Kata
+```console
+$ cd Driver 
+$ gcc -o mesinkatakardriver mesin_kar_kata_driver.c ../Game/mesin_kata.c ../Game/mesin_kar
+$ ./mesinkatakardriver
+```
+
+* Driver untuk Piece
+```console
+$ cd Driver 
+$ gcc -o piecedriver piecedriver.c ../Game/piece.c
+$ ./piecedriver
+```
+
+* Driver untuk Queue
+```console
+$ cd Driver 
+$ gcc -o queuedriver queuedriver.c ../Game/queue.c
+$ ./queuedriver
+```
+
+* Driver untuk Stack
+```console
+$ cd Driver 
+$ gcc -o stackdriver stackdriver.c ../Game/stack.c
+$ ./stackdriver
+```

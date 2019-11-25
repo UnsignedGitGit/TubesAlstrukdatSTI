@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "stack.h"
+#include "../Game/stack.h"
 
 int main () {
 	/*KAMUS*/

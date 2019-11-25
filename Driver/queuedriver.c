@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "queue.h"
+#include "../Game/queue.h"
 
 int main () {
 	/*KAMUS*/

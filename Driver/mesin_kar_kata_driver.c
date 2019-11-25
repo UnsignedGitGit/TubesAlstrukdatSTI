@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "mesin_kata.h"
+#include "../Game/mesin_kata.h"
 
 int main () {
 	/*KAMUS*/

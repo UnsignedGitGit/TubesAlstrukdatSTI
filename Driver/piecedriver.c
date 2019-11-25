@@ -1,7 +1,7 @@
 // Driver ADT Piece
 // gcc -o piecedriver piecedriver.c piece.c
 #include <stdio.h>
-#include "piece.h"
+#include "../Game/piece.h"
 
 int main(){
     piece P;
