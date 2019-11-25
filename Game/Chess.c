@@ -123,11 +123,11 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
     printf("Enter your command: ");
     scanf("%c", &pil);
     
-    while (correct=0){
+    while (correct==0){
         if (pil=='N' || pil=='L' || pil=='B' || pil=='E' ){
             correct=1;
         } else{
-            printf("Please input the correct command. (N/L/B/E)");
+            printf("Please input the correct command. (N/L/B/E)\n");
             printf("Enter your command: ");
             scanf("%c", &pil);
         }
