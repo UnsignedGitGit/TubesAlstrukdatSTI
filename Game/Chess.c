@@ -58,9 +58,9 @@ int main(){
 
     leaderboards LB;
     createdefault(&LB);
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
     //ALGORITMA
-  /*   welcome();
+  /*   welcome();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
         delay (7);
         printf ("Loading");
         delay (5);
