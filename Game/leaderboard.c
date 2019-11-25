@@ -5,24 +5,9 @@
 #include <string.h>
 
 
-/*
-leaderboards L;
-int main (){
-
-    leaderboards hoho;
-    hoho.neff=2;
-    hoho.info[1].name='A';
-    hoho.info[1].score=100;
-    hoho.info[2].name='B';
-    hoho.info[2].score=90;
-    printleaderboard(hoho);
-    return 0;
-}
-*/
-
 void printleaderboard(leaderboards l){
-// I.S leaderboard sudah terdefinisi
-// Leaderboard yang sudah ada akan di print
+// I.S. leaderboard sudah terdefinisi
+// F.S. Leaderboard yang sudah ada akan di print
     printf("===================================== \n");
     printf("         CURRENT LEADERBOARDS         \n");
     printf("===================================== \n");
@@ -76,5 +61,7 @@ void inputleaderboard(leaderboards* l, char *str, int scr){
     }
 }
 void createemptyLB(leaderboards *LB){
+// I.S sembarang
+// F.S akan dibuat sebuah leaderboard dengan neff = 0
     (*LB).neff = 0;
 }

@@ -4,7 +4,7 @@
 
 void BoardPieceMove(piece *P,  board *B, int x, int y)
 // Mengubah posisi piece P di board
-// I.S. Piece P terdefinisi, x dan y berada pada [1..8]
+// I.S. Piece P dan B terdefinisi, x dan y berada pada [1..8]
 // F.S. P berpindah ke posisi x dan y di board
 {
 	//KAMUS
@@ -89,8 +89,6 @@ void CreateBoard(board *B)
                 PieceCreateEmpty(&P, x, y);
 				BoardCell(*B)[x][y] = P;
             }
-
-            // PiecePrintInfo(*(BoardCell(*B)[x][y]));
         }
     }
 }
@@ -99,7 +97,6 @@ void CreateBoard(board *B)
 // *** Input/Output Screen *** //
 // *** =================== *** //
 
-// #define asciiwhiteblk 178,178,178,178,178,178,178,178, 178,178,178,178,178,178,178,178, 178,178,178,178,178,178,178,178, 178,178,178,178,178,178,178,178, 178,178,178,178,178,178,178,178, 178,178,178,178,178,178,178,178, 178,178,178,178,178,178,178,178
 void BoardPrintInfo(board B)
 // Menampilkan info dari Board secara lengkap
 // I.S. B Terdefinisi

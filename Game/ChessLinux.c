@@ -5,19 +5,22 @@
 #include "board.h"
 #include "array.h"
 #include "turn.h"
-
 #include "Commandmove.h"
 #include "Commandspecialmove.h"
 #include "Undo.h"
 #include "leaderboard.h"
 #include "bufferscreen.h"
 
-void initiate(); //inisialisasi semua
-void mainscreen(); //UI main menu
-void plyrname(); //input nama pemain
-void readmain(boolean* g, Stack *S); //input user memilih new game, load game, leaderboard, atau exit
-void play(Stack* S); //main game
-void load();
+//PROTOTIPE
+void mainscreen();
+//UI untuk bagian main menu
+
+void readmain(boolean* g, Stack *S); 
+//input user memilih new game, load game, leaderboard, atau exit
+
+void play(Stack* S);
+//main game
+
 
 int main(){
     /*KAMUS*/
@@ -35,13 +38,13 @@ int main(){
     return 0;
 }
 
-
+//IMPLEMENTASI
 void readmain(boolean* g, Stack* S) {
-    /*KAMUS*/
+//Input user memilih new game, load game, leaderboard, atau exit
+    //KAMUS
     char pil;
 
-    /*ALGORITMA*/
-
+    //ALGORITMA
     printf("Enter your command: ");
     scanf("%c", &pil);
     
@@ -67,7 +70,8 @@ void readmain(boolean* g, Stack* S) {
 }
 
 void play(Stack* S) {
-    /*KAMUS*/
+//Menjalankan game
+    //KAMUS
     board B;
     arr_possible_move black, white;
     int i, turncounter;
@@ -76,8 +80,7 @@ void play(Stack* S) {
     char str[20];
     boolean donemove;
 
-    /*ALGORITMA*/
-    
+    //SALGORITMA
 
     /*****INISIALISASI*****/
     /*Array board/"Papan catur" diisi dengan bidak-bidak. Bidak tim putih ada di bagian bawah papan dan tim hitam ada di bagian atas papan.*/
@@ -236,22 +239,4 @@ void play(Stack* S) {
 
     /*****KEMBALI KE MAIN MENU*****/
     printf("GAME OVER\n");
-}
-
-void load(boolean* g, Stack* S){
-    char filename[20];
-    printf("Enter file name: ");
-    scanf("%s", filename);
-    sleep(7);
-    printf("%s loaded succesfully, starting in a few seconds", filename);
-    sleep(5);
-    printf(".");
-    sleep(5);
-    printf(".");
-    sleep(5);
-    printf(".");
-    sleep(15);
-    
-    system("clear");
-    play(S);
 }
