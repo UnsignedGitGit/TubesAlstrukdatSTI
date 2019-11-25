@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "Commandmove.h"
-#include "Commandmove.h"
 
 /*IMPLEMENTASI*/
 void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* enemy, board* B) {
@@ -252,7 +251,7 @@ void generate_valid_move(arr_possible_move *T, board B){
 
 void show_movable_piece(piece_choice pc) {
 // I.S sembarang
-// F.S Menampilkan seluruh piece yang mungkin digerakkan sesuai spek tubes tercinta
+// F.S Menampilkan seluruh piece yang mungkin digerakkan
     //KAMUS
     int i;
     

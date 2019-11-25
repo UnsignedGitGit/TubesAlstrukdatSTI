@@ -1,6 +1,3 @@
-// NAMA : Adriel Gustino P 
-// NIM : 18218047
-
 #include "Undo.h"
 
 boolean UndoHasMoved(Sinfotype SI, Stack S,piece P)

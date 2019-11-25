@@ -1,5 +1,4 @@
 /* File: boolean.h */
-/* Tanggal: 1 September 2019 */
 
 /****Definisi type boolean ****/
 #ifndef _BOOLEAN_h
