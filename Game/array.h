@@ -55,5 +55,4 @@ void MakeEmptyArrChoice (piece_choice *T);
 void MakeEmptyArrPMove (arr_possible_move *T);
 /* I.S. sembarang */
 /* F.S. Terbentuk tabel "arr" kosong dengan kapasitas 16 elemen*/
-
 #endif
