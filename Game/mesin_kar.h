@@ -3,6 +3,7 @@
 
 #include "boolean.h"
 #include <stdio.h>
+#include <stdlib.h>
 #define MARK '.'
 
 /* State Mesin */

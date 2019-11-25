@@ -1,4 +1,6 @@
 #include "mesin_kata.h"
+#include <stdio.h>
+#include <stdlib.h>
 
 boolean EndKata;
 Kata CKata;

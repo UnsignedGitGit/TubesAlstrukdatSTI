@@ -2,6 +2,8 @@
 #define __MESIN_KATA__
 
 #include "mesin_kar.h"
+#include <stdlib.h>
+#include <stdio.h>
 
 #define NMax 50
 #define BLANK ' '
