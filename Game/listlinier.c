@@ -141,7 +141,7 @@ int NbElmtList (List L) {
 
 void PrintInfo (List L)
 /* I.S. List tidak kosong */
-/* F.S. Jika list tidak kosong, list akan dicetak dengan format yang ditentukan. Contoh: 1. (a, 1) 
+/* F.S. Jika list tidak kosong, list akan dicetak dengan format yang ditentukan. Contoh: 1. (a, 1) */
 {	
 	/*KAMUS*/
 	address P;
