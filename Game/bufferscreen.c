@@ -1,6 +1,8 @@
 #include "bufferscreen.h"
 
 void welcome(){
+//Animasi singkat saat pemain pertama menjalankan program
+    //ALGORITMA
     system("clear");
 	printf("                                                           \n");
     printf("                                                           \n");             
@@ -299,6 +301,8 @@ void welcome(){
 }
 
 void mainscreen(){
+//Tampilan main menu
+    //ALGORITMA
     printf("##################################################################\n\n");
     printf("       _________ __     __ ________  ________ ________    __      \n");
     printf("      /   ______|  |   |  |  ______|/  ______/  ______|  |  |     \n");
@@ -319,6 +323,8 @@ void mainscreen(){
 }
 
 void eksit(){
+//Tampilan saat pemain keluar dari program
+    //ALGORITMA
     system("clear");
     printf("                                                           \n");
     printf("                 `      :                                  \n");                               

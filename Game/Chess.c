@@ -12,19 +12,43 @@
 #include "Undo.h"
 #include "leaderboard.h"
 
-void welcome(); //animasi singkat
-void initiate(); //inisialisasi semua
-void mainscreen(); //UI main menu
-void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2, leaderboards *LB); //input user memilih new game, load game, leaderboard, atau exit
-void delay(int number_of_seconds); 
-void play(Stack* S, boolean* checkmate); //main game
+// PROTOTIPE
+void welcome(); 
+//Animasi singkat saat pemain pertama menjalankan program
+
+void mainscreen();
+//UI untuk bagian main menu
+
+void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2, leaderboards *LB);
+//Input user memilih new game, load game, leaderboard, atau exit
+// I.S. g, S, scorewhite, scoreblack, team1, team2, LB terdefinisi. Stack S bisa kosong
+// F.S. Operasi menampilkan leaderboard, masuk ke game, keluar program dijalankan sesuai masukan pemain
+
+void delay(int number_of_seconds);
+
+void play(Stack* S, boolean* checkmate);
+//Menjalankan game
+// I.S. S terdefinisi dan kosong. Checkmate terdefinisi.
+// F.S. Jika game berakhir dengan skakmat, checkmate diset menjadi true. Stack terisi.
+ 
 void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate);
-void gamelog(int tc, char ct); //tc untuk turncounter, ct untuk current team
+//Mengitung skor pemain
+// I.S. S dan checkmate terdefinisi. scorewhite dan scoreblack sembarang
+// F.S. scorewhite dan scoreblack terisi dengan skor masing-masing pemain
+
+void gamelog(int tc, char ct);
+//(tc untuk turncounter, ct untuk current team.)
+//Menampilkan kondisi game sekarang (tim yang sedang mendapat giliran dan turn ke-berapa) 
+
 void gameover();
+//Animasi saat game selesai (ditampilkan saat tepat akan kembali ke main menu)
+
 void eksit();
+//Animasi saat pemain keluar dari game
+
 
 int main(){
-    /*KAMUS*/
+    //KAMUS
     boolean gameover = false;
     Stack movehistory;
     int whitescore = 0;
@@ -33,10 +57,9 @@ int main(){
     char player2[4];
 
     leaderboards LB;
-    createemptyLB(&LB);
+    createdefault(&LB);
 
-
-    /*ALGORITMA*/
+    //ALGORITMA
   /*   welcome();
         delay (7);
         printf ("Loading");
@@ -84,21 +107,27 @@ int main(){
     return 0;
 }
 
-void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2, leaderboards *LB) {
-    /*KAMUS*/
-    char pil;
-    boolean lastgame_checkmate;
-    int correct=0; // untuk cek apakah inputan sudah benar;
-    /*ALGORITMA*/
 
+// IMPLEMENTASI
+void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2, leaderboards *LB) {
+//Input user memilih new game, load game, leaderboard, atau exit
+// I.S. g, S, scorewhite, scoreblack, team1, team2, LB terdefinisi. Stack S bisa kosong
+// F.S. Operasi menampilkan leaderboard, masuk ke game, keluar program dijalankan sesuai masukan pemain
+
+    //KAMUS
+    char pil;
+    boolean lastgame_checkmate = false;
+    int correct = 0; // untuk cek apakah inputan sudah benar
+
+    //ALGORITMA
     printf("Enter your command: ");
     scanf("%c", &pil);
     
-    while (correct=0){
+    while (correct==0){
         if (pil=='N' || pil=='L' || pil=='B' || pil=='E' ){
-        correct=1;
-        }else{
-            printf("Please input the correct command. (N/L/B/E)");
+            correct=1;
+        } else{
+            printf("Please input the correct command. (N/L/B/E)\n");
             printf("Enter your command: ");
             scanf("%c", &pil);
         }
@@ -117,8 +146,10 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
         printf("Nama Player 1: %s - Skor: %d\n",team1,(*scorewhite));
         printf("Nama player 2: %s - Skor: %d\n",team2, (*scoreblack));
 
+        if((*scorewhite) != (*scoreblack)){
         inputleaderboard(LB, team1, (*scorewhite));
         inputleaderboard(LB, team2, (*scoreblack));
+        }
         printleaderboard(*LB);
 
     } else if(pil=='L'){
@@ -136,7 +167,11 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
 }
 
 void play(Stack* S, boolean* checkmate) {
-    /*KAMUS*/
+//Menjalankan game
+// I.S. S terdefinisi dan kosong. Checkmate terdefinisi.
+// F.S. Jika game berakhir dengan skakmat, checkmate diset menjadi true. Stack terisi.
+
+    //KAMUS
     board B;
     arr_possible_move black, white;
     int i, turncounter;
@@ -145,7 +180,7 @@ void play(Stack* S, boolean* checkmate) {
     char str[20];
     boolean donemove;
 
-    /*ALGORITMA*/
+    //ALGORITMA
     
 
     /*****INISIALISASI*****/
@@ -309,9 +344,15 @@ void play(Stack* S, boolean* checkmate) {
 }
 
 void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
+//Mengitung skor pemain
+// I.S. S dan checkmate terdefinisi. scorewhite dan scoreblack sembarang
+// F.S. scorewhite dan scoreblack terisi dengan skor masing-masing pemain
+
+    //KAMUS
     int dummy;
     Sinfotype x;
 
+    //ALGORITMA
     if (checkmate){	
         dummy = 20;
         Pop(&S, &x);
@@ -368,10 +409,9 @@ void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
     
 }
 
-
-
-
 void delay(int number_of_seconds){ 
+
+    //ALGORITMA
     // Converting time into milli_seconds 
     int milli_seconds = 100 * number_of_seconds; 
   
@@ -384,6 +424,9 @@ void delay(int number_of_seconds){
 } 
 
 void welcome(){
+//Animasi singkat saat pemain pertama menjalankan program
+
+    //ALGORITMA
 	printf("                                                           \n");
     printf("                                                           \n");             
     printf("                                                           \n");
@@ -681,6 +724,9 @@ void welcome(){
 }
 
 void mainscreen(){
+//UI untuk bagian main menu
+
+    //ALGORITMA
     printf("##################################################################\n\n");
     printf("       _________ __     __ ________  ________ ________    __      \n");
     printf("      /   ______|  |   |  |  ______|/  ______/  ______|  |  |     \n");
@@ -701,6 +747,9 @@ void mainscreen(){
 }
 
 void gamelog(int tc, char ct){
+//Menampilkan kondisi game sekarang (tim yang sedang mendapat giliran dan turn ke-berapa)
+
+    //ALGORITMA
     if (ct=='W'){
         printf("     =================================================================\n");
         printf("               WHITE TEAM'S TURN                PLY : %d / 100        \n",tc);
@@ -713,6 +762,9 @@ void gamelog(int tc, char ct){
 }
 
 void eksit(){
+//Animasi saat pemain keluar dari game
+    
+    //ALGORITMA
     printf("                                                           \n");
     printf("                 `      :                                  \n");                               
     printf("             `     ` `.-o-.                                \n");
@@ -732,7 +784,7 @@ void eksit(){
     printf("                  `://////////.`://////////.               \n");
     printf("                                                            \n"); 
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -752,7 +804,7 @@ system("cls");
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
     delay(2); 
-system("cls");
+    system("cls");
     
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -772,7 +824,7 @@ system("cls");
     printf("                  `+ssssssssss. osssssssso/-`              \n");
     printf("                  `://////////.`://////////.               \n");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -792,7 +844,7 @@ system("cls");
     printf("                   +ssssssssss. osssssssso/-               \n");
     printf("                   ://////////.`://////////.               \n");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -812,7 +864,7 @@ system("cls");
     printf("                        ssssss. osssssss                   \n");
     printf("                         /////.`://///                     \n");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -832,7 +884,7 @@ system("cls");
     printf("                          ssss. ossssss                    \n");
     printf("                            //.`:////                      \n");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -853,7 +905,7 @@ system("cls");
     printf("                              .`://                        \n");
     printf ("                   B        y        e        !             ");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -874,7 +926,7 @@ system("cls");
     printf("                              `:`                          \n");
     printf ("                    B      y      e      !                  ");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -895,7 +947,7 @@ system("cls");
     printf("                                `:`                        \n");
     printf ("                      B    y    e    !                      ");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -916,7 +968,7 @@ system("cls");
     printf("                                  `:`                      \n");
     printf ("                       B   y   e   !                        ");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -938,7 +990,7 @@ system("cls");
     printf("                                                           \n");  
     printf ("                        B  y  e  !                          ");
     delay(2); 
-system("cls");
+    system("cls");
 
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -960,7 +1012,7 @@ system("cls");
     printf("                                                           \n");  
     printf ("                           B y e !                          ");
     delay(2); 
-system("cls");
+    system("cls");
      
     printf("                                                           \n");
     printf("                                                           \n");                               
@@ -982,10 +1034,11 @@ system("cls");
     printf("                                                           \n");  
     printf ("                            Bye!                            ");
     delay(8); 
-system("cls");
+    system("cls");
 }
 
 void gameover(){
+//Animasi saat game selesai (ditampilkan saat tepat akan kembali ke main menu)
     printf("                                                                         ___     ___   __  _\n");
     printf("                                                                        / __|   /   \\ |  \\\n");
     printf("                                                                        | (_ |   | - | | |\\\n");
