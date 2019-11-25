@@ -5,6 +5,9 @@
 
 boolean UndoHasMoved(Sinfotype SI, Stack S,piece P)
 {
+	// I.S sembarang
+	// F.S menghasilkan boolean apakah sebuah bidak sudah bergerak atau belum selama permainan berlangsung
+	
 	//KAMUS
 	Sinfotype X;
 	boolean udahgerak;
@@ -62,6 +65,9 @@ void UndoBoardPieceMove(arr_possible_move* white, arr_possible_move* black, piec
 
 void UndoEnpassan (arr_possible_move* white, arr_possible_move* black, piece *P,  board *B, Sinfotype X)
 {
+// I.S piece P terdefinisi sebagai pion, dan Sinfotype.speecialmove = E (Enpassan)t
+// F.S Prosedur akan melakukan undo enpassant
+
 	//KAMUS
 	piece emptypiece, Q;
 	int i;
@@ -94,6 +100,7 @@ void UndoEnpassan (arr_possible_move* white, arr_possible_move* black, piece *P,
 
 void Undo (arr_possible_move* white, arr_possible_move* black, Stack *S, board* B)
 {
+// I.S 
 	// KAMUS
 	Sinfotype X;
 	piece P, finder;
