@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "leaderboard.h"
-#include "string.h"
+#include <string.h>
 
 
 /*
@@ -43,16 +43,16 @@ void printleaderboard(leaderboards l){
     }  
 }
 
-void inputleaderboard(leaderboards l, char (*str), int scr){
+void inputleaderboard(leaderboards* l, char (*str), int scr){
     int i, temp;   
     int cek=0; //cek false
-    if (l.neff==0){ //kondisi leaderboard awal kosong
-        l.info[1].name=str;
-        l.info[1].score=scr;
-    }else if (l.neff=5){ //kondisi leaderboard penuh
+    if ((*l).neff==0){ //kondisi leaderboard awal kosong
+        strcpy((*l).info[1].name,str);
+        (*l).info[1].score=scr;
+    }else if ((*l).neff==5){ //kondisi leaderboard penuh
         while (cek=0){
             for(i=0;i<=5;i++){ //check apakah score baru dapat menggantikan salah satu score lama
-                if (l.info[i].score<scr){
+                if ((*l).info[i].score<scr){
                     cek=1;
                     temp=i; //menyimpan di urutan ke berapa skor baru akan diinsert
                 }
@@ -60,17 +60,20 @@ void inputleaderboard(leaderboards l, char (*str), int scr){
         }
         if (cek=1){
             while(i+1!=6){
-                l.info[i+1]=l.info[i];
+                (*l).info[i+1]=(*l).info[i];
                 i++;
             }
-            l.info[temp].name=str;
-            l.info[temp].score=scr;            
+            strcpy((*l).info[temp].name,str);
+            (*l).info[temp].score=scr;            
         }
     }else{
-        for (i=(l.neff);(i>=1 && l.info[i].score>=scr); i--){
-            l.info[i+1]=l.info[i];            
+        for (i=((*l).neff);(i>=1 && (*l).info[i].score>=scr); i--){
+            (*l).info[i+1]=(*l).info[i];            
         }
-        l.info[i+1].name=str;
-        l.info[i+1].score=scr;
-        l.neff+=1;
+        strcpy((*l).info[i+1].name,str);
+        (*l).info[i+1].score=scr;
+        (*l).neff+=1;
+}
+void createemptyLB (leaderboards * LB){
+    (*LB).neff = 0;
 }

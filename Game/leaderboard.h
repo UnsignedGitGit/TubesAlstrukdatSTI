@@ -26,6 +26,8 @@ typedef struct{
 void printleaderboard(leaderboards l);
 void inputleaderboard(leaderboards l, char (*str), int scr);
 
-void UpdateLB(leaderboards *l, int * score1, int* score2, char * name1, char * name2);
+
+
+void createemptyLB(leaderboards * LB);
 
 #endif
