@@ -53,7 +53,7 @@ void readmain(boolean* g, Stack* S) {
         system("clear");
         play(S);
     } else if (pil=='L'){
-        load(g, S);
+        // load(g, S);
         //jalankan fungsi load
     } else if (pil=='B'){
         //jalankan fungsi print leaderboard
