@@ -4,7 +4,7 @@
 
 /*IMPLEMENTASI*/
 void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, boolean* done)
-/* I.S. player, enemy, S, B, dan T terdefinisi. */
+/* I.S. white, black, S, B, dan T terdefinisi. done sembarang */
 /* F.S. Special move pilihan pemain dilakukan. Gerakan dilakukan di B dan dicatat di S */
 {	
 	/*KAMUS*/
@@ -82,6 +82,7 @@ void special_move(arr_possible_move* white, arr_possible_move* black, board* B, 
 			DoEnpassant(white, black, B, S, T, p2);
 		}
 
+		/*Supaya jika tidak ada special move yang dapat dilakukan, pemain dapat memasukan command lain*/
 		*done = true;
 
 	} else {

@@ -14,13 +14,13 @@ typedef struct {
 
 /*PROTOTIPE*/
 void special_move(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, boolean* done);
-/* I.S. M, S, B, dan T terdefinisi. */
+/* I.S. white, black, S, B, dan T terdefinisi. done sembarang */
 /* F.S. Special move pilihan pemain dilakukan. Gerakan dilakukan di B dan dicatat di S */
 void DoCastling(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char id, char T);
-/* I.S. B, S, id, dan T terdefinisi. */
+/* I.S. white, black, B, S, id, dan T terdefinisi. */
 /* F.S. Castling dilakukan di B dan dicatat di S */
 void DoEnpassant(arr_possible_move* white, arr_possible_move* black, board* B, Stack* S, char T, pawn_enpassant p);
-/* I.S. B, S, id, T, dan p terdefinisi. */
+/* I.S. white, black, B, S, id, T, dan p terdefinisi. */
 /* F.S. En passant dilakukan di B dan dicatat di S */
 void EnpassantL(board B, Stack S, pawn_enpassant* C);
 /* Prosedur ini mengecek keberadaan pion tim sendiri di 
