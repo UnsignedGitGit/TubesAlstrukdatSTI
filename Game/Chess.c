@@ -15,7 +15,7 @@
 void welcome(); //animasi singkat
 void initiate(); //inisialisasi semua
 void mainscreen(); //UI main menu
-void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2, leaderboards LB); //input user memilih new game, load game, leaderboard, atau exit
+void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2, leaderboards *LB); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
 void play(Stack* S, boolean* checkmate); //main game
 void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate);
@@ -78,7 +78,7 @@ int main(){
 
     while (!gameover) {
         mainscreen();
-        readmain(&gameover, &movehistory, &whitescore, &blackscore, player1, player2, LB);
+        readmain(&gameover, &movehistory, &whitescore, &blackscore, player1, player2, &LB);
     }
     
     return 0;
@@ -108,13 +108,14 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
         inputleaderboard(LB, team1, (*scorewhite));
 
     } else if(pil=='L'){
-        printf("Sorry, load function is not available yet...");
+        printf("Sorry, load function is not available yet...\n");
         delay(10);
+        system("cls");
     } else if (pil=='B'){
         
         system("cls");
         
-        printleaderboard();
+        printleaderboard(*LB);
 
     } else if (pil=='E'){
 
@@ -124,7 +125,7 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
     } else {
 
         printf("Please input the correct command.\n");
-        readmain(g, S, scorewhite,scoreblack, team1, team2);
+        readmain(g, S, scorewhite,scoreblack, team1, team2, LB);
     }
 }
 

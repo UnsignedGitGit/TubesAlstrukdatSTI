@@ -33,11 +33,7 @@ void printleaderboard(leaderboards l){
     }else{
         for (int i=1;i<=l.neff;i++){
         printf("  %d   | %c              | %d        \n",
-<<<<<<< HEAD
-                i, l.info[i].name, l.info[i].score);
-=======
             i, l.info[i].name, l.info[i].score);
->>>>>>> ac77d15a1a52cf70c946c29ab2375225deaa09a5
         printf("-------------------------------------\n");
         }
     }  
@@ -73,7 +69,8 @@ void inputleaderboard(leaderboards* l, char (*str), int scr){
         strcpy((*l).info[i+1].name,str);
         (*l).info[i+1].score=scr;
         (*l).neff+=1;
+    }
 }
-void createemptyLB (leaderboards * LB){
+void createemptyLB(leaderboards *LB){
     (*LB).neff = 0;
 }
