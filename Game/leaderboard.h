@@ -28,9 +28,11 @@ void inputleaderboard(leaderboards *l, char (*str), int scr);
 // I.S leaderboard terdefinisi, char nama dan skor dari permain sudah terdefinisi
 // F.S Data yang diinput akan dicatat ke dalam leaderboard 
 
-void createemptyLB(leaderboards *LB);
+void createdefault(leaderboards *LB);
 // I.S sembarang
 // F.S akan dibuat sebuah leaderboard dengan neff = 0
 
+void sortLB (leaderboards * LB);
+// I.S leaderboards belum terurut menurun
 
 #endif

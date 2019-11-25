@@ -33,8 +33,7 @@ int main(){
     char player2[4];
 
     leaderboards LB;
-    createemptyLB(&LB);
-
+    createdefault(&LB);
 
     /*ALGORITMA*/
   /*   welcome();
@@ -117,8 +116,10 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
         printf("Nama Player 1: %s - Skor: %d\n",team1,(*scorewhite));
         printf("Nama player 2: %s - Skor: %d\n",team2, (*scoreblack));
 
+        if((*scorewhite) != (*scoreblack)){
         inputleaderboard(LB, team1, (*scorewhite));
         inputleaderboard(LB, team2, (*scoreblack));
+        }
         printleaderboard(*LB);
 
     } else if(pil=='L'){
