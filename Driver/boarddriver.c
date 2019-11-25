@@ -1,7 +1,7 @@
 // Driver ADT Board
 // gcc -o boarddriver boarddriver.c piece.c board.c
 #include <stdio.h>
-#include "board.h"
+#include "../Game/board.h"
 
 int main(){
     board B;

@@ -2,10 +2,11 @@
 
 
 #include <stdio.h>
-#include "array.h"
-#include "boolean.h"
-#include "piece.h"
-#include "listlinier.h"
+#include "../Game/array.h"
+#include "../Game/boolean.h"
+#include "../Game/piece.h"
+#include "../Game/board.h"
+#include "../Game/listlinier.h"
 
 int main(){
     TabChar tc;\

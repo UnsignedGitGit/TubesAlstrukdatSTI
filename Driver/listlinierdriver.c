@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "listlinier.h"
+#include "../Game/listlinier.h"
 
 int main () {
 	/*KAMUS*/
