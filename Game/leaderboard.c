@@ -21,7 +21,8 @@ int main (){
 */
 
 void printleaderboard(leaderboards l){
-
+// I.S leaderboard sudah terdefinisi
+// Leaderboard yang sudah ada akan di print
     printf("===================================== \n");
     printf("         CURRENT LEADERBOARDS         \n");
     printf("===================================== \n");
@@ -40,6 +41,8 @@ void printleaderboard(leaderboards l){
 }
 
 void inputleaderboard(leaderboards* l, char *str, int scr){
+// I.S leaderboard sudah terdefinisi, str sebagai nama input dan scr 
+// F.S input skor dan nama akan masuk dengan terurut, apabila skor input tidak mencapai leaderboard, maka masukan tidak akan ditambahkan ke leaderboard. 
     int i, temp;   
     int cek=0; //cek false
     if ((*l).neff==0){ //kondisi leaderboard awal kosong
