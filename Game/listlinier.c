@@ -141,10 +141,7 @@ int NbElmtList (List L) {
 
 void PrintInfo (List L)
 /* I.S. List tidak kosong */
-/* F.S. Jika list tidak kosong, isi list dicetak ke kanan: [e1,e2,...,en] */
-/* Contoh : jika ada tiga elemen bernilai 1, 20, 30 akan dicetak: [1,20,30] */
-/* Jika list kosong : menulis [] */
-/* Tidak ada tambahan karakter apa pun di awal, akhir, atau di tengah */
+/* F.S. Jika list tidak kosong, list akan dicetak dengan format yang ditentukan. Contoh: 1. (a, 1) 
 {	
 	/*KAMUS*/
 	address P;
