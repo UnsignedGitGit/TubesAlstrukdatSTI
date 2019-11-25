@@ -5,12 +5,23 @@
 
 /*IMPLEMENTASI*/
 void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* enemy, board* B) {
+    /* Secara Berurutan, Prosedur ini Akan melakukan :
+            1. Generate Valid Move untuk seluruh bidak dari 1 tim
+            2. Mengcopy bidak yang mungkin bergerak ke array of pilihan possible
+            3. Menampilkan array of pilihan possible dan meminta input untuk pilihan bidak
+            4. Menampilkan gerakan yang mungkin dari bidak pilihan dan meminta input pilihan gerakan
+            5. Melakukan gerakan dari pilihan pengguna (do move)
+   */
+
+
     //KAMUS
     int i, j, k, l, x0, y0, xt, yt;
     piece_choice Pilihan;
     piece PP;
 
     //ALGORITMA
+	
+    // membersihkan array of possible move
     for (i=1; i<= 16; i++) {
         DelList(&(*player).arr[i].possmove);
     }
@@ -56,14 +67,16 @@ void move(Stack *S, char team, arr_possible_move* player, arr_possible_move* ene
         printf("Pilih posisi tujuan bidak: ");
         scanf("%d", &k);
     }
-
+    // Memanggil fungsi doMove yang memindah posisi bidak pada board, serta status posisi pada piece
+    // Mencatat gerakan ke stack move history
     doMove(player, enemy,  &PP, B, S, k, &(*player).arr[i].possmove);
 
     x0 = (*S).T[(*S).TOP].x0;
     y0 = (*S).T[(*S).TOP].y0;
     xt =  (*S).T[(*S).TOP].xt;
     yt = (*S).T[(*S).TOP].yt;
-
+	
+    // Tampilan mengenai status bidak yang telah dipindahkan
     if ((*S).T[(*S).TOP].specialmove == 'P') {
         printf("Bidak Pion telah berpindah dari (%c,%d) ke (%c,%d)\n", translatex(x0), y0, translatex(xt), yt);
         printf("Pion telah dipromosikan.\n");
@@ -185,7 +198,7 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
             (*player).arr[i].p.type = (*P).type;
         }
     }
-
+	//Pencatatan ke stack movement history
 	Push(S, H);
 
     /* Pembaruan info piece di array of possible move. Jika ada bidak lawan, info isdead
@@ -205,6 +218,9 @@ void doMove(arr_possible_move* player, arr_possible_move* enemy, piece* P, board
 }
 
 void generate_valid_move(arr_possible_move *T, board B){
+    // I.S arr_possible_move sudah ada, dan list possible move dikosongkan
+	// F.S. arr_possible_move sudah terisi
+
     //KAMUS
     int i;
 
@@ -235,6 +251,8 @@ void generate_valid_move(arr_possible_move *T, board B){
 
 
 void show_movable_piece(piece_choice pc) {
+// I.S sembarang
+// F.S Menampilkan seluruh piece yang mungkin digerakkan sesuai spek tubes tercinta
     //KAMUS
     int i;
     
@@ -405,7 +423,7 @@ void rook(arr_possible_move* M, piece P, board B, char T) {
     //ALGORITMA
     i = findPieceIdx (*M, P);
 
-    //kanan
+    // mengeceke gerakan yang mungkin ke arah kanan (x positif)
     j = P.xpos + 1;
     while(j<9){
         addValidCoor(M, i, j, P.ypos, B, T);
@@ -417,7 +435,7 @@ void rook(arr_possible_move* M, piece P, board B, char T) {
         }
     }
 
-    // Kiri
+    // Mengecek gerakan yang mungkin ke arah Kiri
     j = P.xpos - 1;
     while(j>0){
         addValidCoor(M ,i, j, P.ypos, B, T);
@@ -429,7 +447,7 @@ void rook(arr_possible_move* M, piece P, board B, char T) {
         }
     }
 
-    // Atas
+    // mengecek gerakan yamn mungkin ke arah y positif (Atas)
     j = P.ypos + 1;
     while(j<9){
         addValidCoor(M, i, P.xpos, j, B, T);
@@ -441,7 +459,7 @@ void rook(arr_possible_move* M, piece P, board B, char T) {
         }
     }
 
-    //Bawah
+    //mengecek gerakan yang mungkin ke arah y negatif (Bawah)
     j = P.ypos - 1;
     while(j>0){
         addValidCoor(M, i, P.xpos, j, B, T);
@@ -480,7 +498,7 @@ void bishop(arr_possible_move *M, piece P, board B, char T) {
         }
     }
 
-    // Kiri atas
+    // mengecek gerakan yang mungkin ke Kiri atas
     i = P.xpos - 1;
     j = P.ypos + 1;
     while((i>0) && (j<9)){
@@ -494,7 +512,7 @@ void bishop(arr_possible_move *M, piece P, board B, char T) {
         }
     }
 
-    // Kiri bawah
+    //  gerakan yang mungkin ke arah Kiri bawah
     i = P.xpos - 1;
     j = P.ypos - 1;
     while((i>0) && (j>0)) {
