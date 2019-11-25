@@ -105,6 +105,9 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
         printf(" %s %d %s %d\n", team1, (*scorewhite), team2, (*scoreblack));
         inputleaderboard(LB, team1, (*scorewhite));
 
+    } else if(pil=='L'){
+        printf("Sorry, load function is not available yet...");
+        delay(10);
     } else if (pil=='B'){
         
         system("cls");

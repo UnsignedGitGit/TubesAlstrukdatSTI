@@ -1,7 +1,8 @@
 //Leaderboards
 #include <stdio.h>
+#include <stdlib.h>
 #include "leaderboard.h"
-
+#include "string.h"
 
 
 /*
@@ -32,12 +33,17 @@ void printleaderboard(leaderboards l){
     }else{
         for (int i=1;i<=l.neff;i++){
         printf("  %d   | %c              | %d        \n",
+<<<<<<< HEAD
                 i, l.info[i].name, l.info[i].score);
+=======
+            i, l.info[i].name, l.info[i].score);
+>>>>>>> ac77d15a1a52cf70c946c29ab2375225deaa09a5
         printf("-------------------------------------\n");
         }
     }  
 }
 
+<<<<<<< HEAD
 void inputleaderboard(leaderboards l, char (*str), int scr){
     if (l.neff==0){ //kondisi leaderboard awal kosong
         l.info[1].name=str;
@@ -65,3 +71,27 @@ void inputleaderboard(leaderboards l, char (*str), int scr){
         //         jika score> leaderboards.info[i].score maka:
         //             geser leaderboards.info tsb beserta skor2 dibawahnya sbnyk 1
         //             masukan leaderboards.info baru yang berisi skor yg lebih tinggi.
+=======
+void UpdateLB(leaderboards *l, int * score1, int* score2, char * name1, char * name2){
+    if ((*l).neff == 0){
+        if((*score1) > (*score2)){
+            strcpy((*l).info[1].name,name1);
+            (*l).info[1].score = (*score1);
+            strcpy((*l).info[2].name,name2);
+            (*l).info[2].score = (*score2);
+            (*l).neff = 2;
+        }
+        else if ((*score2) > (*score1)){
+            strcpy((*l).info[1].name,name2);
+            (*l).info[1].score = (*score2);
+            strcpy((*l).info[2].name,name1);
+            (*l).info[2].score = (*score1);
+            (*l).neff = 2;
+        }
+    }
+    else{
+        int i = 1;
+                
+    }
+}
+>>>>>>> ac77d15a1a52cf70c946c29ab2375225deaa09a5
