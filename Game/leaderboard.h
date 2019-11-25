@@ -21,7 +21,16 @@ typedef struct{
 //wacana pake priolist aja biar masukinnya urut
 
 void printleaderboard(leaderboards l);
+// I.S leaderboard terdefinisi
+// Prosedur akan menampilkan leaderboard yang telah terdeklarasi di main
+
 void inputleaderboard(leaderboards *l, char (*str), int scr);
+// I.S leaderboard terdefinisi, char nama dan skor dari permain sudah terdefinisi
+// F.S Data yang diinput akan dicatat ke dalam leaderboard 
+
 void createemptyLB(leaderboards *LB);
+// I.S sembarang
+// F.S akan dibuat sebuah leaderboard dengan neff = 0
+
 
 #endif
