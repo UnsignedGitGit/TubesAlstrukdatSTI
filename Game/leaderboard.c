@@ -43,55 +43,34 @@ void printleaderboard(leaderboards l){
     }  
 }
 
-<<<<<<< HEAD
 void inputleaderboard(leaderboards l, char (*str), int scr){
+    int i, temp;   
+    int cek=0; //cek false
     if (l.neff==0){ //kondisi leaderboard awal kosong
         l.info[1].name=str;
         l.info[1].score=scr;
+    }else if (l.neff=5){ //kondisi leaderboard penuh
+        while (cek=0){
+            for(i=0;i<=5;i++){ //check apakah score baru dapat menggantikan salah satu score lama
+                if (l.info[i].score<scr){
+                    cek=1;
+                    temp=i; //menyimpan di urutan ke berapa skor baru akan diinsert
+                }
+            }
+        }
+        if (cek=1){
+            while(i+1!=6){
+                l.info[i+1]=l.info[i];
+                i++;
+            }
+            l.info[temp].name=str;
+            l.info[temp].score=scr;            
+        }
     }else{
-        int i;
-        for (int i=(l.neff);(i>=1 && l.info[i].score>=scr); i--){
+        for (i=(l.neff);(i>=1 && l.info[i].score>=scr); i--){
             l.info[i+1]=l.info[i];            
         }
         l.info[i+1].name=str;
         l.info[i+1].score=scr;
+        l.neff+=1;
 }
-
-  //ide : 
-        // jika leaderboads.neff == 0 (belum ada isinya)
-        // maka : 
-        //     jika putih menang :
-        //         isi leaderboards.info[1].name dgn nama player 1/tim putih
-        //         isi leaderboards.info[1].score dgn scorenya
-        //     else:
-        //         isi leaderboards.info[1].name dgn nama player 2/tim putih
-        //         isi leaderboards.info[1].score dgn scorenya
-        // else:
-        //     iterasi dari leaderboards.neff - 1:
-        //         jika score> leaderboards.info[i].score maka:
-        //             geser leaderboards.info tsb beserta skor2 dibawahnya sbnyk 1
-        //             masukan leaderboards.info baru yang berisi skor yg lebih tinggi.
-=======
-void UpdateLB(leaderboards *l, int * score1, int* score2, char * name1, char * name2){
-    if ((*l).neff == 0){
-        if((*score1) > (*score2)){
-            strcpy((*l).info[1].name,name1);
-            (*l).info[1].score = (*score1);
-            strcpy((*l).info[2].name,name2);
-            (*l).info[2].score = (*score2);
-            (*l).neff = 2;
-        }
-        else if ((*score2) > (*score1)){
-            strcpy((*l).info[1].name,name2);
-            (*l).info[1].score = (*score2);
-            strcpy((*l).info[2].name,name1);
-            (*l).info[2].score = (*score1);
-            (*l).neff = 2;
-        }
-    }
-    else{
-        int i = 1;
-                
-    }
-}
->>>>>>> ac77d15a1a52cf70c946c29ab2375225deaa09a5
