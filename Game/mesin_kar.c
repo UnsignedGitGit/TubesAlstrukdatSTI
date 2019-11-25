@@ -1,6 +1,4 @@
 #include "mesin_kar.h"
-#include <stdlib.h>
-#include <stdio.h>
 
 char CC;
 boolean EOP;
@@ -18,7 +16,7 @@ F.S. : CC adalah karakter pertama pada pita
 Jika CC != MARK maka EOP akan padam (false)
 Jika CC = MARK maka EOP akan menyala (true) */
 {
-    pita = stdin;
+    pita = fopen(filename, "r");
     ADV();
 }
 void ADV()
