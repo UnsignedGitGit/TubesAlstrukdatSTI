@@ -88,11 +88,22 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
     /*KAMUS*/
     char pil;
     boolean lastgame_checkmate;
+    int correct=0; // untuk cek apakah inputan sudah benar;
     /*ALGORITMA*/
 
     printf("Enter your command: ");
     scanf("%c", &pil);
     
+    while (correct=0){
+        if (pil=='N' || pil=='L' || pil=='B' || pil=='E' ){
+        correct=1;
+        }else{
+            printf("Please input the correct command. (N/L/B/E)");
+            printf("Enter your command: ");
+            scanf("%c", &pil);
+        }
+    }
+
     if (pil=='N'){   
         printf("Player 1 (White Team) name: \n");
         scanf("%s", team1);
@@ -103,29 +114,24 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
         system("cls");
         play(S, &lastgame_checkmate);        
         countscore(*S, scorewhite, scoreblack, lastgame_checkmate);
-        printf(" Nama Player 1: %s - Skor: %d\n ",team1,(*scorewhite));
-        printf(" Nama player 2: %s - Skor: %d\n",team2, (*scoreblack));
+        printf("Nama Player 1: %s - Skor: %d\n",team1,(*scorewhite));
+        printf("Nama player 2: %s - Skor: %d\n",team2, (*scoreblack));
+
         inputleaderboard(LB, team1, (*scorewhite));
+        inputleaderboard(LB, team2, (*scoreblack));
+        printleaderboard(*LB);
 
     } else if(pil=='L'){
         printf("Sorry, load function is not available yet...\n");
         delay(10);
         system("cls");
-    } else if (pil=='B'){
-        
-        system("cls");
-        
-        printleaderboard(*LB);
+    } else if (pil=='B'){       
+        system("cls");        
+        printleaderboard((*LB));
 
     } else if (pil=='E'){
-
         *g = true;
         eksit();
-
-    } else {
-
-        printf("Please input the correct command.\n");
-        readmain(g, S, scorewhite,scoreblack, team1, team2, LB);
     }
 }
 

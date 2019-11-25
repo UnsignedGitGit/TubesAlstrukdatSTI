@@ -25,26 +25,27 @@ void printleaderboard(leaderboards l){
     printf("===================================== \n");
     printf("         CURRENT LEADERBOARDS         \n");
     printf("===================================== \n");
-    printf("  No. | Name           | Score       \n");
+    printf("  No. | Name            | Score       \n");
     printf("-------------------------------------\n");
     if (l.neff==0){  // kalau kosong ini yang di print
         printf("          LEADERBOARD EMPTY          \n");
         printf(" ------------------------------------\n");
     }else{
         for (int i=1;i<=l.neff;i++){
-        printf("  %d   | %c              | %d        \n",
+        printf("  %d   | %s              | %d        \n",
             i, l.info[i].name, l.info[i].score);
         printf("-------------------------------------\n");
         }
     }  
 }
 
-void inputleaderboard(leaderboards* l, char (*str), int scr){
+void inputleaderboard(leaderboards* l, char *str, int scr){
     int i, temp;   
     int cek=0; //cek false
     if ((*l).neff==0){ //kondisi leaderboard awal kosong
         strcpy((*l).info[1].name,str);
-        (*l).info[1].score=scr;
+        (*l).info[1].score = scr;
+        (*l).neff=1;
     }else if ((*l).neff==5){ //kondisi leaderboard penuh
         while (cek=0){
             for(i=0;i<=5;i++){ //check apakah score baru dapat menggantikan salah satu score lama
