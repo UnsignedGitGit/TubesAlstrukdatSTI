@@ -91,6 +91,7 @@ void inputleaderboard(leaderboards* l, char *str, int scr){
 void createdefault(leaderboards *LB){
     // I.S sudah di deklarasi
     // F.S leaderboard diisi dengan nilai default leaderboard (data dummy)
+    
     (*LB).neff = 5;
     int j;
 
