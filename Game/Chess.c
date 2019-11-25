@@ -83,7 +83,7 @@ int main(){
     return 0;
 }
 
-void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2, leaderboards LB) {
+void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2, leaderboards *LB) {
     /*KAMUS*/
     char pil;
     boolean lastgame_checkmate;
@@ -102,7 +102,8 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
         system("cls");
         play(S, &lastgame_checkmate);        
         countscore(*S, scorewhite, scoreblack, lastgame_checkmate);
-        printf(" %s %d %s %d\n", team1, (*scorewhite), team2, (*scoreblack));
+        printf(" Nama Player 1: %s - Skor: %d\n ",team1,(*scorewhite));
+        printf(" Nama player 2: %s - Skor: %d\n",team2, (*scoreblack));
         inputleaderboard(LB, team1, (*scorewhite));
 
     } else if(pil=='L'){
@@ -316,42 +317,42 @@ void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate) {
     while (!IsStackEmpty(S)) {
         Pop(&S, &x);
         if (x.turn == 'W') {
-            if(x.targettype ='p'){
+            if(x.targettype =='p'){
                 (*scorewhite) += 1;
             }
-            else if(x.targettype ='h'){
+            else if(x.targettype =='h'){
                 (*scorewhite) += 2;
             }
-            else if(x.targettype ='r'){
+            else if(x.targettype =='r'){
                 (*scorewhite) += 4;
             }
-            else if(x.targettype ='b'){
+            else if(x.targettype =='b'){
                 (*scorewhite) += 4;
             }
-            else if(x.targettype ='q'){
+            else if(x.targettype =='q'){
                 (*scorewhite) += 8;
             }
-            else if(x.targettype ='k'){
+            else if(x.targettype =='k'){
                 (*scorewhite) += 10;
             }
             
         } else if(x.turn == 'B') {
-            if(x.targettype ='P'){
+            if(x.targettype =='P'){
                 (*scoreblack) += 1;
             }
-            else if(x.targettype ='H'){
+            else if(x.targettype =='H'){
                 (*scoreblack) += 2;
             }
-            else if(x.targettype ='R'){
+            else if(x.targettype =='R'){
                 (*scoreblack) += 4;
             }
-            else if(x.targettype ='B'){
+            else if(x.targettype =='B'){
                 (*scoreblack) += 4;
             }
-            else if(x.targettype ='Q'){
+            else if(x.targettype =='Q'){
                 (*scoreblack) += 8;
             }
-            else if(x.targettype ='K'){
+            else if(x.targettype =='K'){
                 (*scoreblack) += 10;
             }
         }
