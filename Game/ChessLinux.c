@@ -27,7 +27,7 @@ int main(){
     boolean gameover = false;
     Stack movehistory;
 
-    // welcome();
+    welcome();
     CreateEmptyStack(&movehistory);
 
     while (!gameover) {
@@ -62,7 +62,7 @@ void readmain(boolean* g, Stack* S) {
         //printleaderboard();
     } else if (pil=='E'){
         *g = true;
-        // eksit();
+        eksit();
     } else {
         printf("Please input the correct command.\n");
         readmain(g, S);
