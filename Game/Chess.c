@@ -33,6 +33,7 @@ int main(){
     char player2[4];
 
     leaderboards LB;
+    createemptyLB(&LB);
 
 
     /*ALGORITMA*/
