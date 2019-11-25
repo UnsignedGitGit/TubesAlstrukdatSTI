@@ -6,7 +6,7 @@
 #include<stdio.h> 
 
 typedef struct{
-    int pos;         //urutan
+    // int pos;       urutan gaperlu rasanya
     char name[4];   //nama
     int score;      //score
 }leaderboard;
@@ -19,5 +19,6 @@ typedef struct{
 //wacana pake priolist aja biar masukinnya urut
 
 void printleaderboard(leaderboards l);
+void inputleaderboard(leaderboards l, char (*str), int scr);
 
 #endif

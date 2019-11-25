@@ -15,8 +15,7 @@
 void welcome(); //animasi singkat
 void initiate(); //inisialisasi semua
 void mainscreen(); //UI main menu
-void plyrname(); //input nama pemain
-void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2); //input user memilih new game, load game, leaderboard, atau exit
+void readmain(boolean* g, Stack *S, int* scorewhite, int* scoreblack, char *team1, char *team2, leaderboards LB); //input user memilih new game, load game, leaderboard, atau exit
 void delay(int number_of_seconds); 
 void play(Stack* S, boolean* checkmate); //main game
 void countscore(Stack S, int* scorewhite, int* scoreblack, boolean checkmate);
@@ -78,14 +77,13 @@ int main(){
 
     while (!gameover) {
         mainscreen();
-        readmain(&gameover, &movehistory, &whitescore, &blackscore,player1,player2);
+        readmain(&gameover, &movehistory, &whitescore, &blackscore, player1, player2, LB);
     }
     
     return 0;
 }
 
-
-void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2) {
+void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * team1, char *team2, leaderboards LB) {
     /*KAMUS*/
     char pil;
     boolean lastgame_checkmate;
@@ -95,23 +93,23 @@ void readmain(boolean* g, Stack* S, int* scorewhite, int* scoreblack, char * tea
     scanf("%c", &pil);
     
     if (pil=='N'){   
-        printf("Silakan masukan nama player 1 (teamputih): \n");
+        printf("Player 1 (White Team) name: \n");
         scanf("%s", team1);
         
-        printf("Silakan masukan nama player 1 (teamgitam): \n");
+        printf("Player 2 (Black Team) name: \n");
         scanf("%s", team2);
         
-
         system("cls");
         play(S, &lastgame_checkmate);        
         countscore(*S, scorewhite, scoreblack, lastgame_checkmate);
         printf(" %s %d %s %d\n", team1, (*scorewhite), team2, (*scoreblack));
+        inputleaderboard(LB, team1, (*scorewhite));
 
     } else if (pil=='B'){
         
         system("cls");
         
-        //printleaderboard();
+        printleaderboard();
 
     } else if (pil=='E'){
 
