@@ -8,6 +8,7 @@
 #include <string.h> 
 
 typedef struct{
+    int pos;
     char name[4];   //nama
     int score;      //score
 }leaderboard;

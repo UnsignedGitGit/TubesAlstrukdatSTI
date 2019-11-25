@@ -58,8 +58,21 @@ void UpdateLB(leaderboards *l, int * score1, int* score2, char * name1, char * n
             (*l).neff = 2;
         }
     }
-    else{
-        int i = 1;
-                
+    else if ((*l).neff == 1){
+        if((*score1) > (*score2)){
+            strcpy((*l).info[2].name,name1);
+            (*l).info[2].score = (*score1);
+            strcpy((*l).info[3].name,name2);
+            (*l).info[3].score = (*score2);
+            (*l).neff = 3;
+        }
+        else if ((*score2) > (*score1)){
+            strcpy((*l).info[2].name,name2);
+            (*l).info[2].score = (*score2);
+            strcpy((*l).info[2].name,name1);
+            (*l).info[2].score = (*score1);
+            (*l).neff = 3;
+        }
     }
+               
 }
