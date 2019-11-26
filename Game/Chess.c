@@ -60,7 +60,7 @@ int main(){
     createdefault(&LB);
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
     //ALGORITMA
-  /*   welcome();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
+    welcome();                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       
         delay (7);
         printf ("Loading");
         delay (5);
@@ -95,7 +95,7 @@ int main(){
         printf("Loading complete. Press enter to continue. \n");
         getchar();
         
-        system("cls"); */
+        system("cls");
     
     CreateEmptyStack(&movehistory);
 
